@@ -1,0 +1,1 @@
+VAULT_PATH = r"C:\Users\leona\Documents\Obsidian\BJJ"

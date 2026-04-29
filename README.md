@@ -44,7 +44,7 @@ llm-bjj/
 ### 1. Clone the repository
 
 ```bash id="0ytc7d"
-git clone <repo-url>
+git clone <https://github.com/Leonard-B212/llm-bjj-wiki.git>
 cd llm-bjj
 ```
 
@@ -92,7 +92,7 @@ VAULT_PATH = r"C:\Users\leona\Documents\Obsidian\BJJ"
 ## ▶️ Run the project
 
 ```bash id="cl8m1g"
-python app/main.py
+python -m app.main
 ```
 
 You can now ask questions in the terminal:
