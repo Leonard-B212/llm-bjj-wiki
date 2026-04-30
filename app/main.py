@@ -1,35 +1,60 @@
-from app.ingestion.loader import load_notes
-from app.vectorstore.chroma_store import add_notes, query_notes, reset_collection
-from app.config import OPENAI_API_KEY
-from app.services.rag_service import ask, client
 import os
 
-def main():
-    notes = load_notes()
+from app.ingestion.loader import load_notes
+from app.vectorstore.chroma_store import add_notes, reset_collection
+from app.services.rag_service import ask
+from app.cli.command_handler import handle_command
 
+
+def reindex_notes():
+    notes = load_notes()
     reset_collection()
     add_notes(notes)
-
     print("✅ Notes indexed")
-    print("Type 'exit' to quit.\n")
+
+
+def print_sources(sources):
+    print("\nSources:")
+    for source in sources:
+        print(f"- {os.path.basename(source)}")
+
+
+def main():
+    reindex_notes()
+
+    print("Type '/exit' to quit.")
+    print("Commands: /exit, /reindex, /write <text>\n")
 
     while True:
-        question = input("Question: ")
+        user_input = input(">> ")
+        cmd = handle_command(user_input)
 
-        if question.lower() in ["exit", "quit"]:
+        if cmd["type"] == "exit":
             break
 
-        answer, sources = ask(question)
+        elif cmd["type"] == "reindex":
+            reindex_notes()
+            continue
 
-        print("\nAnswer:")
-        print(answer)
+        elif cmd["type"] == "write":
+            print("Write feature coming soon:")
+            print(cmd["content"])
+            continue
 
-        print("\nSources:")
-        for source in sources:
-            print(f"- {os.path.basename(source)}")
+        elif cmd["type"] == "unknown":
+            print("Unknown command.")
+            continue
 
-        print("\n---\n")
+        elif cmd["type"] == "question":
+            answer, sources = ask(cmd["content"])
+
+            print("\nAnswer:")
+            print(answer)
+
+            print_sources(sources)
+
+            print("\n---\n")
+
 
 if __name__ == "__main__":
     main()
-    

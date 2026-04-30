@@ -6,10 +6,14 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 
 def ask(question):
     results = query_notes(question)
-    
+
     documents_raw = results["documents"][0]
     ids_raw = results["ids"][0]
     distances = results["distances"][0]
+
+    # Guard
+    if not results["documents"] or not results["documents"][0]:
+        return "No relevant notes found.", []
 
     documents = []
     ids = []
