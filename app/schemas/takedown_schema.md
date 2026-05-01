@@ -1,0 +1,149 @@
+# Takedown / Throw Note Schema
+
+Use this structure for takedowns and throws.
+
+IMPORTANT:
+
+* Always include the tag: #takedown or #throw
+
+
+---
+
+#takedown
+
+---
+
+# Angriff
+
+## Funktioniert wenn
+
+* Under which conditions does the takedown work?
+* Opponent posture, balance, distance
+
+## Setup / Entry
+
+* How do you enter the takedown?
+* Level change, grips, positioning
+
+## Durchführung
+
+### Entry
+
+* How do you initiate the takedown?
+* Where is head position?
+* What control is established?
+
+### Finish
+
+* How do you complete the takedown?
+* How do you break balance?
+* What variations exist?
+
+## Führt zu
+
+* [[...]]
+* [[...]]
+
+## Follow-Ups
+
+* What should you do immediately after?
+* How do you stabilize position?
+
+## Probleme
+
+* What commonly goes wrong?
+* What reduces effectiveness?
+
+## Wenn blockiert / Kombinationen
+
+* [[...]]
+* [[...]]
+
+---
+
+# Verteidigung
+
+## Reaktionen
+
+* How does the opponent defend?
+* What are standard counters?
+
+## Probleme
+
+* What leads to getting taken down?
+
+---
+
+# Example (Single-Leg-Takedown)
+
+---
+
+# Angriff
+
+## Funktioniert wenn
+
+* Opponent stands relatively upright
+* Weight is on one leg
+* Distance is closed
+
+## Setup / Entry
+
+* Level change (go down, do not lean forward)
+* Step forward (penetration step)
+* Keep head close to opponent’s body
+* Wrap leg tightly
+
+## Durchführung
+
+### Entry
+
+* Go low and grab the leg (below the knee)
+* Position head against hip/body (outside head risks guillotine)
+* Pull leg in tightly
+
+### Finish
+
+* Off-balance opponent (push/pull)
+* Lift or “run the pipe” (rotate leg and topple opponent)
+* Alternative: block leg and drive opponent backward
+
+## Führt zu
+
+* Top [[Half-Guard]]
+* [[Side-Control]]
+
+## Follow-Ups
+
+* Apply immediate pressure
+* Control the leg until position is secured
+* Transition into stable control (avoid scrambles)
+
+## Probleme
+
+* Head too far away → no pressure
+* Too upright → lose leverage
+* Gripping too high on the leg
+* Opponent has strong balance
+
+## Wenn blockiert / Kombinationen
+
+* Opponent sprawls → stay on the leg / come up
+* Opponent hops away → follow and finish
+* Opponent pushes head down → adjust position
+
+---
+
+# Verteidigung
+
+## Reaktionen
+
+* [[Sprawl]]
+* Maintain distance
+* Shift weight backward
+* Push head down
+
+## Probleme
+
+* Reacting too late → leg gets captured
+* Poor balance
+* Allowing close distance
