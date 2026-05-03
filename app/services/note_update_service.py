@@ -52,6 +52,10 @@ Rules:
 - Do NOT duplicate sections.
 - Do NOT remove useful existing content.
 - Keep the same headings and style as the existing note.
+- Place new information in the most semantically fitting existing section.
+- You may rephrase and improve the wording of the new information for clarity and correctness.
+- Preserve the meaning, but do not keep the original wording if it is unclear or messy.
+- Each bullet point should contain a complete and meaningful step, not just a single keyword.
 """
 
     response = client.chat.completions.create(

@@ -7,6 +7,7 @@ from app.cli.command_handler import handle_command
 from app.services.note_writer_service import generate_note_draft, save_note_draft, load_global_rules
 from app.config import TYPE_TO_FOLDER
 from app.services.note_update_service import generate_note_update, save_note_update
+from app.cli.diff_printer import print_diff
 
 
 def reindex_notes():
@@ -26,7 +27,7 @@ def main():
     reindex_notes()
 
     print("Type '/exit' to quit.")
-    print("Commands: /exit, /reindex, /write <text>, /update <text>\n")
+    print("Commands: /exit, /reindex, /write <text>, /update <filename> <new information>\n")
 
     while True:
         user_input = input(">> ")
@@ -94,11 +95,10 @@ def main():
 
                 update_result = generate_note_update(note_name, new_info)
 
-                print("\n--- OLD ---")
-                print(update_result["old_content"])
-
-                print("\n--- NEW ---")
-                print(update_result["new_content"])
+                print_diff(
+                    update_result["old_content"],
+                    update_result["new_content"]
+                )
 
                 confirm = input("\nSave update? (y/n): ")
 
