@@ -110,11 +110,9 @@ Language rules:
     data["note_type"] = note_type
     return data
 
-
-def save_note_draft(draft):
+def build_note_path(draft):
     note_type = draft["note_type"]
     filename = draft["filename"]
-    content = draft["content"]
 
     folder = TYPE_TO_FOLDER.get(note_type)
 
@@ -122,13 +120,24 @@ def save_note_draft(draft):
         raise ValueError(f"No folder mapping for type: {note_type}")
 
     folder_path = os.path.join(VAULT_PATH, folder)
-
-    # Ordner erstellen falls nicht vorhanden
     os.makedirs(folder_path, exist_ok=True)
 
-    file_path = os.path.join(folder_path, filename)
+    return os.path.join(folder_path, filename)
 
-    with open(file_path, "w", encoding="utf-8") as f:
-        f.write(content)
+def save_note_draft(draft, overwrite=False):
+    file_path = build_note_path(draft)
 
-    return file_path
+    if os.path.exists(file_path) and not overwrite:
+        return {
+            "saved": False,
+            "reason": "exists",
+            "path": file_path
+        }
+
+    with open(file_path, "w", encoding="utf-8") as file:
+        file.write(draft["content"])
+
+    return {
+        "saved": True,
+        "path": file_path
+    }

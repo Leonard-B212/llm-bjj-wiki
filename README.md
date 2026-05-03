@@ -74,8 +74,8 @@ OPENAI_API_KEY=your_api_key
 
 Important:
 
-* `.env` is listed in `.gitignore`
-* your key will not be committed
+* List your API-Key in `.env` and add it to your `.gitignore`
+* -> so your Key will not be comitted to the repo
 
 ---
 

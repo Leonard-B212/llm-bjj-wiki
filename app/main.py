@@ -6,6 +6,7 @@ from app.services.rag_service import ask
 from app.cli.command_handler import handle_command
 from app.services.note_writer_service import generate_note_draft, save_note_draft, load_global_rules
 from app.config import TYPE_TO_FOLDER
+from app.services.note_update_service import generate_note_update, save_note_update
 
 
 def reindex_notes():
@@ -25,7 +26,7 @@ def main():
     reindex_notes()
 
     print("Type '/exit' to quit.")
-    print("Commands: /exit, /reindex, /write <text>\n")
+    print("Commands: /exit, /reindex, /write <text>, /update <text>\n")
 
     while True:
         user_input = input(">> ")
@@ -54,8 +55,21 @@ def main():
             confirm = input("\nSave this note? (y/n): ")
 
             if confirm.lower() == "y":
-                path = save_note_draft(draft)
-                print(f"\nSaved to: {path}")
+                result = save_note_draft(draft)
+
+                if not result["saved"] and result["reason"] == "exists":
+                    print("\nFile already exists:")
+                    print(os.path.basename(result["path"]))
+
+                    choice = input("[o] overwrite, [c] cancel: ").lower()
+
+                    if choice == "o":
+                        result = save_note_draft(draft, overwrite=True)
+                        print(f"\nOverwritten: {result['path']}")
+                    else:
+                        print("\nCancelled.")
+                else:
+                    print(f"\nSaved to: {result['path']}")
             else:
                 print("\nNot saved.")
 
@@ -64,6 +78,40 @@ def main():
 
         elif cmd["type"] == "unknown":
             print("Unknown command.")
+            continue
+
+        elif cmd["type"] == "update":
+            try:
+                parts = cmd["content"].split(" ", 1)
+
+                if len(parts) < 2:
+                    print("\nUsage: /update <Note-Name> <new information>")
+                    print("Example: /update Knee-Elbow-Escape Neue Side-Control Variante gelernt.")
+                    continue
+
+                note_name = parts[0]
+                new_info = parts[1]
+
+                update_result = generate_note_update(note_name, new_info)
+
+                print("\n--- OLD ---")
+                print(update_result["old_content"])
+
+                print("\n--- NEW ---")
+                print(update_result["new_content"])
+
+                confirm = input("\nSave update? (y/n): ")
+
+                if confirm.lower() == "y":
+                    path = save_note_update(update_result)
+                    print(f"\nUpdated: {path}")
+                else:
+                    print("\nUpdate cancelled.")
+
+            except Exception as e:
+                print(f"\nError: {e}")
+
+            print("\n---\n")
             continue
 
         elif cmd["type"] == "question":
