@@ -1,144 +1,163 @@
-# 🥋 BJJ LLM Wiki
+### Components
 
-A small project to query your BJJ techniques stored in Obsidian notes using an LLM.
-
-## 🎯 Goal
-
-* Use your own Markdown notes (Obsidian) as a knowledge base
-* Ask questions via terminal
-* Get answers based on your own training notes
+* **Markdown Notes** (Obsidian Vault) — the knowledge base itself
+* **ChromaDB** — vector database for semantic search
+* **OpenAI API (gpt-4.1-mini)** — note generation, note classification, and question answering
+* **Hybrid Retrieval** — combines semantic search with exact/normalized title matching, so short or sparsely-written notes are still found reliably even if their embedding is weak
 
 ---
 
-## 🧠 Concept
+## Project Structure
 
-The system follows a simple RAG (Retrieval-Augmented Generation) approach:
-
-Question → find relevant notes → send to LLM → generate answer
-
-### Components:
-
-* Markdown Notes (Obsidian Vault)
-* Vector Database (semantic search)
-* LLM (OpenAI API)
-
----
-
-## 📁 Project Structure (current)
-
-```text id="h2f91c"
-llm-bjj/
+```text
+LLM-BJJ-Wiki/
 │
 ├── app/
-│   └── main.py
+│   ├── main.py
+│   ├── config.py
+│   │
+│   ├── cli/
+│   │   ├── command_handler.py
+│   │   └── diff_printer.py
+│   │
+│   ├── ingestion/
+│   │   └── loader.py
+│   │
+│   ├── schemas/
+│   │   ├── escape_schema.md
+│   │   ├── global_rules.md
+│   │   ├── pass_schema.md
+│   │   ├── position_schema.md
+│   │   ├── submission_schema.md
+│   │   ├── sweep_schema.md
+│   │   ├── takedown_schema.md
+│   │   └── throw_schema.md
+│   │
+│   ├── services/
+│   │   ├── note_update_service.py
+│   │   ├── note_writer_service.py
+│   │   └── rag_service.py
+│   │
+│   └── vectorstore/
+│       ├── chroma_store.py
+│       └── retrieval.py
 │
 ├── .env
 ├── .gitignore
 ├── requirements.txt
+├── todo.md
+└── README.md
 ```
 
 ---
 
-## ⚙️ Setup
+## Setup
 
 ### 1. Clone the repository
 
-```bash id="0ytc7d"
-git clone <https://github.com/Leonard-B212/llm-bjj-wiki.git>
-cd llm-bjj
+```bash
+git clone https://github.com/Leonard-B212/llm-bjj-wiki.git
+cd llm-bjj-wiki
 ```
-
----
 
 ### 2. Install dependencies
 
-```bash id="juy4c8"
+```bash
 pip install -r requirements.txt
 ```
 
 or manually:
 
-```bash id="m9y0fp"
+```bash
 pip install chromadb openai python-dotenv
 ```
 
----
-
 ### 3. Set your API key
 
-Create a `.env` file:
+Create a `.env` file in the project root:
 
-```text id="cys6tx"
+```text
 OPENAI_API_KEY=your_api_key
 ```
 
-Important:
+Important: `.env` is listed in `.gitignore` so your key is never committed to the repo.
 
-* List your API-Key in `.env` and add it to your `.gitignore`
-* -> so your Key will not be comitted to the repo
+### 4. Configure your vault path
 
----
+Set your Obsidian vault path in `app/config.py`:
 
-### 4. Configure your Vault path
-
-In your code, set your Obsidian vault path, e.g.:
-
-```python id="l7m0kc"
+```python
 VAULT_PATH = r"C:\Users\leona\Documents\Obsidian\BJJ"
 ```
 
+Note folders are mapped by technique type in `TYPE_TO_FOLDER` in the same file. Add a new type there if you want a new category (and a matching `*_schema.md` in `app/schemas/`).
+
 ---
 
-## ▶️ Run the project
+## Run the project
 
-```bash id="cl8m1g"
+```bash
 python -m app.main
 ```
 
-You can now ask questions in the terminal:
+On startup, all notes in the vault are indexed into ChromaDB.
 
-```text id="sxh0g7"
-Question: What can I do from Closed Guard?
+### Commands
+
+| Command | Description |
+|---|---|
+| `<free text>` | Ask a question about your notes (RAG) |
+| `/write <filename> <description>` | Create a new note. You provide the filename, the LLM classifies the technique type, fills in the schema, and drafts the content |
+| `/update <filename> <new information>` | Merge new information into an existing note, keeping its structure |
+| `/reindex` | Rebuild the vector index (e.g. after manual edits in Obsidian) |
+| `/exit` | Quit |
+
+Example:
+
+```text
+>> /write Rear-Naked-Choke Klassischer Choke von der Rückenkontrolle aus, Arm um den Hals, Griff einhaken, Ellenbogen zusammenziehen.
 ```
 
----
-
-## 🧩 How it works (simplified)
-
-1. Markdown files are loaded
-2. Content is stored in a vector database
-3. You ask a question
-4. Relevant notes are retrieved
-5. The LLM generates an answer based on those notes
+The generated note is shown as a preview before saving, and you're asked to confirm.
 
 ---
 
-## 🧭 Current Status
+## How note generation works
+
+Each technique type (`submission`, `escape`, `sweep`, `pass`, `position`, `takedown`, `throw`) has a corresponding schema file in `app/schemas/` that defines the expected structure (headings, sections, level of detail). When you run `/write`:
+
+1. The LLM classifies the technique into one of the defined types
+2. The matching schema is loaded
+3. The LLM drafts the note content in German, following the schema structure, with technique names and links in English (`[[Armbar]]`, `[[Side-Control]]`)
+4. The filename you provided is used as-is (normalized to end in `.md`)
+
+`/update` follows the same principle but works against an existing note: it loads the current content, merges the new information into the correct section, and preserves structure and existing content.
+
+---
+
+## How retrieval works
+
+Questions are answered using hybrid retrieval:
+
+1. **Semantic search** via ChromaDB embeddings — finds notes that are thematically related to the question
+2. **Lexical title matching** — if a note's title (normalized, hyphen- and case-insensitive) appears in the question, it is included regardless of its embedding score
+
+This avoids a common RAG failure mode: short or sparsely-filled notes (e.g. a note that's mostly headings with little content) can have weak embeddings and get outranked by longer, unrelated notes that happen to mention the same term in passing.
+
+---
+
+## Current Status
 
 * Terminal-based interaction
-* Simple structure
-* Focus on understanding over complexity
+* Note creation and updates follow enforced per-type schemas
+* Hybrid retrieval (semantic + lexical) for question answering
 
-Planned:
-
-* better retrieval (chunking)
-* automatic note generation
-* optional web interface
+See `todo.md` for planned features and open ideas.
 
 ---
 
-## ❗ Notes
+## Notes
 
 * Do not store sensitive data in your notes
 * OpenAI API usage may incur costs
-* This is currently a learning project
-
----
-
-## 🥋 Vision
-
-A personal BJJ knowledge system that:
-
-* reflects your own game
-* understands connections between techniques
-* supports your learning process
+* This is currently a learning/personal project, not intended for production use
