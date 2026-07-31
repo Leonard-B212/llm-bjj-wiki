@@ -16,3 +16,4 @@ Thumbs.db
 # optional: IDE
 .vscode/
 .idea/
+.aider*

@@ -49,7 +49,7 @@ def main():
     print_banner()
 
     print("Type '/exit' to quit.")
-    print("Commands: /exit, /reindex, /write <text>, /update <filename> <new information>\n")
+    print("Commands: /exit, /reindex, /write <filename> <description>, /update <filename> <new information>\n")
 
     while True:
         user_input = input(">> ")

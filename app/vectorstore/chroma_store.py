@@ -1,3 +1,4 @@
+import os
 import chromadb
 
 client = chromadb.Client()
@@ -50,3 +51,16 @@ def reset_collection():
 
     if existing["ids"]:
         collection.delete(ids=existing["ids"])
+
+
+def get_all_notes_meta():
+    
+    existing = collection.get()
+
+    notes_meta = []
+
+    for note_id in existing["ids"]:
+        title = os.path.basename(note_id).replace(".md", "")
+        notes_meta.append({"id": note_id, "title": title})
+
+    return notes_meta

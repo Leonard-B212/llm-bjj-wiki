@@ -1,11 +1,12 @@
 from openai import OpenAI
 from app.config import OPENAI_API_KEY
-from app.vectorstore.chroma_store import query_notes
+from app.vectorstore.retrieval import hybrid_query
+
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 def ask(question):
-    results = query_notes(question)
+    results = hybrid_query(question)
 
     documents_raw = results["documents"][0]
     ids_raw = results["ids"][0]
