@@ -1,3 +1,21 @@
+# BJJ LLM Wiki
+
+A terminal-based tool to build and query a personal Brazilian Jiu-Jitsu knowledge base, stored as Markdown notes in an Obsidian vault, using an LLM for retrieval, writing, and updating.
+
+## Goal
+
+* Use Markdown notes (Obsidian) as a structured knowledge base
+* Let an LLM write and update notes for you in a consistent format
+* Ask questions via terminal and get answers grounded in your own notes
+
+---
+
+## Concept
+
+The system combines note generation with a Retrieval-Augmented Generation (RAG) approach:
+
+---
+
 ### Components
 
 * **Markdown Notes** (Obsidian Vault) — the knowledge base itself
