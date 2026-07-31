@@ -14,7 +14,27 @@ def reindex_notes():
     notes = load_notes()
     reset_collection()
     add_notes(notes)
-    print("✅ Notes indexed")
+    print("Notes indexed")
+
+
+def print_banner():
+    print(r"""
+    ╔══════════════════════════════════════════════╗
+    ║                                              ║
+    ║          🥋  B J J   L L M   W I K I  🥋     ║
+    ║                                              ║
+    ╠══════════════════════════════════════════════╣
+    ║  ✓ Notes indexed                             ║
+    ║  ✓ Embeddings loaded                         ║
+    ║  ✓ ChromaDB ready                            ║
+    ║  ✓ OpenAI connected                          ║
+    ╠══════════════════════════════════════════════╣
+    ║                                              ║
+    ║                 OSS. 🤙                      ║
+    ║              Ready to Roll                   ║
+    ║                                              ║
+    ╚══════════════════════════════════════════════╝
+""")
 
 
 def print_sources(sources):
@@ -24,7 +44,9 @@ def print_sources(sources):
 
 
 def main():
+    
     reindex_notes()
+    print_banner()
 
     print("Type '/exit' to quit.")
     print("Commands: /exit, /reindex, /write <text>, /update <filename> <new information>\n")
