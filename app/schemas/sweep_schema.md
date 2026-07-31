@@ -5,7 +5,7 @@ Use this structure for sweep techniques.
 IMPORTANT:
 
 * Always include the tag: #sweep
-
+* The section below marked "EXAMPLE — REFERENCE ONLY" is illustrative only. Do NOT copy its content, wording, or technique names into your output. Use it only to understand the expected heading structure and level of detail.
 
 ---
 
@@ -64,12 +64,15 @@ IMPORTANT:
 * What leads to getting swept?
 
 ---
+---
 
-# Example (Pendelum-Sweep)
+# EXAMPLE — REFERENCE ONLY (Pendulum-Sweep)
+
+*(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)*
 
 ---
 
-# Angriff (Beispiel linke Seite)
+# Angriff
 
 ## Funktioniert wenn
 

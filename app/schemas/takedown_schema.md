@@ -1,11 +1,11 @@
-# Takedown / Throw Note Schema
+# Takedown Note Schema
 
-Use this structure for takedowns and throws.
+Use this structure for takedowns.
 
 IMPORTANT:
 
-* Always include the tag: #takedown or #throw
-
+* Always include the tag: #takedown
+* The section below marked "EXAMPLE — REFERENCE ONLY" is illustrative only. Do NOT copy its content, wording, or technique names into your output. Use it only to understand the expected heading structure and level of detail.
 
 ---
 
@@ -73,8 +73,11 @@ IMPORTANT:
 * What leads to getting taken down?
 
 ---
+---
 
-# Example (Single-Leg-Takedown)
+# EXAMPLE — REFERENCE ONLY (Single-Leg-Takedown)
+
+*(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)*
 
 ---
 

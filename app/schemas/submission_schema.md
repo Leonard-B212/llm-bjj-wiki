@@ -5,6 +5,7 @@ Use this structure for submission techniques.
 IMPORTANT:
 
 * Always include the tag: #submission
+* The section below marked "EXAMPLE — REFERENCE ONLY" is illustrative only. Do NOT copy its content, wording, or technique names into your output. Use it only to understand the expected heading structure and level of detail.
 
 ---
 
@@ -61,8 +62,15 @@ IMPORTANT:
 * What should be prevented?
 
 ---
-# Example (Darce-Choke)
 ---
+
+# EXAMPLE — REFERENCE ONLY (Darce-Choke)
+
+*(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)*
+
+---
+
+# Angriff
 
 ## Setup
 
@@ -72,7 +80,7 @@ IMPORTANT:
 
 ### Entry
 
-* Thread arm deep under opponent’s armpit and past the head
+* Thread arm deep under opponent's armpit and past the head
 * Reach through fully (do not stop at the neck)
 * Lock hands using a gable/baseball grip
 
@@ -103,7 +111,9 @@ IMPORTANT:
 * [[Front-Headlock]]
 * [[Guillotine-Choke]]
 
-## Verteidigung
+---
+
+# Verteidigung
 
 * Keep arms tight (no underhook allowed)
 * Hide the head

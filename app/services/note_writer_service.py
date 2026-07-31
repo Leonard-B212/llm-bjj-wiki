@@ -1,5 +1,5 @@
 import os
-import json
+
 from openai import OpenAI
 
 from app.config import OPENAI_API_KEY, VAULT_PATH, TYPE_TO_FOLDER
@@ -19,31 +19,39 @@ def load_schema(note_type):
         return file.read()
 
 
-def detect_note_type(user_input):
-    text = user_input.lower()
+def classify_note_type(user_input):
+    valid_types = list(TYPE_TO_FOLDER.keys())
 
-    if "escape" in text:
-        return "escape"
+    prompt = f"""
+You classify Brazilian Jiu-Jitsu techniques into exactly one category.
 
-    if "sweep" in text:
-        return "sweep"
+Valid categories:
+{', '.join(valid_types)}
 
-    if "pass" in text:
-        return "pass"
+Technique description:
+{user_input}
 
-    if "takedown" in text or "single leg" in text or "double leg" in text:
-        return "takedown"
+Rules:
+- Return ONLY the single most fitting category from the list above.
+- Return ONLY the category name, nothing else.
+- No punctuation, no explanation, no markdown.
+- The category must match one of the valid categories exactly (lowercase).
+"""
 
-    if "throw" in text or "uki goshi" in text:
-        return "throw"
+    response = client.chat.completions.create(
+        model="gpt-4.1-mini",
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
 
-    if "submission" in text or "choke" in text or "armbar" in text or "triangle" in text:
-        return "submission"
+    note_type = response.choices[0].message.content.strip().lower()
 
-    if "mount" in text or "guard" in text or "side control" in text or "position" in text:
-        return "position"
+    if note_type not in valid_types:
+        raise ValueError(f"Model returned invalid note type: '{note_type}'")
 
-    return "submission"
+    return note_type
+
 
 def load_global_rules():
     path = os.path.join(SCHEMA_DIR, "global_rules.md")
@@ -51,8 +59,9 @@ def load_global_rules():
     with open(path, "r", encoding="utf-8") as file:
         return file.read()
 
-def generate_note_draft(user_input):
-    note_type = detect_note_type(user_input)
+
+def generate_note_draft(filename, user_input):
+    note_type = classify_note_type(user_input)
     schema = load_schema(note_type)
     global_rules = load_global_rules()
 
@@ -71,20 +80,13 @@ Detected note type:
 Use this schema:
 {schema}
 
-Return a JSON object with exactly these fields:
-{{
-  "filename": "...",
-  "content": "..."
-}}
-
 Rules:
-- filename must end with .md
-- filename should be concise and use hyphens instead of spaces
 - content must follow the provided schema
 - content must NOT include the title as a heading
-- return ONLY raw, valid JSON
-- Do not use markdown code fences.
-- Do not wrap the JSON in ```json.
+- Return ONLY the raw markdown content.
+- Do NOT return JSON.
+- Do NOT return a Python dictionary.
+- Do NOT use markdown code fences.
 
 Language rules:
 - Technique names and links must be in English (e.g. [[Armbar]], [[Triangle]], [[Knee-Elbow Escape]])
@@ -98,17 +100,17 @@ Language rules:
         ]
     )
 
-    raw_output = response.choices[0].message.content
-    raw_output = raw_output.strip()
+    content = response.choices[0].message.content.strip()
 
-    if raw_output.startswith("```json"):
-        raw_output = raw_output.removeprefix("```json").removesuffix("```").strip()
-    elif raw_output.startswith("```"):
-        raw_output = raw_output.removeprefix("```").removesuffix("```").strip()
+    if not filename.endswith(".md"):
+        filename += ".md"
 
-    data = json.loads(raw_output)
-    data["note_type"] = note_type
-    return data
+    return {
+        "filename": filename,
+        "content": content,
+        "note_type": note_type
+    }
+
 
 def build_note_path(draft):
     note_type = draft["note_type"]
@@ -123,6 +125,7 @@ def build_note_path(draft):
     os.makedirs(folder_path, exist_ok=True)
 
     return os.path.join(folder_path, filename)
+
 
 def save_note_draft(draft, overwrite=False):
     file_path = build_note_path(draft)

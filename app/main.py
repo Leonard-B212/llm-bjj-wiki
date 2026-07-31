@@ -63,7 +63,18 @@ def main():
             continue
 
         elif cmd["type"] == "write":
-            draft = generate_note_draft(cmd["content"])
+            parts = cmd["content"].split(" ", 1)
+
+            if len(parts) < 2:
+                print("\nUsage: /write <Note-Name> <description>")
+                print("Example: /write Knee-Elbow-Escape Escape aus der Side Control gegen Druck von oben.")
+                print("\n---\n")
+                continue
+
+            filename = parts[0]
+            user_input = parts[1]
+
+            draft = generate_note_draft(filename, user_input)
 
             print("\nFilename:")
             print(draft["filename"])
