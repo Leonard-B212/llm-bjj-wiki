@@ -21,6 +21,18 @@ The system combines note generation with a Retrieval-Augmented Generation (RAG) 
 * **OpenAI API (gpt-4.1-mini)** — note generation, note classification, and question answering
 * **Hybrid Retrieval** — combines semantic search with exact/normalized title matching, so short or sparsely-written notes are still found reliably even if their embedding is weak
 
+### Obsidian as the Frontend
+
+This project is designed to work together with [Obsidian](https://obsidian.md/), which acts as the visual frontend for the knowledge base.
+
+The BJJ LLM Wiki manages and interacts with the Markdown data by creating and updating notes, searching the knowledge base, and answering questions through RAG.
+
+Obsidian provides the visual layer for browsing and manually editing notes, following `[[Wiki-Links]]`, and exploring relationships between techniques using features such as the Graph View.
+
+Obsidian must be installed separately and is not included with this project.
+
+The Markdown files remain the source of truth, so the vault can still be viewed and edited directly in Obsidian without running the LLM application.
+
 ---
 
 ## Project Structure
@@ -77,7 +89,8 @@ Before starting, you need:
 
 * **Python 3** installed
 * An **OpenAI API key**
-* An **Obsidian vault** or another folder where the Markdown notes should be stored
+* **Obsidian** installed separately
+* An **Obsidian vault** where the Markdown notes should be stored
 
 The launcher handles the remaining setup and can install the required Python packages for you.
 
@@ -118,7 +131,7 @@ The key is stored locally in `.env` and is not committed to the repository.
 
 #### Obsidian vault path
 
-Enter the full path to the folder containing your BJJ Markdown notes.
+Enter the full path to your BJJ Obsidian vault.
 
 For example, on Windows:
 
@@ -127,9 +140,7 @@ Obsidian vault path: C:\Users\YourName\Documents\Obsidian\BJJ
 ```
 
 * Enter the path directly. Do **not** add quotation marks or additional spaces.
-
 * Spaces that are actually part of a folder name are fine.
-
 * The launcher checks whether the configured vault path exists before starting the Wiki.
 
 #### Content language
