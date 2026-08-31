@@ -40,18 +40,18 @@ The Markdown files remain the source of truth, so the vault can still be viewed 
 ```text
 LLM-BJJ-Wiki/
 │
-├── app/
+├── app/                         # Core application
 │   ├── main.py
 │   ├── config.py
 │   │
-│   ├── cli/
+│   ├── cli/                     # Terminal commands and output handling
 │   │   ├── command_handler.py
 │   │   └── diff_printer.py
 │   │
-│   ├── ingestion/
+│   ├── ingestion/               # Loads Markdown notes from the vault
 │   │   └── loader.py
 │   │
-│   ├── schemas/
+│   ├── schemas/                 # Defines the structure of each BJJ note type
 │   │   ├── escape_schema.md
 │   │   ├── global_rules.md
 │   │   ├── pass_schema.md
@@ -61,12 +61,12 @@ LLM-BJJ-Wiki/
 │   │   ├── takedown_schema.md
 │   │   └── throw_schema.md
 │   │
-│   ├── services/
+│   ├── services/                # LLM, note writing/update and RAG logic
 │   │   ├── note_update_service.py
 │   │   ├── note_writer_service.py
 │   │   └── rag_service.py
 │   │
-│   └── vectorstore/
+│   └── vectorstore/             # ChromaDB storage and retrieval
 │       ├── chroma_store.py
 │       └── retrieval.py
 │
