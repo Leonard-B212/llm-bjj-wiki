@@ -13,86 +13,87 @@ IMPORTANT:
 
 ---
 
-# Angriff (Top)
+# Attack (Top)
 
 ## Submissions
 
 * [[...]]
 * [[...]]
 
-## Kontrolle
+## Control
 
 * How do you maintain control?
 * What are the key pressure points?
 
-## Transition
+## Transitions
 
 * [[...]]
 * [[...]]
 
 ---
 
-# Verteidigung (Bottom)
+# Defense (Bottom)
 
 ## Escapes
 
 * [[...]]
 * [[...]]
 
-## Probleme
+## Problems
 
 * Common issues when stuck in this position
 * What makes escaping difficult?
 
-## Reaktionen
+## Reactions
 
 * What should you try to do first?
 * Key defensive principles (frames, hip movement, space)
 
 ---
+
 ---
 
 # EXAMPLE — REFERENCE ONLY (Mount)
 
-*(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)*
+**(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)**
 
 ---
 
-# Angriff (Top)
+# Attack (Top)
 
 ## Submissions
 
 * [[Armbar]]
 * [[Triangle]]
-* [[Ezekiel Choke]]
+* [[Ezekiel-Choke]]
 
-## Kontrolle
+## Control
 
 * Keep weight low and centered
-* Control opponent’s upper body
+* Control opponent's upper body
 * Prevent frames from being established
 
-## Transition
+## Transitions
 
-* [[Back Control]]
+* [[Back-Control]]
 * [[Knee-On-Belly]]
 
 ---
 
-# Verteidigung (Bottom)
+# Defense (Bottom)
 
 ## Escapes
 
-* [[Bridge Escape]]
-* [[Knee-Elbow Escape]]
+* [[Bridge-Escape]]
+* [[Knee-Elbow-Escape]]
 
-## Probleme
+## Problems
 
 * Cannot establish frames
 * Neck becomes exposed when reaching
 * Opponent controls posture
 
-## Reaktionen
+## Reactions
 
 * Create frames early
 * Bridge to disrupt balance

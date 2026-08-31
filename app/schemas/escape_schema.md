@@ -13,7 +13,7 @@ IMPORTANT:
 
 ---
 
-# Ziel
+# Goal
 
 * From which position are you escaping?
 * What is the target position?
@@ -21,7 +21,7 @@ IMPORTANT:
 
 ---
 
-# Funktioniert aus
+# Works From
 
 * [[...]]
 * [[...]]
@@ -36,26 +36,25 @@ IMPORTANT:
 
 ---
 
-# Durchführung
+# Execution
 
-## Standardvariante
+## Standard Variation
 
 * Step-by-step explanation of the main escape
 * Focus on:
-
   * Frames
   * Movement (hip, shoulders)
   * Creating space
   * Bringing in the knee / recovering position
 
-## Varianten (optional)
+## Variations (optional)
 
 * Different situations (e.g. Mount, Side-Control)
 * Adjustments depending on opponent behavior
 
 ---
 
-# Wichtige Details
+# Key Details
 
 * Key concepts (e.g. connection of knee and elbow)
 * What must always be respected?
@@ -63,34 +62,35 @@ IMPORTANT:
 
 ---
 
-# Probleme
+# Problems
 
 * What typically goes wrong?
 * How does the opponent shut the escape down?
 
 ---
 
-# Wenn blockiert / In Kombination mit
+# If Blocked / Combinations
 
 * [[...]]
 * [[...]]
 
 ---
+
 ---
 
 # EXAMPLE — REFERENCE ONLY (Knee-Elbow-Escape)
 
-*(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)*
+**(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)**
 
 ---
 
-# Ziel
+# Goal
 
 * From Mount / Side Control back to [[Half-Guard]] or [[Guard]]
 
 ---
 
-# Funktioniert aus
+# Works From
 
 * [[Mount]]
 * [[Side-Control]]
@@ -100,50 +100,44 @@ IMPORTANT:
 # Setup
 
 * Establish frames
-* Read opponent’s weight distribution
+* Read opponent's weight distribution
 * Works better if opponent is not extremely low and heavy
-* Often combined with [[Bridge Escape]]
+* Often combined with [[Bridge-Escape]]
 
 ---
 
-# Durchführung
+# Execution
 
-## Standardvariante aus Mount
+## Standard Variation From Mount
 
 * Establish frames
-
-  * Left elbow inside opponent’s knee (arm upright)
+  * Left elbow inside opponent's knee (arm upright)
   * Right arm along the hip, hands connected for a stable frame
-* Bring knee under opponent’s leg
-
-  * Slide your knee under the opponent’s foot
+* Bring knee under opponent's leg
+  * Slide your knee under the opponent's foot
   * If the foot is flat, create space with your other leg
 * Push against the frame
 * Recover to [[Half-Guard]] or [[Guard]]
 
-## Variante aus Side-Control
+## Variation From Side-Control
 
 * Set frames
-
   * Bottom arm at the hip (against hip pressure)
   * Top arm at neck/shoulder (against crossface)
 * Turn onto your side (most important step)
 * Create space
-
   * Use frames
   * Shrimp hips away
 * Insert knee
-
   * Bring top knee between bodies
   * Connect knee and elbow
 * Secure position
-
   * Recover [[Half-Guard]]
   * Or go to [[Guard]] if enough space
 
 ---
 
-# Wichtige Details
+# Key Details
 
 * Connect elbow and knee
 * Do not stay flat
@@ -151,13 +145,13 @@ IMPORTANT:
 
 ---
 
-# Probleme
+# Problems
 
 * Opponent switches position (e.g. [[Knee-On-Belly]]) before entry
 
 ---
 
-# Wenn blockiert / In Kombination mit
+# If Blocked / Combinations
 
-* [[Bridge Escape]]
+* [[Bridge-Escape]]
 * [[Shrimp-Escape]]

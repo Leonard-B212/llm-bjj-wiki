@@ -60,7 +60,7 @@ LLM-BJJ-Wiki/
 │       ├── chroma_store.py
 │       └── retrieval.py
 │
-├── .env
+├── .env.example
 ├── .gitignore
 ├── requirements.txt
 ├── todo.md
@@ -84,31 +84,21 @@ cd llm-bjj-wiki
 pip install -r requirements.txt
 ```
 
-or manually:
+### 3. Configure the environment
 
-```bash
-pip install chromadb openai python-dotenv
-```
-
-### 3. Set your API key
-
-Create a `.env` file in the project root:
+Copy `.env.example` to `.env` and configure your OpenAI API key, Obsidian vault path, and note language:
 
 ```text
-OPENAI_API_KEY=your_api_key
+OPENAI_API_KEY=your_api_key_here
+VAULT_PATH=C:\path\to\your\obsidian\vault
+LANGUAGE=German
 ```
 
-Important: `.env` is listed in `.gitignore` so your key is never committed to the repo.
+`LANGUAGE` controls the language used for descriptive note content. Schema headings, technique names, filenames, and links remain in English.
 
-### 4. Configure your vault path
+Important: `.env` is listed in `.gitignore` so your local configuration and API key are not committed to the repo.
 
-Set your Obsidian vault path in `app/config.py`:
-
-```python
-VAULT_PATH = r"C:\Users\leona\Documents\Obsidian\BJJ"
-```
-
-Note folders are mapped by technique type in `TYPE_TO_FOLDER` in the same file. Add a new type there if you want a new category (and a matching `*_schema.md` in `app/schemas/`).
+Note folders are mapped by technique type in `TYPE_TO_FOLDER` in `app/config.py`. Add a new type there if you want a new category (and a matching `*_schema.md` in `app/schemas/`).
 
 ---
 
@@ -146,7 +136,7 @@ Each technique type (`submission`, `escape`, `sweep`, `pass`, `position`, `taked
 
 1. The LLM classifies the technique into one of the defined types
 2. The matching schema is loaded
-3. The LLM drafts the note content in German, following the schema structure, with technique names and links in English (`[[Armbar]]`, `[[Side-Control]]`)
+3. The LLM drafts the descriptive note content in the language configured through `LANGUAGE`, while schema headings, technique names, filenames, and links remain in English (`[[Armbar]]`, `[[Side-Control]]`)
 4. The filename you provided is used as-is (normalized to end in `.md`)
 
 `/update` follows the same principle but works against an existing note: it loads the current content, merges the new information into the correct section, and preserves structure and existing content.
@@ -179,3 +169,9 @@ See `todo.md` for planned features and open ideas.
 * Do not store sensitive data in your notes
 * OpenAI API usage may incur costs
 * This is currently a learning/personal project, not intended for production use
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.

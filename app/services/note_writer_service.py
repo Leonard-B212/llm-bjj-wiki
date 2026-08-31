@@ -2,7 +2,7 @@ import os
 
 from openai import OpenAI
 
-from app.config import OPENAI_API_KEY, VAULT_PATH, TYPE_TO_FOLDER
+from app.config import OPENAI_API_KEY, VAULT_PATH, TYPE_TO_FOLDER, LANGUAGE
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
@@ -57,7 +57,7 @@ def load_global_rules():
     path = os.path.join(SCHEMA_DIR, "global_rules.md")
 
     with open(path, "r", encoding="utf-8") as file:
-        return file.read()
+        return file.read().replace("{LANGUAGE}", LANGUAGE)
 
 
 def generate_note_draft(filename, user_input):
@@ -82,15 +82,10 @@ Use this schema:
 
 Rules:
 - content must follow the provided schema
-- content must NOT include the title as a heading
 - Return ONLY the raw markdown content.
 - Do NOT return JSON.
 - Do NOT return a Python dictionary.
 - Do NOT use markdown code fences.
-
-Language rules:
-- Technique names and links must be in English (e.g. [[Armbar]], [[Triangle]], [[Knee-Elbow Escape]])
-- The descriptive text (explanations, bullet points) must be in German
 """
 
     response = client.chat.completions.create(

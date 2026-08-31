@@ -13,9 +13,9 @@ IMPORTANT:
 
 ---
 
-# Angriff
+# Attack
 
-## Funktioniert wenn
+## Works When
 
 * Under which conditions does the takedown work?
 * Opponent posture, balance, distance
@@ -25,7 +25,7 @@ IMPORTANT:
 * How do you enter the takedown?
 * Level change, grips, positioning
 
-## Durchführung
+## Execution
 
 ### Entry
 
@@ -39,7 +39,7 @@ IMPORTANT:
 * How do you break balance?
 * What variations exist?
 
-## Führt zu
+## Leads To
 
 * [[...]]
 * [[...]]
@@ -49,41 +49,42 @@ IMPORTANT:
 * What should you do immediately after?
 * How do you stabilize position?
 
-## Probleme
+## Problems
 
 * What commonly goes wrong?
 * What reduces effectiveness?
 
-## Wenn blockiert / Kombinationen
+## If Blocked / Combinations
 
 * [[...]]
 * [[...]]
 
 ---
 
-# Verteidigung
+# Defense
 
-## Reaktionen
+## Reactions
 
 * How does the opponent defend?
 * What are standard counters?
 
-## Probleme
+## Problems
 
 * What leads to getting taken down?
 
 ---
+
 ---
 
 # EXAMPLE — REFERENCE ONLY (Single-Leg-Takedown)
 
-*(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)*
+**(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)**
 
 ---
 
-# Angriff
+# Attack
 
-## Funktioniert wenn
+## Works When
 
 * Opponent stands relatively upright
 * Weight is on one leg
@@ -93,10 +94,10 @@ IMPORTANT:
 
 * Level change (go down, do not lean forward)
 * Step forward (penetration step)
-* Keep head close to opponent’s body
+* Keep head close to opponent's body
 * Wrap leg tightly
 
-## Durchführung
+## Execution
 
 ### Entry
 
@@ -107,10 +108,10 @@ IMPORTANT:
 ### Finish
 
 * Off-balance opponent (push/pull)
-* Lift or “run the pipe” (rotate leg and topple opponent)
+* Lift or "run the pipe" (rotate leg and topple opponent)
 * Alternative: block leg and drive opponent backward
 
-## Führt zu
+## Leads To
 
 * Top [[Half-Guard]]
 * [[Side-Control]]
@@ -121,14 +122,14 @@ IMPORTANT:
 * Control the leg until position is secured
 * Transition into stable control (avoid scrambles)
 
-## Probleme
+## Problems
 
 * Head too far away → no pressure
 * Too upright → lose leverage
 * Gripping too high on the leg
 * Opponent has strong balance
 
-## Wenn blockiert / Kombinationen
+## If Blocked / Combinations
 
 * Opponent sprawls → stay on the leg / come up
 * Opponent hops away → follow and finish
@@ -136,16 +137,16 @@ IMPORTANT:
 
 ---
 
-# Verteidigung
+# Defense
 
-## Reaktionen
+## Reactions
 
 * [[Sprawl]]
 * Maintain distance
 * Shift weight backward
 * Push head down
 
-## Probleme
+## Problems
 
 * Reacting too late → leg gets captured
 * Poor balance

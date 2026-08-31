@@ -5,7 +5,7 @@ from app.vectorstore.chroma_store import add_notes, reset_collection
 from app.services.rag_service import ask
 from app.cli.command_handler import handle_command
 from app.services.note_writer_service import generate_note_draft, save_note_draft, load_global_rules
-from app.config import TYPE_TO_FOLDER
+from app.config import LANGUAGE, TYPE_TO_FOLDER, VAULT_PATH
 from app.services.note_update_service import generate_note_update, save_note_update
 from app.cli.diff_printer import print_diff
 
@@ -14,7 +14,6 @@ def reindex_notes():
     notes = load_notes()
     reset_collection()
     add_notes(notes)
-    print("Notes indexed")
 
 
 def print_banner():
@@ -27,7 +26,7 @@ def print_banner():
     ║  ✓ Notes indexed                             ║
     ║  ✓ Embeddings loaded                         ║
     ║  ✓ ChromaDB ready                            ║
-    ║  ✓ OpenAI connected                          ║
+    ║  ✓ OpenAI configured                         ║
     ╠══════════════════════════════════════════════╣
     ║                                              ║
     ║                 OSS. 🤙                      ║
@@ -47,6 +46,9 @@ def main():
     
     reindex_notes()
     print_banner()
+    
+    print(f"Vault: {VAULT_PATH}")
+    print(f"Content language: {LANGUAGE}\n")
 
     print("Type '/exit' to quit.")
     print("Commands: /exit, /reindex, /write <filename> <description>, /update <filename> <new information>\n")

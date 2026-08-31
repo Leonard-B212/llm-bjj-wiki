@@ -13,18 +13,17 @@ IMPORTANT:
 
 ---
 
-# Angriff (Top)
+# Attack (Top)
 
 ## Setup
 
 * From which positions or situations does this pass work?
 * What initial control or position is required?
 
-## Durchführung
+## Execution
 
 * Step-by-step explanation of the pass
 * Focus on:
-
   * positioning
   * movement
   * control during transition
@@ -34,12 +33,12 @@ IMPORTANT:
 * [[...]]
 * [[...]]
 
-## Kontrolle nach Pass
+## Control After Pass
 
 * How do you stabilize the position?
 * How do you prevent re-guard?
 
-## Probleme
+## Problems
 
 * What commonly goes wrong?
 * How does the opponent interrupt the pass?
@@ -50,38 +49,39 @@ IMPORTANT:
 
 ---
 
-# Verteidigung (Bottom)
+# Defense (Bottom)
 
-## Reaktionen / Verteidigung
+## Reactions / Defense
 
 * How can the opponent defend?
 * What should be done early?
 
-## Probleme
+## Problems
 
 * What mistakes lead to getting passed?
 
 ---
+
 ---
 
 # EXAMPLE — REFERENCE ONLY (Chest-Ride-Pass)
 
-*(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)*
+**(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)**
 
 ---
 
-# Angriff (Top)
+# Attack (Top)
 
 ## Setup
 
 * Possible from [[Knee-On-Belly]]
 * Right leg placed on the belly
 
-## Durchführung (Pass from left side)
+## Execution (Pass From Left Side)
 
-* Place left leg on opponent’s chest
+* Place left leg on opponent's chest
 * Rotate 180° to face the legs
-* Continue rotation along opponent’s legs
+* Continue rotation along opponent's legs
 * End almost in a full 360° rotation
 * Keep head elevated to avoid being swept
 
@@ -91,13 +91,13 @@ IMPORTANT:
 * With both arms trapped → transition to [[Mount]]
 * If no arm control → maintain posture, possible no-hand [[Triangle]]
 
-## Kontrolle nach Pass
+## Control After Pass
 
 * Keep hips low
 * Keep opponent flat
 * Do not allow space (prevent re-guard)
 
-## Probleme
+## Problems
 
 * Too slow → opponent frames or turns in
 
@@ -108,15 +108,15 @@ IMPORTANT:
 
 ---
 
-# Verteidigung (Bottom)
+# Defense (Bottom)
 
-## Reaktionen / Verteidigung
+## Reactions / Defense
 
 * Use frames against hips and upper body
 * Stop rotation early
 * Insert legs → recover guard
 * Create space instead of staying flat
 
-## Probleme
+## Problems
 
 * Reacting too late to the rotation

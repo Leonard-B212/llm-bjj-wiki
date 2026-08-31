@@ -13,9 +13,9 @@ IMPORTANT:
 
 ---
 
-# Angriff
+# Attack
 
-## Funktioniert wenn
+## Works When
 
 * Under which conditions does the throw work?
 * Opponent posture, pressure, balance
@@ -25,16 +25,15 @@ IMPORTANT:
 * What grips or positions are needed?
 * How do you initiate the throw?
 
-## Durchführung
+## Execution
 
 * Step-by-step execution
 * Focus on:
-
   * off-balancing (kuzushi)
   * positioning (especially hips)
   * timing and rotation
 
-## Führt zu
+## Leads To
 
 * [[...]]
 * [[...]]
@@ -44,41 +43,42 @@ IMPORTANT:
 * What should you do after the throw?
 * How do you secure control?
 
-## Probleme
+## Problems
 
 * What commonly goes wrong?
 * What reduces effectiveness?
 
-## Counter (Gegner)
+## Counters
 
 * [[...]]
 * [[...]]
 
 ---
 
-# Verteidigung
+# Defense
 
-## Reaktionen
+## Reactions
 
 * How does the opponent defend?
 * What should be prevented?
 
-## Probleme
+## Problems
 
 * What leads to getting thrown?
 
 ---
+
 ---
 
 # EXAMPLE — REFERENCE ONLY (Uki-Goshi)
 
-*(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)*
+**(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)**
 
 ---
 
-# Angriff
+# Attack
 
-## Funktioniert wenn
+## Works When
 
 * Opponent stands relatively upright
 * Underhook is possible
@@ -88,16 +88,16 @@ IMPORTANT:
 
 * Often from a scramble or right underhook + left wrist control
 
-## Durchführung
+## Execution
 
 * Secure a deep underhook
 * Bring your back tight to the opponent
-* Position hips under the opponent’s center (slight squat)
+* Position hips under the opponent's center (slight squat)
 * Keep legs close together
 * Explosively drive hips upward
 * Initiate rotation → throw opponent over your hips
 
-## Führt zu
+## Leads To
 
 * [[Knee-On-Belly]]
 * [[Side-Control]] (ideal, but not always directly)
@@ -109,31 +109,31 @@ IMPORTANT:
 * Keep the arm → immediate submission opportunity
 * Stabilize quickly (avoid losing position in scramble)
 
-## Probleme
+## Problems
 
 * Hips not deep enough → no leverage
 * Too much distance → opponent stays upright
 * Rotation too slow
 * Losing arm control during the throw
 
-## Counter (Gegner)
+## Counters
 
-* [[Outside trip counter]]
+* [[Outside-Trip-Counter]]
 * Opponent leans back → no lift possible
 * Opponent rotates with you → scramble
 
 ---
 
-# Verteidigung
+# Defense
 
-## Reaktionen
+## Reactions
 
 * Maintain distance (prevent hip connection)
 * Block the underhook
 * Shift weight backward
 * Widen base
 
-## Probleme
+## Problems
 
 * Allowing hips to come in → lose balance
 * Standing too upright

@@ -13,20 +13,20 @@ IMPORTANT:
 
 ---
 
-# Variationen (Optional)
+# Variations (Optional)
 
 * [[...]]
 * [[...]]
 
 ---
 
-# Angriff
+# Attack
 
 ## Setup
 
 * From which positions / situations does this submission work?
 
-## Durchführung
+## Execution
 
 ### Entry
 
@@ -39,7 +39,7 @@ IMPORTANT:
 * Where does the pressure come from?
 * What details are important?
 
-## Probleme
+## Problems
 
 * Common mistakes
 * What usually goes wrong?
@@ -49,34 +49,35 @@ IMPORTANT:
 * Important concepts
 * Key principles (pressure, angle, control, timing)
 
-## Wenn blockiert / In Kombination mit
+## If Blocked / Combinations
 
 * [[...]]
 * [[...]]
 
 ---
 
-# Verteidigung
+# Defense
 
 * How does the opponent defend?
 * What should be prevented?
 
 ---
+
 ---
 
 # EXAMPLE — REFERENCE ONLY (Darce-Choke)
 
-*(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)*
+**(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)**
 
 ---
 
-# Angriff
+# Attack
 
 ## Setup
 
-* From Turtle or Front Headlock
+* From [[Turtle]] or [[Front-Headlock]]
 
-## Durchführung
+## Execution
 
 ### Entry
 
@@ -91,7 +92,7 @@ IMPORTANT:
 * Keep chest tight (no space)
 * Drive hips in and increase pressure gradually
 
-## Probleme
+## Problems
 
 * Arm not deep enough → no pressure
 * Too much space between chest and opponent
@@ -105,15 +106,15 @@ IMPORTANT:
 * Pressure comes from chest + shoulder, not arms
 * Angle is more important than strength
 
-## Wenn blockiert / In Kombination mit
+## If Blocked / Combinations
 
-* [[Anaconda Choke]]
+* [[Anaconda-Choke]]
 * [[Front-Headlock]]
 * [[Guillotine-Choke]]
 
 ---
 
-# Verteidigung
+# Defense
 
 * Keep arms tight (no underhook allowed)
 * Hide the head
