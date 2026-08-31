@@ -40,7 +40,7 @@ def write_env(values):
     with open(ENV_FILE, "w", encoding="utf-8") as file:
         file.write(f"OPENAI_API_KEY={values.get('OPENAI_API_KEY', '')}\n")
         file.write(f"VAULT_PATH={values.get('VAULT_PATH', '')}\n")
-        file.write(f"LANGUAGE={values.get('LANGUAGE', 'German')}\n")
+        file.write(f"LANGUAGE={values.get('LANGUAGE', 'English')}\n")
 
 
 def setup():
@@ -49,10 +49,10 @@ def setup():
 
     api_key = input("OpenAI API key: ").strip()
     vault_path = input("Obsidian vault path: ").strip()
-    language = input("Content language [German]: ").strip()
+    language = input("Content language [English]: ").strip()
 
     if not language:
-        language = "German"
+        language = "English"
 
     write_env({
         "OPENAI_API_KEY": api_key,
@@ -70,7 +70,7 @@ def settings_menu():
         print("\nSettings")
         print("--------")
         print(f"Vault path: {values.get('VAULT_PATH', 'Not configured')}")
-        print(f"Content language: {values.get('LANGUAGE', 'German')}")
+        print(f"Content language: {values.get('LANGUAGE', 'English')}")
         print(f"OpenAI API key: {'Configured' if values.get('OPENAI_API_KEY') else 'Not configured'}")
 
         print("\n1. Change vault path")
