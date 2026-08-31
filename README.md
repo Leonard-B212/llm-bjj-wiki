@@ -12,9 +12,7 @@ A terminal-based tool to build and query a personal Brazilian Jiu-Jitsu knowledg
 
 ## Concept
 
-The system combines note generation with a Retrieval-Augmented Generation (RAG) approach:
-
----
+The system combines note generation with a Retrieval-Augmented Generation (RAG) approach.
 
 ### Components
 
@@ -62,7 +60,9 @@ LLM-BJJ-Wiki/
 │
 ├── .env.example
 ├── .gitignore
+├── LICENSE
 ├── requirements.txt
+├── start.py
 ├── todo.md
 └── README.md
 ```
@@ -71,6 +71,16 @@ LLM-BJJ-Wiki/
 
 ## Setup
 
+### Requirements
+
+Before starting, you need:
+
+* **Python 3** installed
+* An **OpenAI API key**
+* An **Obsidian vault** or another folder where the Markdown notes should be stored
+
+The launcher handles the remaining setup and can install the required Python packages for you.
+
 ### 1. Clone the repository
 
 ```bash
@@ -78,25 +88,140 @@ git clone https://github.com/Leonard-B212/llm-bjj-wiki.git
 cd llm-bjj-wiki
 ```
 
-### 2. Install dependencies
+### 2. Start the launcher
 
 ```bash
-pip install -r requirements.txt
+python start.py
 ```
 
-### 3. Configure the environment
+On the first start, the launcher detects that no `.env` configuration exists and starts the setup automatically.
 
-Copy `.env.example` to `.env` and configure your OpenAI API key, Obsidian vault path, and note language:
+You will be asked for:
+
+```text
+First-time setup
+----------------
+OpenAI API key:
+Obsidian vault path:
+Content language [English]:
+```
+
+#### OpenAI API key
+
+Enter your OpenAI API key directly:
+
+```text
+OpenAI API key: sk-your-api-key-here
+```
+
+The key is stored locally in `.env` and is not committed to the repository.
+
+#### Obsidian vault path
+
+Enter the full path to the folder containing your BJJ Markdown notes.
+
+For example, on Windows:
+
+```text
+Obsidian vault path: C:\Users\YourName\Documents\Obsidian\BJJ
+```
+
+* Enter the path directly. Do **not** add quotation marks or additional spaces.
+
+* Spaces that are actually part of a folder name are fine.
+
+* The launcher checks whether the configured vault path exists before starting the Wiki.
+
+#### Content language
+
+Enter the language in which descriptive note content should be generated:
+
+```text
+Content language [English]: German
+```
+
+If you simply press Enter, `English` is used as the default.
+
+`LANGUAGE` only controls descriptive note content. Schema headings, BJJ technique names, filenames, and links remain in English.
+
+### 3. Install dependencies
+
+After the initial setup, the launcher checks whether required Python packages are installed.
+
+If packages are missing, you will see something like:
+
+```text
+Missing dependencies:
+- chromadb
+- openai
+- python-dotenv
+
+Install them now? (y/n):
+```
+
+Enter:
+
+```text
+y
+```
+
+The launcher installs the dependencies from `requirements.txt` using the same Python installation that started the launcher.
+
+You can also reinstall or repair the dependencies later through the launcher menu.
+
+### 4. Start the Wiki
+
+After setup, the launcher displays:
+
+```text
+🥋 BJJ LLM Wiki
+----------------
+1. Start BJJ-LLM-Wiki
+2. Settings
+3. Install / Repair Dependencies
+4. Exit
+```
+
+Select:
+
+```text
+1
+```
+
+The Wiki will start and index the notes in your configured vault into ChromaDB.
+
+When you exit the Wiki with `/exit`, you return to the launcher. This allows you to change settings, repair dependencies, or start the Wiki again without restarting the launcher.
+
+---
+
+## Configuration
+
+The launcher stores its configuration locally in a `.env` file.
+
+A configuration looks like this:
 
 ```text
 OPENAI_API_KEY=your_api_key_here
-VAULT_PATH=C:\path\to\your\obsidian\vault
-LANGUAGE=German
+VAULT_PATH=C:\Users\YourName\Documents\Obsidian\BJJ
+LANGUAGE=English
 ```
 
-`LANGUAGE` controls the language used for descriptive note content. Schema headings, technique names, filenames, and links remain in English.
+Normally, you do not need to edit this file manually. Use the **Settings** option in `start.py` instead.
 
-Important: `.env` is listed in `.gitignore` so your local configuration and API key are not committed to the repo.
+The settings menu allows you to change:
+
+```text
+1. Change vault path
+2. Change content language
+3. Change OpenAI API key
+4. Back
+```
+
+The API key itself is never displayed by the launcher. It only shows whether an API key is configured.
+
+`.env` is listed in `.gitignore`, so your local configuration and API key are not committed to the repository.
+
+`.env.example` is included as a template for manual configuration.
 
 Note folders are mapped by technique type in `TYPE_TO_FOLDER` in `app/config.py`. Add a new type there if you want a new category (and a matching `*_schema.md` in `app/schemas/`).
 
@@ -104,13 +229,23 @@ Note folders are mapped by technique type in `TYPE_TO_FOLDER` in `app/config.py`
 
 ## Run the project
 
+For normal use, start the launcher from the project directory:
+
+```bash
+python start.py
+```
+
+The application can also be started directly:
+
 ```bash
 python -m app.main
 ```
 
-On startup, all notes in the vault are indexed into ChromaDB.
+Direct startup bypasses the launcher's setup, configuration validation, and dependency checks and is therefore mainly useful during development.
 
-### Commands
+---
+
+## Commands
 
 | Command | Description |
 |---|---|
@@ -118,12 +253,12 @@ On startup, all notes in the vault are indexed into ChromaDB.
 | `/write <filename> <description>` | Create a new note. You provide the filename, the LLM classifies the technique type, fills in the schema, and drafts the content |
 | `/update <filename> <new information>` | Merge new information into an existing note, keeping its structure |
 | `/reindex` | Rebuild the vector index (e.g. after manual edits in Obsidian) |
-| `/exit` | Quit |
+| `/exit` | Exit the Wiki and return to the launcher |
 
 Example:
 
 ```text
->> /write Rear-Naked-Choke Klassischer Choke von der Rückenkontrolle aus, Arm um den Hals, Griff einhaken, Ellenbogen zusammenziehen.
+>> /write Rear-Naked-Choke Classic choke from back control. Wrap the arm around the neck, secure the grip and bring the elbows together.
 ```
 
 The generated note is shown as a preview before saving, and you're asked to confirm.
@@ -132,7 +267,9 @@ The generated note is shown as a preview before saving, and you're asked to conf
 
 ## How note generation works
 
-Each technique type (`submission`, `escape`, `sweep`, `pass`, `position`, `takedown`, `throw`) has a corresponding schema file in `app/schemas/` that defines the expected structure (headings, sections, level of detail). When you run `/write`:
+Each technique type (`submission`, `escape`, `sweep`, `pass`, `position`, `takedown`, `throw`) has a corresponding schema file in `app/schemas/` that defines the expected structure (headings, sections, level of detail).
+
+When you run `/write`:
 
 1. The LLM classifies the technique into one of the defined types
 2. The matching schema is loaded
@@ -157,7 +294,11 @@ This avoids a common RAG failure mode: short or sparsely-filled notes (e.g. a no
 ## Current Status
 
 * Terminal-based interaction
+* Guided first-time setup through `start.py`
+* Configuration management through the launcher
+* Automatic dependency checking and installation
 * Note creation and updates follow enforced per-type schemas
+* Configurable descriptive note language
 * Hybrid retrieval (semantic + lexical) for question answering
 
 See `todo.md` for planned features and open ideas.
@@ -168,6 +309,8 @@ See `todo.md` for planned features and open ideas.
 
 * Do not store sensitive data in your notes
 * OpenAI API usage may incur costs
+* Your OpenAI API key is stored locally in `.env`
+* Your Markdown notes remain in your configured vault and are not part of this repository
 * This is currently a learning/personal project, not intended for production use
 
 ---

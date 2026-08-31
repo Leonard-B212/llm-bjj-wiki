@@ -4,6 +4,7 @@
 
 - [x] RAG retrieval improvements
 - [x] Configurable note content language
+- [x] Add a setup/launcher script that handles first-time configuration, settings, dependency installation, and starting the application
 - [ ] Smart Router: detect whether free-text input should trigger write, update, or question
 - [ ] Fuzzy matching for note names (case differences, typos)
 - [ ] Duplicate check for `/write`
