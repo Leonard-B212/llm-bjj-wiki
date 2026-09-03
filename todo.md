@@ -5,9 +5,11 @@
 - [x] RAG retrieval improvements
 - [x] Configurable note content language
 - [x] Add a setup/launcher script that handles first-time configuration, settings, dependency installation, and starting the application
+- [ ] BJJ terminology glossary: define canonical meanings for ambiguous or relative terms (e.g. Rear-Side-Arm, Far-Side-Arm, Underhook, Crossface) and provide relevant glossary context to the writer
 - [ ] Smart Router: detect whether free-text input should trigger write, update, or question
 - [ ] Fuzzy matching for note names (case differences, typos)
 - [ ] Duplicate check for `/write`
+- [ ] Canonical note linking: provide existing note titles to the writer so it can prefer existing canonical concepts (e.g. [[Side-Control]]) while still allowing links to not-yet-created techniques
 - [ ] Undo functionality for `/update`
 - [ ] Support multiple LLM providers (e.g. OpenAI, Anthropic Claude)
 - [ ] Wiki linter: automatically detect schema violations, broken links, duplicates, and orphaned notes

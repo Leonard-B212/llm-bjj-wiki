@@ -2,6 +2,7 @@ import os
 
 from openai import OpenAI
 
+from app.ingestion.loader import get_existing_note_titles
 from app.config import OPENAI_API_KEY, VAULT_PATH, TYPE_TO_FOLDER, LANGUAGE
 
 client = OpenAI(api_key=OPENAI_API_KEY)
@@ -40,6 +41,7 @@ Rules:
 
     response = client.chat.completions.create(
         model="gpt-4.1-mini",
+        temperature=0,
         messages=[
             {"role": "user", "content": prompt}
         ]
@@ -64,12 +66,19 @@ def generate_note_draft(filename, user_input):
     note_type = classify_note_type(user_input)
     schema = load_schema(note_type)
     global_rules = load_global_rules()
+    existing_note_titles = get_existing_note_titles()
+    existing_notes_text = "\n".join(
+        f"- {title}" for title in existing_note_titles
+    )
 
     prompt = f"""
 You create Obsidian markdown notes for a Brazilian Jiu-Jitsu wiki.
 
 Global rules:
 {global_rules}
+
+Existing canonical note titles:
+{existing_notes_text}
 
 User input:
 {user_input}
@@ -87,9 +96,12 @@ Rules:
 - Do NOT return a Python dictionary.
 - Do NOT use markdown code fences.
 """
+    print("\n--- WRITE PROMPT DEBUG ---")
+    print(prompt)
+    print("--- END WRITE PROMPT DEBUG ---\n")
 
     response = client.chat.completions.create(
-        model="gpt-4.1-mini",
+        model="gpt-5.6-luna",
         messages=[
             {"role": "user", "content": prompt}
         ]
@@ -105,7 +117,6 @@ Rules:
         "content": content,
         "note_type": note_type
     }
-
 
 def build_note_path(draft):
     note_type = draft["note_type"]

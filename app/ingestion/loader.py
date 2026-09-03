@@ -1,5 +1,7 @@
 import os
+
 from app.config import VAULT_PATH
+
 
 def load_notes():
     notes = []
@@ -20,3 +22,14 @@ def load_notes():
                 })
 
     return notes
+
+
+def get_existing_note_titles():
+    titles = []
+
+    for root, dirs, files in os.walk(VAULT_PATH):
+        for filename in files:
+            if filename.endswith(".md"):
+                titles.append(filename.replace(".md", ""))
+
+    return sorted(titles)
