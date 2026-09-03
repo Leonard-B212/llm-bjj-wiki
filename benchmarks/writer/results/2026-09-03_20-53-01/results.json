@@ -1,0 +1,1162 @@
+[
+  {
+    "case": "butterfly_sweep",
+    "model": "gpt-4.1-mini",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 10,
+    "total_checks": 10,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Butterfly-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Open-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Closed-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Half-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Mount]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Three-Quarter-Mount]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Overhook]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Collar-Tie]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Butterfly-Hook]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Shoulder-Crunch-Sweep]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 11.86,
+    "input_tokens": 2652,
+    "output_tokens": 809,
+    "total_tokens": 3461,
+    "cost_usd": 0.002355,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\butterfly_sweep\\gpt-4.1-mini.md"
+  },
+  {
+    "case": "butterfly_sweep",
+    "model": "gpt-5-mini",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 10,
+    "total_checks": 10,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Butterfly-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Open-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Closed-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Half-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Mount]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Three-Quarter-Mount]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Overhook]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Collar-Tie]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Butterfly-Hook]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Shoulder-Crunch-Sweep]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 23.84,
+    "input_tokens": 2651,
+    "output_tokens": 3342,
+    "total_tokens": 5993,
+    "cost_usd": 0.007347,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\butterfly_sweep\\gpt-5-mini.md"
+  },
+  {
+    "case": "butterfly_sweep",
+    "model": "gpt-5.4-nano",
+    "status": "success",
+    "quality_passed": false,
+    "passed_checks": 6,
+    "total_checks": 10,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Butterfly-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Open-Guard]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Closed-Guard]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Half-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Mount]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Three-Quarter-Mount]]",
+        "passed": false
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Overhook]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Collar-Tie]]",
+        "passed": false
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Butterfly-Hook]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Shoulder-Crunch-Sweep]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 10.25,
+    "input_tokens": 2651,
+    "output_tokens": 1347,
+    "total_tokens": 3998,
+    "cost_usd": 0.002214,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\butterfly_sweep\\gpt-5.4-nano.md"
+  },
+  {
+    "case": "butterfly_sweep",
+    "model": "gpt-5.6-luna",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 10,
+    "total_checks": 10,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Butterfly-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Open-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Closed-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Half-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Mount]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Three-Quarter-Mount]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Overhook]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Collar-Tie]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Butterfly-Hook]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Shoulder-Crunch-Sweep]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 19.66,
+    "input_tokens": 2651,
+    "output_tokens": 1797,
+    "total_tokens": 4448,
+    "cost_usd": 0.002687,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\butterfly_sweep\\gpt-5.6-luna.md"
+  },
+  {
+    "case": "calf_slicer_from_turtle_test",
+    "model": "gpt-4.1-mini",
+    "status": "success",
+    "quality_passed": false,
+    "passed_checks": 6,
+    "total_checks": 9,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Turtle]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Calf-Slicer]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Armbar]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "Triangle Lock",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "Fuß auf Fuß",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Right-Turtle]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Left-Turtle]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Triangle-Lock]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Wedge]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 6.51,
+    "input_tokens": 2630,
+    "output_tokens": 552,
+    "total_tokens": 3182,
+    "cost_usd": 0.001935,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\calf_slicer_from_turtle_test\\gpt-4.1-mini.md"
+  },
+  {
+    "case": "calf_slicer_from_turtle_test",
+    "model": "gpt-5-mini",
+    "status": "success",
+    "quality_passed": false,
+    "passed_checks": 6,
+    "total_checks": 9,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Turtle]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Calf-Slicer]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Armbar]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "Triangle Lock",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "Fuß auf Fuß",
+        "passed": false
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Right-Turtle]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Left-Turtle]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Triangle-Lock]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Wedge]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 20.0,
+    "input_tokens": 2629,
+    "output_tokens": 3078,
+    "total_tokens": 5707,
+    "cost_usd": 0.006813,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\calf_slicer_from_turtle_test\\gpt-5-mini.md"
+  },
+  {
+    "case": "calf_slicer_from_turtle_test",
+    "model": "gpt-5.4-nano",
+    "status": "success",
+    "quality_passed": false,
+    "passed_checks": 7,
+    "total_checks": 9,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Turtle]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Calf-Slicer]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Armbar]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "Triangle Lock",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "Fuß auf Fuß",
+        "passed": false
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Right-Turtle]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Left-Turtle]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Triangle-Lock]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Wedge]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 10.43,
+    "input_tokens": 2629,
+    "output_tokens": 1179,
+    "total_tokens": 3808,
+    "cost_usd": 0.002,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\calf_slicer_from_turtle_test\\gpt-5.4-nano.md"
+  },
+  {
+    "case": "calf_slicer_from_turtle_test",
+    "model": "gpt-5.6-luna",
+    "status": "success",
+    "quality_passed": false,
+    "passed_checks": 8,
+    "total_checks": 9,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Turtle]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Calf-Slicer]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Armbar]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "Triangle Lock",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "Fuß auf Fuß",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Right-Turtle]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Left-Turtle]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Triangle-Lock]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Wedge]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 19.47,
+    "input_tokens": 2629,
+    "output_tokens": 1437,
+    "total_tokens": 4066,
+    "cost_usd": 0.00225,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\calf_slicer_from_turtle_test\\gpt-5.6-luna.md"
+  },
+  {
+    "case": "choi_bar_test",
+    "model": "gpt-4.1-mini",
+    "status": "success",
+    "quality_passed": false,
+    "passed_checks": 4,
+    "total_checks": 8,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Armbar]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Russian-Armbar]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": false
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": false
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[S-Grip]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Crossface]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Underhook]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 7.59,
+    "input_tokens": 2269,
+    "output_tokens": 758,
+    "total_tokens": 3027,
+    "cost_usd": 0.00212,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\choi_bar_test\\gpt-4.1-mini.md"
+  },
+  {
+    "case": "choi_bar_test",
+    "model": "gpt-5-mini",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 8,
+    "total_checks": 8,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Armbar]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Russian-Armbar]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[S-Grip]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Crossface]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Underhook]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 17.95,
+    "input_tokens": 2268,
+    "output_tokens": 2661,
+    "total_tokens": 4929,
+    "cost_usd": 0.005889,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\choi_bar_test\\gpt-5-mini.md"
+  },
+  {
+    "case": "choi_bar_test",
+    "model": "gpt-5.4-nano",
+    "status": "success",
+    "quality_passed": false,
+    "passed_checks": 7,
+    "total_checks": 8,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Armbar]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Russian-Armbar]]",
+        "passed": false
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[S-Grip]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Crossface]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Underhook]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 9.69,
+    "input_tokens": 2268,
+    "output_tokens": 1079,
+    "total_tokens": 3347,
+    "cost_usd": 0.001802,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\choi_bar_test\\gpt-5.4-nano.md"
+  },
+  {
+    "case": "choi_bar_test",
+    "model": "gpt-5.6-luna",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 8,
+    "total_checks": 8,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Armbar]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Russian-Armbar]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[S-Grip]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Crossface]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Underhook]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 15.39,
+    "input_tokens": 2268,
+    "output_tokens": 1401,
+    "total_tokens": 3669,
+    "cost_usd": 0.002135,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\choi_bar_test\\gpt-5.6-luna.md"
+  },
+  {
+    "case": "sambo_guard_pass_test",
+    "model": "gpt-4.1-mini",
+    "status": "success",
+    "quality_passed": false,
+    "passed_checks": 9,
+    "total_checks": 12,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Closed-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Knee-Slice]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Kesa-Gatame]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[North-South]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Butterfly-Guard]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Sweep]]",
+        "passed": false
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Underhook]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Crossface]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Shoulder-Pin]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Upper-Body-Pressure]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Butterfly-Hook]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 9.54,
+    "input_tokens": 3244,
+    "output_tokens": 896,
+    "total_tokens": 4140,
+    "cost_usd": 0.002731,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\sambo_guard_pass_test\\gpt-4.1-mini.md"
+  },
+  {
+    "case": "sambo_guard_pass_test",
+    "model": "gpt-5-mini",
+    "status": "success",
+    "quality_passed": false,
+    "passed_checks": 9,
+    "total_checks": 12,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Closed-Guard]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Knee-Slice]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Kesa-Gatame]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[North-South]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Butterfly-Guard]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Sweep]]",
+        "passed": false
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Underhook]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Crossface]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Shoulder-Pin]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Upper-Body-Pressure]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Butterfly-Hook]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 19.62,
+    "input_tokens": 3243,
+    "output_tokens": 2652,
+    "total_tokens": 5895,
+    "cost_usd": 0.006115,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\sambo_guard_pass_test\\gpt-5-mini.md"
+  },
+  {
+    "case": "sambo_guard_pass_test",
+    "model": "gpt-5.4-nano",
+    "status": "success",
+    "quality_passed": false,
+    "passed_checks": 6,
+    "total_checks": 12,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Closed-Guard]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Knee-Slice]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Kesa-Gatame]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[North-South]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Butterfly-Guard]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Sweep]]",
+        "passed": false
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Underhook]]",
+        "passed": false
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Crossface]]",
+        "passed": false
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Shoulder-Pin]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Upper-Body-Pressure]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Butterfly-Hook]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 13.73,
+    "input_tokens": 3243,
+    "output_tokens": 1806,
+    "total_tokens": 5049,
+    "cost_usd": 0.002906,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\sambo_guard_pass_test\\gpt-5.4-nano.md"
+  },
+  {
+    "case": "sambo_guard_pass_test",
+    "model": "gpt-5.6-luna",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 12,
+    "total_checks": 12,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Closed-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Knee-Slice]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Kesa-Gatame]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[North-South]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Butterfly-Guard]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Sweep]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Underhook]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Crossface]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Shoulder-Pin]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Upper-Body-Pressure]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Butterfly-Hook]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 29.1,
+    "input_tokens": 3243,
+    "output_tokens": 2028,
+    "total_tokens": 5271,
+    "cost_usd": 0.003082,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\sambo_guard_pass_test\\gpt-5.6-luna.md"
+  },
+  {
+    "case": "sidecontrol_reversal_test",
+    "model": "gpt-4.1-mini",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 3,
+    "total_checks": 3,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 6.93,
+    "input_tokens": 1991,
+    "output_tokens": 587,
+    "total_tokens": 2578,
+    "cost_usd": 0.001736,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\sidecontrol_reversal_test\\gpt-4.1-mini.md"
+  },
+  {
+    "case": "sidecontrol_reversal_test",
+    "model": "gpt-5-mini",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 3,
+    "total_checks": 3,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 20.76,
+    "input_tokens": 1990,
+    "output_tokens": 2873,
+    "total_tokens": 4863,
+    "cost_usd": 0.006243,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\sidecontrol_reversal_test\\gpt-5-mini.md"
+  },
+  {
+    "case": "sidecontrol_reversal_test",
+    "model": "gpt-5.4-nano",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 3,
+    "total_checks": 3,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 7.21,
+    "input_tokens": 1990,
+    "output_tokens": 880,
+    "total_tokens": 2870,
+    "cost_usd": 0.001498,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\sidecontrol_reversal_test\\gpt-5.4-nano.md"
+  },
+  {
+    "case": "sidecontrol_reversal_test",
+    "model": "gpt-5.6-luna",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 3,
+    "total_checks": 3,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 15.19,
+    "input_tokens": 1990,
+    "output_tokens": 1489,
+    "total_tokens": 3479,
+    "cost_usd": 0.002185,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_20-53-01\\sidecontrol_reversal_test\\gpt-5.6-luna.md"
+  }
+]

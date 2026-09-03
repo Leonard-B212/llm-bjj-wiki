@@ -2,6 +2,7 @@
 
 ## Planned
 
+- [ ] Architecture cleanup: introduce clear application/infrastructure boundaries by moving Markdown vault access into a `repositories` layer and LLM provider access into an `llm` layer; keep CLI as presentation and services focused on use-case logic
 - [x] RAG retrieval improvements
 - [x] Configurable note content language
 - [x] Add a setup/launcher script that handles first-time configuration, settings, dependency installation, and starting the application
