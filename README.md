@@ -2,6 +2,8 @@
 
 A terminal-based tool to build and query a personal Brazilian Jiu-Jitsu knowledge base, stored as Markdown notes in an Obsidian vault, using an LLM for retrieval, writing, and updating.
 
+![BJJ LLM Wiki CLI](assets/bjj-llm-wiki-cli.png)
+
 ## Goal
 
 * Use Markdown notes (Obsidian) as a structured knowledge base

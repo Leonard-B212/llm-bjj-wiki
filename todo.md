@@ -20,4 +20,4 @@
 - [ ] Router: ask a clarification question when input is ambiguous or incomplete (single-turn clarification first, no persistent memory)
 - [ ] Router: detect and split multiple intents within a single message (more complex, long-term)
 - [ ] Build a standalone frontend without requiring Obsidian, providing a simple UI for users without CLI or Obsidian experience
-- [ ] Make repository public-ready: remove secrets/personal data, add example configuration, documentation, and setup instructions
+- [x] Make repository public-ready: remove secrets/personal data, add example configuration, documentation, and setup instructions
