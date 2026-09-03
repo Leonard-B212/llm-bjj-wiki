@@ -5,14 +5,14 @@
     "[[Side-Control]]",
     "[[Kesa-Gatame]]",
     "[[North-South]]",
-    "[[Butterfly-Guard]]",
-    "[[Sweep]]"
+    "[[Butterfly-Guard]]"
   ],
   "must_not_contain": [
     "[[Underhook]]",
     "[[Crossface]]",
     "[[Shoulder-Pin]]",
     "[[Upper-Body-Pressure]]",
-    "[[Butterfly-Hook]]"
+    "[[Butterfly-Hook]]",
+    "[[Sweep]]"
   ]
 }

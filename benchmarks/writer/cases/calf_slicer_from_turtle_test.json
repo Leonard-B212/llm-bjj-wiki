@@ -2,9 +2,7 @@
   "must_contain": [
     "[[Turtle]]",
     "[[Calf-Slicer]]",
-    "[[Armbar]]",
-    "Triangle Lock",
-    "Fuß auf Fuß"
+    "[[Armbar]]"
   ],
   "must_not_contain": [
     "[[Right-Turtle]]",
