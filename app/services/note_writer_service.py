@@ -3,7 +3,7 @@ import os
 from openai import OpenAI
 
 from app.ingestion.loader import get_existing_note_titles
-from app.config import OPENAI_API_KEY, VAULT_PATH, TYPE_TO_FOLDER, LANGUAGE
+from app.config import OPENAI_API_KEY, VAULT_PATH, TYPE_TO_FOLDER, LANGUAGE, WRITER_MODEL
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
@@ -62,7 +62,8 @@ def load_global_rules():
         return file.read().replace("{LANGUAGE}", LANGUAGE)
 
 
-def generate_note_draft(filename, user_input):
+def generate_note_draft(filename, user_input, model=None):
+    model = model or WRITER_MODEL
     note_type = classify_note_type(user_input)
     schema = load_schema(note_type)
     global_rules = load_global_rules()
@@ -96,12 +97,9 @@ Rules:
 - Do NOT return a Python dictionary.
 - Do NOT use markdown code fences.
 """
-    print("\n--- WRITE PROMPT DEBUG ---")
-    print(prompt)
-    print("--- END WRITE PROMPT DEBUG ---\n")
 
     response = client.chat.completions.create(
-        model="gpt-5.6-luna",
+        model=model,
         messages=[
             {"role": "user", "content": prompt}
         ]
@@ -115,7 +113,12 @@ Rules:
     return {
         "filename": filename,
         "content": content,
-        "note_type": note_type
+        "note_type": note_type,
+        "usage": {
+            "input_tokens": response.usage.prompt_tokens,
+            "output_tokens": response.usage.completion_tokens,
+            "total_tokens": response.usage.total_tokens,
+        }
     }
 
 def build_note_path(draft):
