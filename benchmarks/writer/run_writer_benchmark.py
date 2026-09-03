@@ -106,6 +106,71 @@ def save_result(run_dir, case_name, model, content):
 
     return file_path
 
+def print_quality_tables(results):
+    successful_results = [
+        result for result in results
+        if result["status"] == "success"
+    ]
+
+    case_names = list(dict.fromkeys(
+        result["case"] for result in successful_results
+    ))
+
+    for case_name in case_names:
+        case_results = [
+            result for result in successful_results
+            if result["case"] == case_name
+        ]
+
+        if not case_results:
+            continue
+
+        print(f"\n=== {case_name} ===\n")
+
+        model_width = 14
+        check_width = 32
+
+        header = f"{'Check':<{check_width}}"
+        for result in case_results:
+            model_name = result["model"].replace("gpt-", "")
+            header += f"{model_name:>{model_width}}"
+
+        print(header)
+        print("-" * len(header))
+
+        reference_checks = case_results[0]["checks"]
+
+        for index, check in enumerate(reference_checks):
+            prefix = "MUST" if check["type"] == "must_contain" else "NO"
+            label = f"{prefix} {check['value']}"
+
+            row = f"{label:<{check_width}}"
+
+            for result in case_results:
+                passed = result["checks"][index]["passed"]
+                symbol = "✓" if passed else "✗"
+                row += f"{symbol:>{model_width}}"
+
+            print(row)
+
+        print("-" * len(header))
+
+        result_row = f"{'Result':<{check_width}}"
+        cost_row = f"{'Cost':<{check_width}}"
+        time_row = f"{'Time':<{check_width}}"
+
+        for result in case_results:
+            score = f"{result['passed_checks']}/{result['total_checks']}"
+            cost = f"${result['cost_usd']:.5f}"
+            elapsed = f"{result['time_seconds']:.2f}s"
+
+            result_row += f"{score:>{model_width}}"
+            cost_row += f"{cost:>{model_width}}"
+            time_row += f"{elapsed:>{model_width}}"
+
+        print(result_row)
+        print(cost_row)
+        print(time_row)
 
 def run_benchmark():
     cases = load_test_cases()
@@ -199,7 +264,9 @@ def run_benchmark():
     with open(results_path, "w", encoding="utf-8") as file:
         json.dump(results, file, indent=2, ensure_ascii=False)
 
-    print("Benchmark complete.")
+    print_quality_tables(results)
+
+    print("\nBenchmark complete.")
     print(f"Results saved to: {run_dir}")
 
 
