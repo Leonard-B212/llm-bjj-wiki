@@ -1,0 +1,14 @@
+{
+  "must_contain": [
+    "[[Side-Control]]",
+    "[[Armbar]]",
+    "[[Russian-Armbar]]"
+  ],
+  "must_not_contain": [
+    "[[Top-Side-Control]]",
+    "[[Bottom-Side-Control]]",
+    "[[S-Grip]]",
+    "[[Crossface]]",
+    "[[Underhook]]"
+  ]
+}

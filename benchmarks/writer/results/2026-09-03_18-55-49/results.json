@@ -1,0 +1,350 @@
+[
+  {
+    "case": "choi_bar_test",
+    "model": "gpt-4.1-mini",
+    "status": "success",
+    "quality_passed": false,
+    "passed_checks": 5,
+    "total_checks": 8,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Armbar]]",
+        "passed": false
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Russian-Armbar]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": false
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[S-Grip]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Crossface]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Underhook]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 10.02,
+    "input_tokens": 2269,
+    "output_tokens": 479,
+    "total_tokens": 2748,
+    "cost_usd": 0.001674,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_18-55-49\\choi_bar_test\\gpt-4.1-mini.md"
+  },
+  {
+    "case": "choi_bar_test",
+    "model": "gpt-5-mini",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 8,
+    "total_checks": 8,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Armbar]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Russian-Armbar]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[S-Grip]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Crossface]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Underhook]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 20.45,
+    "input_tokens": 2268,
+    "output_tokens": 2680,
+    "total_tokens": 4948,
+    "cost_usd": 0.005927,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_18-55-49\\choi_bar_test\\gpt-5-mini.md"
+  },
+  {
+    "case": "choi_bar_test",
+    "model": "gpt-5.4-nano",
+    "status": "success",
+    "quality_passed": false,
+    "passed_checks": 5,
+    "total_checks": 8,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Armbar]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Russian-Armbar]]",
+        "passed": false
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[S-Grip]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Crossface]]",
+        "passed": false
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Underhook]]",
+        "passed": false
+      }
+    ],
+    "time_seconds": 9.28,
+    "input_tokens": 2268,
+    "output_tokens": 1063,
+    "total_tokens": 3331,
+    "cost_usd": 0.001782,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_18-55-49\\choi_bar_test\\gpt-5.4-nano.md"
+  },
+  {
+    "case": "choi_bar_test",
+    "model": "gpt-5.6-luna",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 8,
+    "total_checks": 8,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Armbar]]",
+        "passed": true
+      },
+      {
+        "type": "must_contain",
+        "value": "[[Russian-Armbar]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[S-Grip]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Crossface]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Underhook]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 16.43,
+    "input_tokens": 2268,
+    "output_tokens": 1589,
+    "total_tokens": 3857,
+    "cost_usd": 0.00236,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_18-55-49\\choi_bar_test\\gpt-5.6-luna.md"
+  },
+  {
+    "case": "sidecontrol_reversal_test",
+    "model": "gpt-4.1-mini",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 3,
+    "total_checks": 3,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 8.59,
+    "input_tokens": 1991,
+    "output_tokens": 595,
+    "total_tokens": 2586,
+    "cost_usd": 0.001748,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_18-55-49\\sidecontrol_reversal_test\\gpt-4.1-mini.md"
+  },
+  {
+    "case": "sidecontrol_reversal_test",
+    "model": "gpt-5-mini",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 3,
+    "total_checks": 3,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 21.53,
+    "input_tokens": 1990,
+    "output_tokens": 3037,
+    "total_tokens": 5027,
+    "cost_usd": 0.006572,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_18-55-49\\sidecontrol_reversal_test\\gpt-5-mini.md"
+  },
+  {
+    "case": "sidecontrol_reversal_test",
+    "model": "gpt-5.4-nano",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 3,
+    "total_checks": 3,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 6.59,
+    "input_tokens": 1990,
+    "output_tokens": 960,
+    "total_tokens": 2950,
+    "cost_usd": 0.001598,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_18-55-49\\sidecontrol_reversal_test\\gpt-5.4-nano.md"
+  },
+  {
+    "case": "sidecontrol_reversal_test",
+    "model": "gpt-5.6-luna",
+    "status": "success",
+    "quality_passed": true,
+    "passed_checks": 3,
+    "total_checks": 3,
+    "checks": [
+      {
+        "type": "must_contain",
+        "value": "[[Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Top-Side-Control]]",
+        "passed": true
+      },
+      {
+        "type": "must_not_contain",
+        "value": "[[Bottom-Side-Control]]",
+        "passed": true
+      }
+    ],
+    "time_seconds": 18.42,
+    "input_tokens": 1990,
+    "output_tokens": 1498,
+    "total_tokens": 3488,
+    "cost_usd": 0.002196,
+    "output_file": "benchmarks\\writer\\results\\2026-09-03_18-55-49\\sidecontrol_reversal_test\\gpt-5.6-luna.md"
+  }
+]
