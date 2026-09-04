@@ -1,6 +1,6 @@
 import os
 
-from app.ingestion.loader import load_notes
+from app.repositories.note_repository import load_notes
 from app.vectorstore.chroma_store import add_notes, reset_collection
 from app.services.rag_service import ask
 from app.cli.command_handler import handle_command

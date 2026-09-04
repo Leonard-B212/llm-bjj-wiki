@@ -1,9 +1,7 @@
-from openai import OpenAI
-from app.config import OPENAI_API_KEY
+from app.config import CLASSIFIER_MODEL
+from app.llm.client import create_chat_completion
 from app.vectorstore.retrieval import hybrid_query
 
-
-client = OpenAI(api_key=OPENAI_API_KEY)
 
 def ask(question):
     results = hybrid_query(question)
@@ -48,8 +46,8 @@ Question:
 {question}
 """
 
-    response = client.chat.completions.create(
-        model="gpt-4.1-mini",
+    response = create_chat_completion(
+        model=CLASSIFIER_MODEL,
         messages=[
             {"role": "user", "content": prompt}
         ]

@@ -108,6 +108,6 @@ OUTPUT REQUIREMENTS
 
 def save_note_update(update_result):
     return write_note(
-    update_result["path"],
-    update_result["new_content"]
-)
+        update_result["path"],
+        update_result["new_content"]
+    )
