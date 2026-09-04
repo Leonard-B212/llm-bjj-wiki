@@ -1,8 +1,13 @@
+# Handles ChromaDB storage and retrieval for indexed BJJ notes.
+# Keeps vector-store specific operations isolated from the retrieval and service layers.
+
 import os
 import chromadb
 
+
 client = chromadb.Client()
 collection = client.get_or_create_collection("bjj")
+
 
 def add_notes(notes):
     documents = []
@@ -17,6 +22,8 @@ def add_notes(notes):
         ids=ids
     )
 
+
+# Queries indexed notes and optionally filters results by semantic distance.
 def query_notes(query, n_results=5, max_distance=None):
     results = collection.query(
         query_texts=[query],
@@ -46,6 +53,7 @@ def query_notes(query, n_results=5, max_distance=None):
         "distances": [filtered_distances]
     }
 
+
 def reset_collection():
     existing = collection.get()
 
@@ -53,8 +61,8 @@ def reset_collection():
         collection.delete(ids=existing["ids"])
 
 
+# Builds lightweight note metadata from the currently indexed collection.
 def get_all_notes_meta():
-    
     existing = collection.get()
 
     notes_meta = []

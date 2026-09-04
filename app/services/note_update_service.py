@@ -1,3 +1,6 @@
+# Handles the note update workflow by combining existing note content with new user input.
+# Applies the current schema, global writing rules, canonical note titles, and configured LLM model.
+
 from app.config import WRITER_MODEL
 from app.llm.client import create_chat_completion
 from app.repositories.note_repository import (
@@ -9,6 +12,7 @@ from app.repositories.note_repository import (
 from app.schemas.schema_loader import load_schema, load_global_rules
 
 
+# Generates a complete updated note while preserving supported existing technical content.
 def generate_note_update(note_name, user_input):
     note = find_note(note_name)
 

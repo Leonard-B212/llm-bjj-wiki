@@ -1,3 +1,6 @@
+# Provides the provider-neutral interface used by application services for LLM access.
+# Routes requests to the configured provider without exposing provider-specific implementations.
+
 from app.config import LLM_PROVIDER
 from app.llm.openai.openai_client import create_chat_completion as create_openai_completion
 

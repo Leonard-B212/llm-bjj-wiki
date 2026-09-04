@@ -1,3 +1,6 @@
+# Entry point for the interactive BJJ LLM Wiki CLI.
+# Coordinates command handling and delegates application logic to the corresponding services.
+
 import os
 
 from app.repositories.note_repository import load_notes
@@ -10,6 +13,7 @@ from app.services.note_update_service import generate_note_update, save_note_upd
 from app.cli.diff_printer import print_diff
 
 
+# Rebuilds the vector index from the current Markdown notes in the configured vault.
 def reindex_notes():
     notes = load_notes()
     reset_collection()
@@ -42,6 +46,7 @@ def print_sources(sources):
         print(f"- {os.path.basename(source)}")
 
 
+# Initializes the index and runs the interactive command loop.
 def main():
     
     reindex_notes()

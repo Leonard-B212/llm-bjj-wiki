@@ -1,3 +1,6 @@
+# Handles the note creation workflow from BJJ input to a structured Markdown draft.
+# Coordinates note type classification, schema/rule loading, canonical titles, LLM generation, and saving.
+
 import os
 
 from app.llm.client import create_chat_completion
@@ -10,6 +13,8 @@ from app.repositories.note_repository import (
 from app.config import TYPE_TO_FOLDER, WRITER_MODEL, CLASSIFIER_MODEL
 from app.schemas.schema_loader import load_schema, load_global_rules
 
+
+# Classifies user-provided BJJ knowledge into one of the supported note types.
 def classify_note_type(user_input):
     valid_types = list(TYPE_TO_FOLDER.keys())
 
@@ -45,6 +50,7 @@ Rules:
     return note_type
 
 
+# Generates a structured note draft while treating the user input as the technical source of truth.
 def generate_note_draft(filename, user_input, model=None):
     model = model or WRITER_MODEL
     note_type = classify_note_type(user_input)
@@ -124,6 +130,7 @@ OUTPUT REQUIREMENTS
             "total_tokens": response.usage.total_tokens,
         }
     }
+
 
 def build_note_path(draft):
     return build_repository_note_path(

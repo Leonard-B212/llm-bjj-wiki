@@ -1,3 +1,6 @@
+# Formats and prints the differences between an existing note and its updated version.
+# Only added and removed lines are shown to keep update previews concise.
+
 import difflib
 
 

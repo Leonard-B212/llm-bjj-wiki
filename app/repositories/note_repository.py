@@ -1,8 +1,12 @@
+# Handles all filesystem access to Markdown notes in the configured BJJ vault.
+# Keeps vault-specific file operations and note type folder mappings out of application services.
+
 import os
 
 from app.config import VAULT_PATH, TYPE_TO_FOLDER
 
 
+# Loads all Markdown notes from the vault in the format expected by the retrieval pipeline.
 def load_notes():
     notes = []
 
@@ -35,6 +39,7 @@ def get_existing_note_titles():
     return sorted(titles)
 
 
+# Finds the filesystem path of a note across all configured note type folders.
 def find_note_path(note_name):
     filename = f"{note_name}.md"
 
@@ -46,6 +51,8 @@ def find_note_path(note_name):
 
     raise FileNotFoundError(f"Note not found: {filename}")
 
+
+# Finds a note and derives its note type from the folder it is stored in.
 def find_note(note_name):
     filename = f"{note_name}.md"
 
@@ -66,6 +73,7 @@ def read_note(file_path):
         return file.read()
 
 
+# Builds the target path for a note and ensures its type-specific folder exists.
 def build_note_path(note_type, filename):
     folder = TYPE_TO_FOLDER.get(note_type)
 

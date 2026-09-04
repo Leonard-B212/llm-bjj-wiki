@@ -1,3 +1,6 @@
+# Parses terminal input and maps it to the corresponding application command.
+# Free-text input without a command prefix is treated as a question.
+
 def handle_command(user_input):
     if user_input.startswith("/"):
         parts = user_input.split(" ", 1)

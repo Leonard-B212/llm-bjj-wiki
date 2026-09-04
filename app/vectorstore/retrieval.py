@@ -1,3 +1,6 @@
+# Combines semantic ChromaDB retrieval with normalized title matching.
+# Ensures directly referenced notes are included even when their semantic similarity is weak.
+
 from app.vectorstore.chroma_store import query_notes, get_all_notes_meta, collection
 
 
@@ -9,6 +12,7 @@ def normalize_compact(text):
     return normalize(text).replace(" ", "")
 
 
+# Finds notes whose normalized titles are directly referenced in the question.
 def find_title_matches(question, notes_meta):
     question_norm = normalize(question)
     question_compact = normalize_compact(question)
@@ -25,6 +29,7 @@ def find_title_matches(question, notes_meta):
     return matched_ids
 
 
+# Fetches exact notes by ID and assigns them the strongest retrieval distance.
 def fetch_by_ids(ids):
     if not ids:
         return {"documents": [], "ids": [], "distances": []}
@@ -38,6 +43,7 @@ def fetch_by_ids(ids):
     return {"documents": documents, "ids": fetched_ids, "distances": distances}
 
 
+# Merges semantic results with direct title matches and removes duplicate notes.
 def hybrid_query(question, n_results=5):
     semantic_results = query_notes(question, n_results=n_results)
 

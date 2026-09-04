@@ -1,3 +1,6 @@
+# Handles question answering over the BJJ wiki using hybrid retrieval and grounded LLM responses.
+# Retrieved notes are filtered before being assembled into the context passed to the LLM.
+
 from app.config import CLASSIFIER_MODEL
 from app.llm.client import create_chat_completion
 from app.vectorstore.retrieval import hybrid_query
@@ -10,18 +13,18 @@ def ask(question):
     ids_raw = results["ids"][0]
     distances = results["distances"][0]
 
-    # Guard
+    # Return early when retrieval found no relevant notes.
     if not results["documents"] or not results["documents"][0]:
         return "No relevant notes found.", []
 
     documents = []
     ids = []
 
-    # beste Distanz als Referenz
+    # Use the best semantic distance as the reference for filtering weaker matches.
     best_distance = distances[0]
 
     for doc, id_, dist in zip(documents_raw, ids_raw, distances):
-        # nur behalten, wenn nicht deutlich schlechter als der beste Treffer
+        # Keep only results that are not significantly worse than the best match.
         if dist <= best_distance + 0.2:
             documents.append(doc)
             ids.append(id_)

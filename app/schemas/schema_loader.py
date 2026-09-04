@@ -1,3 +1,6 @@
+# Loads note schemas and shared writing rules used by the writer and update services.
+# Keeps schema file access and runtime rule configuration in one place.
+
 import os
 
 from app.config import LANGUAGE
@@ -16,6 +19,7 @@ def load_schema(note_type):
         return file.read()
 
 
+# Loads the global rules and applies the configured descriptive content language.
 def load_global_rules():
     path = os.path.join(SCHEMA_DIR, "global_rules.md")
 
