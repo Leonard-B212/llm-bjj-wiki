@@ -4,7 +4,7 @@ from app.repositories.note_repository import (
     read_note,
     write_note,
 )
-from app.services.note_writer_service import load_global_rules
+from app.schemas.schema_loader import load_global_rules
 
 
 def generate_note_update(note_name, user_input):
