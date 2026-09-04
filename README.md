@@ -1,83 +1,19 @@
 # BJJ LLM Wiki
 
-A terminal-based tool for building and querying a personal Brazilian Jiu-Jitsu knowledge base using structured Markdown notes, Obsidian, LLM-assisted note generation, and Retrieval-Augmented Generation (RAG).
+A terminal-based tool for building and querying a personal Brazilian Jiu-Jitsu knowledge base using structured Markdown notes, Obsidian, LLM-assisted writing, and Retrieval-Augmented Generation (RAG).
 
 ![BJJ LLM Wiki CLI](assets/bjj-llm-wiki-cli.png)
 
 ## Goal
 
-The project is designed to turn personal BJJ knowledge into a structured and searchable wiki without replacing that knowledge with generic LLM-generated technique instructions.
+BJJ LLM Wiki is designed to turn personal BJJ knowledge into a structured and searchable wiki without replacing that knowledge with generic LLM-generated technique instructions.
 
-- Use Markdown notes as the source of truth
-- Use Obsidian as a visual frontend for browsing and editing the wiki
-- Let an LLM structure personal BJJ knowledge into consistent note schemas
-- Connect related positions and techniques through `[[Wiki-Links]]`
-- Ask questions about the wiki using RAG
-- Keep the underlying knowledge base portable and independent of the application
-
----
-
-## How It Works
-
-The BJJ LLM Wiki combines structured note generation with hybrid retrieval.
-
-```text
-                         ┌─────────────────────┐
-                         │     User Input      │
-                         └──────────┬──────────┘
-                                    │
-                  ┌─────────────────┴─────────────────┐
-                  │                                   │
-             /write /update                       Question
-                  │                                   │
-                  ▼                                   ▼
-        ┌───────────────────┐               ┌───────────────────┐
-        │ Schema + Rules    │               │ Hybrid Retrieval  │
-        │ + Canonical Notes │               │ Chroma + Titles   │
-        └─────────┬─────────┘               └─────────┬─────────┘
-                  │                                   │
-                  ▼                                   ▼
-        ┌───────────────────┐               ┌───────────────────┐
-        │    LLM Writer     │               │   Grounded LLM    │
-        └─────────┬─────────┘               └───────────────────┘
-                  │
-                  ▼
-        ┌───────────────────┐
-        │ Markdown / Vault  │
-        └─────────┬─────────┘
-                  │
-                  ▼
-        ┌───────────────────┐
-        │     Obsidian      │
-        └───────────────────┘
-```
-
-### Core Components
-
-- **Markdown Notes** — the knowledge base and source of truth
-- **Obsidian** — visual frontend for browsing, editing, Wiki-Links, and Graph View
-- **OpenAI API** — technique classification, structured note generation, updates, and question answering
-- **ChromaDB** — vector database for semantic retrieval
-- **Hybrid Retrieval** — combines semantic search with normalized title matching
-- **Schemas** — define the structure of different BJJ note types
-- **Global Writing Rules** — control terminology, linking behavior, structure, and how user-provided knowledge is handled
-
----
-
-## Obsidian as the Frontend
-
-This project is designed to work together with [Obsidian](https://obsidian.md/), which acts as the visual frontend for the knowledge base.
-
-The BJJ LLM Wiki creates, updates, retrieves, and reasons over the Markdown data, while Obsidian provides the visual layer for:
-
-- browsing and manually editing notes
-- following `[[Wiki-Links]]`
-- navigating related techniques
-- exploring relationships through Graph View
-
-Obsidian must be installed separately and is not included with this project.
-
-The Markdown files remain the source of truth. The vault can therefore still be viewed, edited, moved, or used directly in Obsidian without running the LLM application.
+- Markdown notes remain the source of truth
+- Obsidian provides a visual frontend for browsing and editing the wiki
+- LLMs structure personal BJJ knowledge using consistent schemas
+- `[[Wiki-Links]]` connect related positions and techniques
+- RAG allows questions to be answered from the existing knowledge base
+- The vault remains portable and independent of the application
 
 ---
 
@@ -85,31 +21,32 @@ The Markdown files remain the source of truth. The vault can therefore still be 
 
 - Terminal-based interaction
 - Guided first-time setup
-- Structured note generation for multiple BJJ entity types
-- Schema-based note updates
+- Structured note generation for seven BJJ entity types
+- Schema-based note updates and legacy note migration
 - Global terminology and Wiki-Linking rules
 - Canonical entity awareness using existing note titles
 - Configurable descriptive content language
 - Configurable writer and classifier models
-- Hybrid RAG retrieval using semantic and lexical matching
+- Hybrid RAG retrieval using semantic and title matching
 - Markdown/Obsidian as a portable source of truth
+- Preview and confirmation before notes are saved
 - Writer benchmark suite with deterministic regression checks
-- Preview and confirmation before generated notes are saved
+- Provider-neutral LLM application layer
 
 ---
 
-## Setup
+## Quick Start
 
 ### Requirements
 
-Before starting, you need:
+You need:
 
 - **Python 3**
 - an **OpenAI API key**
 - **Obsidian**
-- an **Obsidian vault** where the BJJ notes should be stored
+- an Obsidian vault for your BJJ notes
 
-The launcher handles configuration and can install the required Python packages.
+An empty `example-vault/` with the expected folder structure is included in the repository and can be used to quickly get started.
 
 ### 1. Clone the repository
 
@@ -136,17 +73,15 @@ Obsidian vault path:
 Content language [English]:
 ```
 
+You can point the vault path either to your own Obsidian vault or to the included `example-vault/`.
+
 The API key is stored locally in `.env` and is not committed to the repository.
 
-The configured vault path must point to an existing Obsidian vault.
-
-`LANGUAGE` controls descriptive note content. Schema headings, BJJ terminology, filenames, and Wiki-Link targets remain in English.
+`LANGUAGE` controls the descriptive content of generated notes. Schema headings, BJJ terminology, filenames, and Wiki-Link targets remain in English.
 
 ### 3. Dependencies
 
-The launcher checks whether the required Python packages are installed.
-
-If dependencies are missing, it can install them from `requirements.txt` using the same Python installation that started the launcher.
+The launcher checks whether the required Python packages are installed and can install missing dependencies from `requirements.txt`.
 
 Dependencies can also be repaired or reinstalled later through the launcher menu.
 
@@ -157,7 +92,6 @@ After setup, the launcher displays:
 ```text
 🥋 BJJ LLM Wiki
 ----------------
-
 1. Start BJJ-LLM-Wiki
 2. Settings
 3. Install / Repair Dependencies
@@ -168,14 +102,16 @@ When you exit the Wiki with `/exit`, you return to the launcher.
 
 ---
 
-## Commands
+## Usage
+
+### Commands
 
 | Command | Description |
 |---|---|
 | `<free text>` | Ask a question about your notes using RAG |
 | `/write <filename> <description>` | Create a structured note from user-provided BJJ knowledge |
-| `/update <filename> <new information>` | Merge new information into an existing note while preserving its structure |
-| `/reindex` | Rebuild the vector index after manual changes to the vault |
+| `/update <filename> <new information>` | Merge new information into an existing note |
+| `/reindex` | Rebuild the vector index after manual vault changes |
 | `/exit` | Exit the Wiki and return to the launcher |
 
 Example:
@@ -188,9 +124,42 @@ The generated note is shown as a preview before saving and must be confirmed by 
 
 ---
 
-## Note Generation
+## How It Works
 
-The writer currently supports the following note types:
+```text
+                         User Input
+                             │
+              ┌──────────────┴──────────────┐
+              │                             │
+         /write /update                  Question
+              │                             │
+              ▼                             ▼
+       Schema + Rules               Hybrid Retrieval
+       + Canonical Notes            Chroma + Titles
+              │                             │
+              ▼                             ▼
+          LLM Writer                  Grounded LLM
+              │
+              ▼
+        Markdown Vault
+              │
+              ▼
+           Obsidian
+```
+
+### Writing
+
+`/write` turns user-provided BJJ knowledge into a structured Markdown note.
+
+The application:
+
+1. Classifies the input into a supported note type
+2. Loads the corresponding schema and global writing rules
+3. Provides existing note titles as canonical wiki entities
+4. Structures the supplied knowledge
+5. Shows the generated note before saving it
+
+The writer currently supports:
 
 ```text
 submission
@@ -204,35 +173,25 @@ throw
 
 Each type has its own schema in `app/schemas/`.
 
-When `/write` is executed:
+The user's description is treated as the source of technical BJJ knowledge. The LLM may reorganize, clarify, and rephrase the supplied information, but it should not intentionally fill missing technical details using general BJJ knowledge.
 
-1. The input is classified into one of the supported note types.
-2. The corresponding schema is loaded.
-3. Global writing and Wiki-Linking rules are loaded.
-4. Existing note titles are provided as canonical wiki entities.
-5. The writer structures the user's BJJ knowledge according to the schema.
-6. The generated Markdown is shown as a preview.
-7. After confirmation, the note is written to the configured Obsidian vault.
-
-### User Input as the Source of Truth
-
-The writer is intended to **structure personal BJJ knowledge rather than generate a complete technique from general model knowledge**.
-
-The user's description is therefore treated as the source of truth.
-
-The writer may reorganize, clarify, and concisely rephrase the supplied information, but missing technical information should not intentionally be filled using general BJJ knowledge.
-
-If a required schema section has no corresponding information in the user's input, the section remains present and is represented by:
+Unsupported schema sections remain present as:
 
 ```markdown
 * TBD
 ```
 
-This allows incomplete notes to remain structurally consistent without pretending that missing information was provided by the user.
+### Updating
 
-### Wiki Links and Canonical Entities
+`/update` works against an existing Markdown note.
 
-BJJ entities can be connected using Obsidian Wiki-Links:
+Both the existing note and the new user input are treated as technical source material. Existing knowledge is preserved while new information is integrated into the appropriate sections.
+
+Updates use the current schema for the note type. This also allows older notes using legacy structures or headings to be migrated to the current schema while preserving their technical content.
+
+### Wiki Links
+
+Concrete BJJ entities are connected through Obsidian Wiki-Links:
 
 ```markdown
 [[Side-Control]]
@@ -241,94 +200,93 @@ BJJ entities can be connected using Obsidian Wiki-Links:
 [[Armbar]]
 ```
 
-Existing note titles are supplied to the writer as canonical entities so that references can reuse the existing wiki terminology.
+Existing note titles are supplied to the writer as canonical entities. Links to meaningful BJJ entities may also be created before the corresponding note exists, allowing the wiki to develop naturally over time.
 
-For example, perspective descriptions such as "top Side Control" or "bottom Side Control" refer to the same canonical position:
+Detailed linking and terminology behavior is defined in `app/schemas/global_rules.md`.
 
-```markdown
-[[Side-Control]]
-```
-
-Links to meaningful BJJ entities may also exist before the corresponding note has been created. This allows relationships between techniques to develop naturally as the wiki grows.
-
-Generic mechanics and controls such as Underhooks, Crossfaces, Frames, Hooks, or Grips are normally kept as regular text rather than automatically becoming wiki entities.
-
----
-
-## Note Updates
-
-`/update` works against an existing Markdown note.
-
-The current note is loaded together with the new information, and the LLM merges the new knowledge into the appropriate schema sections while preserving existing content and structure.
-
-This makes it possible to gradually expand a technique note as new details are learned or tested.
-
----
-
-## Retrieval
+### Retrieval
 
 Questions are answered using hybrid retrieval.
 
-### Semantic Search
+**Semantic search** uses ChromaDB embeddings to find notes related to the question.
 
-ChromaDB embeddings are used to find notes that are semantically related to the question.
-
-### Lexical Title Matching
-
-Normalized note titles are also matched directly against the question.
-
-Matching is case- and hyphen-insensitive, allowing a note such as:
+**Title matching** directly matches normalized note titles against the query. Matching is case- and hyphen-insensitive, so:
 
 ```text
 Side-Control.md
 ```
 
-to be found from a query containing:
+can be found from:
 
 ```text
 side control
 ```
 
-even if its embedding is weak.
-
-The two approaches complement each other. Semantic search finds conceptually related content, while title matching prevents short or sparsely written notes from being missed simply because they have weak embeddings.
+Combining both approaches helps retrieve conceptually related notes while preventing short or sparsely written notes from being missed due to weak embeddings.
 
 ---
 
-## Writer Benchmark
+## Architecture
 
-The repository contains a small benchmark suite for testing note generation against real BJJ input cases.
+The application uses a lightweight layered architecture:
 
 ```text
-benchmarks/
-└── writer/
-    ├── cases/
-    ├── results/
-    ├── model_pricing.py
-    └── run_writer_benchmark.py
+CLI
+ │
+ ▼
+Services
+ ├────► Repository ────► Markdown / Obsidian Vault
+ ├────► LLM Layer ─────► LLM Provider
+ └────► Vector Store ──► ChromaDB
 ```
 
-The benchmark can compare multiple writer models using the same inputs.
+The main application structure is:
 
-Each case can define deterministic expectations such as:
-
-```json
-{
-  "must_contain": [
-    "[[Side-Control]]",
-    "[[Armbar]]"
-  ],
-  "must_not_contain": [
-    "[[Top-Side-Control]]",
-    "[[Bottom-Side-Control]]",
-    "[[Underhook]]"
-  ]
-}
+```text
+LLM-BJJ-Wiki/
+│
+├── app/
+│   ├── cli/            # Terminal interface
+│   ├── services/       # Application use cases
+│   ├── repositories/   # Markdown vault access
+│   ├── llm/            # Provider-neutral LLM access
+│   │   ├── openai/     # OpenAI implementation
+│   │   └── anthropic/  # Reserved for future provider support
+│   ├── vectorstore/    # ChromaDB and retrieval
+│   ├── schemas/        # Note schemas and global writing rules
+│   ├── config.py
+│   └── main.py
+│
+├── example-vault/      # Empty example vault structure
+├── benchmarks/         # Writer regression benchmarks
+├── assets/
+├── .env.example
+├── requirements.txt
+├── start.py
+├── todo.md
+└── README.md
 ```
 
-Besides regression checks, benchmark runs record information such as token usage, execution time, and estimated API cost.
+Services contain the application use cases while infrastructure-specific access is kept behind dedicated repository, LLM, and vector-store layers.
 
-The benchmark is intended to catch repeatable structural and Wiki-Linking errors rather than replace manual evaluation of BJJ content quality.
+The LLM layer is provider-neutral from the perspective of the application services. OpenAI is currently the implemented provider, while the structure allows additional providers to be added later.
+
+---
+
+## Obsidian
+
+Obsidian acts as the visual frontend for the knowledge base.
+
+The application handles LLM-assisted writing, updating, retrieval, and question answering, while Obsidian provides:
+
+- browsing and manually editing notes
+- following `[[Wiki-Links]]`
+- navigating related techniques
+- exploring relationships through Graph View
+
+Obsidian must be installed separately.
+
+The Markdown files remain the source of truth, so the vault can still be viewed, edited, moved, or used directly without running the application.
 
 ---
 
@@ -339,6 +297,7 @@ Configuration is stored locally in `.env`.
 Example:
 
 ```text
+LLM_PROVIDER=openai
 OPENAI_API_KEY=your_api_key_here
 VAULT_PATH=C:\Users\YourName\Documents\Obsidian\BJJ
 LANGUAGE=English
@@ -348,11 +307,9 @@ CLASSIFIER_MODEL=gpt-4.1-mini
 
 Normally, configuration can be managed through the launcher instead of editing `.env` manually.
 
-`.env` is excluded through `.gitignore`.
+`.env` is excluded through `.gitignore`, while `.env.example` is included as a template.
 
-`.env.example` is included as a template for manual configuration.
-
-Note folders are mapped by technique type through `TYPE_TO_FOLDER` in `app/config.py`. A new note type requires a folder mapping and a corresponding schema in `app/schemas/`.
+Note folders are mapped by technique type through `TYPE_TO_FOLDER` in `app/config.py`. Adding a new note type requires a folder mapping and a corresponding schema.
 
 ---
 
@@ -374,91 +331,51 @@ Direct startup bypasses the launcher's setup, configuration validation, and depe
 
 ---
 
-## Project Structure
+## Writer Benchmark
+
+The repository contains a benchmark suite for testing note generation against real BJJ input cases.
 
 ```text
-LLM-BJJ-Wiki/
-│
-├── app/
-│   ├── main.py
-│   ├── config.py
-│   │
-│   ├── cli/
-│   │   ├── command_handler.py
-│   │   └── diff_printer.py
-│   │
-│   ├── ingestion/
-│   │   └── loader.py
-│   │
-│   ├── schemas/
-│   │   ├── escape_schema.md
-│   │   ├── global_rules.md
-│   │   ├── pass_schema.md
-│   │   ├── position_schema.md
-│   │   ├── submission_schema.md
-│   │   ├── sweep_schema.md
-│   │   ├── takedown_schema.md
-│   │   └── throw_schema.md
-│   │
-│   ├── services/
-│   │   ├── note_update_service.py
-│   │   ├── note_writer_service.py
-│   │   └── rag_service.py
-│   │
-│   └── vectorstore/
-│       ├── chroma_store.py
-│       └── retrieval.py
-│
-├── assets/
-│   └── bjj-llm-wiki-cli.png
-│
-├── benchmarks/
-│   └── writer/
-│       ├── cases/
-│       ├── results/
-│       ├── model_pricing.py
-│       └── run_writer_benchmark.py
-│
-├── .env.example
-├── .gitignore
-├── LICENSE
-├── requirements.txt
-├── start.py
-├── todo.md
-└── README.md
+benchmarks/
+└── writer/
+    ├── cases/
+    ├── model_pricing.py
+    └── run_writer_benchmark.py
 ```
 
-The current structure is intentionally lightweight and may evolve as additional application and infrastructure boundaries are introduced.
+Benchmarks can compare writer models using identical inputs and deterministic expectations such as required or forbidden Wiki-Links.
+
+Runs also record token usage, execution time, and estimated API cost.
+
+Run the complete benchmark with:
+
+```bash
+python -m benchmarks.writer.run_writer_benchmark
+```
+
+Or run a specific case:
+
+```bash
+python -m benchmarks.writer.run_writer_benchmark butterfly_sweep_test
+```
+
+The benchmark is intended to catch repeatable structural and Wiki-Linking errors rather than replace manual evaluation of BJJ content quality.
 
 ---
 
-## Current Status
+## Roadmap
 
-Currently implemented:
+Planned improvements include smarter command routing, fuzzy note matching, duplicate detection, undo support, additional LLM providers, wiki linting, a BJJ terminology glossary, and deriving a knowledge graph from Markdown relationships.
 
-- Terminal-based BJJ wiki
-- Guided setup and configuration
-- Seven schema-based BJJ note types
-- Structured note creation and updating
-- Global writing and Wiki-Linking rules
-- Canonical note awareness
-- Configurable content language
-- Configurable LLM models
-- ChromaDB vector storage
-- Hybrid semantic + lexical retrieval
-- Writer regression benchmark
-
-Planned improvements include architecture cleanup, smarter routing, fuzzy note matching, duplicate detection, undo support, additional LLM providers, wiki linting, and deriving a knowledge graph from Markdown relationships.
-
-See `todo.md` for the current roadmap.
+See [`todo.md`](todo.md) for the full roadmap.
 
 ---
 
 ## Notes
 
 - OpenAI API usage may incur costs.
-- The OpenAI API key is stored locally in `.env`.
-- Markdown notes remain in the configured vault and are not part of this repository.
+- The API key is stored locally in `.env`.
+- User-created Markdown notes remain in the configured vault and are not committed to this repository by the application.
 - Do not store sensitive information in notes that will be sent to an external LLM provider.
 - This is currently a personal and learning project rather than a production system.
 
