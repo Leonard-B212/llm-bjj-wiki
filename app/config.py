@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "openai")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 VAULT_PATH = os.getenv("VAULT_PATH")
 LANGUAGE = os.getenv("LANGUAGE", "English")

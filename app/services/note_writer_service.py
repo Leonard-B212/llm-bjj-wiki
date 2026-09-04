@@ -1,24 +1,14 @@
 import os
 
-from openai import OpenAI
+from app.llm.client import create_chat_completion
 
-from app.ingestion.loader import get_existing_note_titles
-from app.config import OPENAI_API_KEY, VAULT_PATH, TYPE_TO_FOLDER, LANGUAGE, WRITER_MODEL
-
-client = OpenAI(api_key=OPENAI_API_KEY)
-
-SCHEMA_DIR = os.path.join("app", "schemas")
-
-
-def load_schema(note_type):
-    schema_path = os.path.join(SCHEMA_DIR, f"{note_type}_schema.md")
-
-    if not os.path.exists(schema_path):
-        raise FileNotFoundError(f"Schema not found: {schema_path}")
-
-    with open(schema_path, "r", encoding="utf-8") as file:
-        return file.read()
-
+from app.repositories.note_repository import (
+    get_existing_note_titles,
+    build_note_path as build_repository_note_path,
+    write_note,
+)
+from app.config import TYPE_TO_FOLDER, WRITER_MODEL, CLASSIFIER_MODEL
+from app.schemas.schema_loader import load_schema, load_global_rules
 
 def classify_note_type(user_input):
     valid_types = list(TYPE_TO_FOLDER.keys())
@@ -39,8 +29,8 @@ Rules:
 - The category must match one of the valid categories exactly (lowercase).
 """
 
-    response = client.chat.completions.create(
-        model="gpt-4.1-mini",
+    response = create_chat_completion(
+        model=CLASSIFIER_MODEL,
         temperature=0,
         messages=[
             {"role": "user", "content": prompt}
@@ -53,13 +43,6 @@ Rules:
         raise ValueError(f"Model returned invalid note type: '{note_type}'")
 
     return note_type
-
-
-def load_global_rules():
-    path = os.path.join(SCHEMA_DIR, "global_rules.md")
-
-    with open(path, "r", encoding="utf-8") as file:
-        return file.read().replace("{LANGUAGE}", LANGUAGE)
 
 
 def generate_note_draft(filename, user_input, model=None):
@@ -119,7 +102,7 @@ OUTPUT REQUIREMENTS
 - Do not use markdown code fences.
 """
 
-    response = client.chat.completions.create(
+    response = create_chat_completion(
         model=model,
         messages=[
             {"role": "user", "content": prompt}
@@ -143,18 +126,10 @@ OUTPUT REQUIREMENTS
     }
 
 def build_note_path(draft):
-    note_type = draft["note_type"]
-    filename = draft["filename"]
-
-    folder = TYPE_TO_FOLDER.get(note_type)
-
-    if not folder:
-        raise ValueError(f"No folder mapping for type: {note_type}")
-
-    folder_path = os.path.join(VAULT_PATH, folder)
-    os.makedirs(folder_path, exist_ok=True)
-
-    return os.path.join(folder_path, filename)
+    return build_repository_note_path(
+        draft["note_type"],
+        draft["filename"]
+    )
 
 
 def save_note_draft(draft, overwrite=False):
@@ -167,8 +142,7 @@ def save_note_draft(draft, overwrite=False):
             "path": file_path
         }
 
-    with open(file_path, "w", encoding="utf-8") as file:
-        file.write(draft["content"])
+    write_note(file_path, draft["content"])
 
     return {
         "saved": True,
