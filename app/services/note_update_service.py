@@ -1,14 +1,10 @@
-from openai import OpenAI
-
-from app.config import OPENAI_API_KEY
+from app.llm.client import create_chat_completion
 from app.repositories.note_repository import (
     find_note_path,
     read_note,
     write_note,
 )
 from app.services.note_writer_service import load_global_rules
-
-client = OpenAI(api_key=OPENAI_API_KEY)
 
 
 def generate_note_update(note_name, user_input):
@@ -48,7 +44,7 @@ Rules:
 - Each bullet point should contain a complete and meaningful step, not just a single keyword.
 """
 
-    response = client.chat.completions.create(
+    response = create_chat_completion(
         model="gpt-4.1-mini",
         messages=[
             {"role": "user", "content": prompt}

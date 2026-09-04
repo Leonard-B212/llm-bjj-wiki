@@ -1,15 +1,14 @@
 import os
 
-from openai import OpenAI
+from app.llm.client import create_chat_completion
 
 from app.repositories.note_repository import (
     get_existing_note_titles,
     build_note_path as build_repository_note_path,
     write_note,
 )
-from app.config import OPENAI_API_KEY, TYPE_TO_FOLDER, LANGUAGE, WRITER_MODEL
+from app.config import TYPE_TO_FOLDER, LANGUAGE, WRITER_MODEL, CLASSIFIER_MODEL
 
-client = OpenAI(api_key=OPENAI_API_KEY)
 
 SCHEMA_DIR = os.path.join("app", "schemas")
 
@@ -43,8 +42,8 @@ Rules:
 - The category must match one of the valid categories exactly (lowercase).
 """
 
-    response = client.chat.completions.create(
-        model="gpt-4.1-mini",
+    response = create_chat_completion(
+        model=CLASSIFIER_MODEL,
         temperature=0,
         messages=[
             {"role": "user", "content": prompt}
@@ -123,7 +122,7 @@ OUTPUT REQUIREMENTS
 - Do not use markdown code fences.
 """
 
-    response = client.chat.completions.create(
+    response = create_chat_completion(
         model=model,
         messages=[
             {"role": "user", "content": prompt}
