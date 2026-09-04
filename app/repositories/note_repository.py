@@ -46,6 +46,20 @@ def find_note_path(note_name):
 
     raise FileNotFoundError(f"Note not found: {filename}")
 
+def find_note(note_name):
+    filename = f"{note_name}.md"
+
+    for note_type, folder in TYPE_TO_FOLDER.items():
+        path = os.path.join(VAULT_PATH, folder, filename)
+
+        if os.path.exists(path):
+            return {
+                "path": path,
+                "note_type": note_type,
+            }
+
+    raise FileNotFoundError(f"Note not found: {filename}")
+
 
 def read_note(file_path):
     with open(file_path, "r", encoding="utf-8") as file:

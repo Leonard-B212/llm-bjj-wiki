@@ -1,51 +1,91 @@
+from app.config import WRITER_MODEL
 from app.llm.client import create_chat_completion
 from app.repositories.note_repository import (
-    find_note_path,
+    find_note,
     read_note,
     write_note,
+    get_existing_note_titles,
 )
-from app.schemas.schema_loader import load_global_rules
+from app.schemas.schema_loader import load_schema, load_global_rules
 
 
 def generate_note_update(note_name, user_input):
-    file_path = find_note_path(note_name)
+    note = find_note(note_name)
+
+    file_path = note["path"]
+    note_type = note["note_type"]
 
     existing_content = read_note(file_path)
 
+    schema = load_schema(note_type)
     global_rules = load_global_rules()
+    existing_note_titles = get_existing_note_titles()
+    existing_notes_text = "\n".join(
+        f"- {title}" for title in existing_note_titles
+    )
 
     prompt = f"""
 You update an existing Obsidian markdown note for a Brazilian Jiu-Jitsu wiki.
 
-Global rules:
-{global_rules}
+Follow the instruction hierarchy below.
 
-Existing note:
+PRIORITY 1 — EXISTING NOTE AND NEW INFORMATION
+The existing note contains previously stored technical BJJ knowledge.
+The new information contains additional technical BJJ knowledge provided by the user.
+
+Preserve useful existing information and integrate the new information into the most semantically appropriate sections.
+Only information supported by the existing note or the new information may be used.
+Do not derive content for one section from another (e.g. an Attack detail must not be reversed into a Defense or Problem).
+
+<existing_note>
 {existing_content}
+</existing_note>
 
-New information:
+<new_information>
 {user_input}
+</new_information>
 
-Rules:
+PRIORITY 2 — GLOBAL RULES
+These rules define how the note must be written and linked.
+
+<global_rules>
+{global_rules}
+</global_rules>
+
+PRIORITY 3 — NOTE SCHEMA
+The updated note must follow this schema.
+Preserve existing supported information while ensuring the final note follows the required structure.
+You may rephrase existing information for clarity, but do not reinterpret, generalize, narrow, or change its technical meaning.
+If a schema section is unsupported by both the existing note and the new information, use `* TBD`.
+
+<schema>
+{schema}
+</schema>
+
+REFERENCE — EXISTING CANONICAL NOTE TITLES
+Use these titles when a matching wiki entity is referenced.
+
+<existing_note_titles>
+{existing_notes_text}
+</existing_note_titles>
+
+Detected note type:
+{note_type}
+
+OUTPUT REQUIREMENTS
 - Integrate the new information into the existing note.
-- Keep the existing structure.
-- Do NOT duplicate sections.
-- Do NOT remove useful existing content.
-- Return ONLY the updated markdown content.
-- Do NOT return JSON.
-- Do NOT return a Python dictionary.
-- Do NOT use markdown code fences.
-- Do NOT duplicate sections.
-- Do NOT remove useful existing content.
-- Keep the same headings and style as the existing note.
-- Place new information in the most semantically fitting existing section.
-- You may rephrase and improve the wording of the new information for clarity and correctness.
-- Preserve the meaning, but do not keep the original wording if it is unclear or messy.
-- Each bullet point should contain a complete and meaningful step, not just a single keyword.
+- Preserve useful existing technical information.
+- Do not duplicate information or sections.
+- Follow the provided schema exactly.
+- Keep the same general writing style where possible.
+- Return only the complete updated raw markdown content.
+- Do not return JSON.
+- Do not return a Python dictionary.
+- Do not use markdown code fences.
 """
 
     response = create_chat_completion(
-        model="gpt-4.1-mini",
+        model=WRITER_MODEL,
         messages=[
             {"role": "user", "content": prompt}
         ]
@@ -56,7 +96,13 @@ Rules:
     return {
         "path": file_path,
         "old_content": existing_content,
-        "new_content": updated_content
+        "new_content": updated_content,
+        "note_type": note_type,
+        "usage": {
+            "input_tokens": response.usage.prompt_tokens,
+            "output_tokens": response.usage.completion_tokens,
+            "total_tokens": response.usage.total_tokens,
+        }
     }
 
 
