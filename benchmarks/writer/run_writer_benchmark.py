@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import json
 from datetime import datetime
@@ -18,11 +19,16 @@ CASES_DIR = os.path.join("benchmarks", "writer", "cases")
 RESULTS_DIR = os.path.join("benchmarks", "writer", "results")
 
 
-def load_test_cases():
+def load_test_cases(case_filter=None):
     cases = []
 
     for filename in sorted(os.listdir(CASES_DIR)):
         if not filename.endswith(".txt"):
+            continue
+
+        case_name = filename.replace(".txt", "")
+
+        if case_filter and case_name != case_filter:
             continue
 
         path = os.path.join(CASES_DIR, filename)
@@ -31,7 +37,7 @@ def load_test_cases():
             user_input = file.read().strip()
 
         cases.append({
-            "name": filename.replace(".txt", ""),
+            "name": case_name,
             "filename": filename.replace("_test.txt", ""),
             "input": user_input,
         })
@@ -172,8 +178,12 @@ def print_quality_tables(results):
         print(cost_row)
         print(time_row)
 
-def run_benchmark():
-    cases = load_test_cases()
+def run_benchmark(case_filter=None):
+    cases = load_test_cases(case_filter)
+
+    if not cases:
+        raise ValueError(f"Test case not found: {case_filter}")
+
     run_dir = create_run_directory()
     results = []
 
@@ -271,4 +281,5 @@ def run_benchmark():
 
 
 if __name__ == "__main__":
-    run_benchmark()
+    case_filter = sys.argv[1] if len(sys.argv) > 1 else None
+    run_benchmark(case_filter)

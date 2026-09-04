@@ -81,7 +81,7 @@ Examples:
 - Do NOT link broad category or classification words such as `Position`, `Guard`, `Submission`, `Sweep`, `Pass`, `Escape`, `Takedown`, or `Throw` when they are only describing the type of a concrete BJJ entity.
   - Example: in "the opponent can counter with a sweep", write `sweep`, not `[[Sweep]]`.
   - A specific named sweep such as `[[Butterfly-Sweep]]` is a valid wiki entity.
-- Do NOT create wiki links for generic BJJ mechanics, grips, controls, body parts, or movement concepts such as S-Grip, Underhook, Overhook, Crossface, Frame, Base, Shrimp, Bridge, Grip, Hook, Post, Butterfly Hook, Collar Tie, Shoulder Pin, Upper-Body Pressure, or Wedge.
+- Do NOT create wiki links for generic BJJ mechanics, grips, controls, body parts, movement concepts, or situations such as S-Grip, Underhook, Overhook, Crossface, Frame, Base, Shrimp, Bridge, Grip, Hook, Post, Butterfly Hook, Collar Tie, Shoulder Pin, Upper-Body Pressure, Wedge, or Scramble.
   - Example: write `Underhook` and `Crossface`, not `[[Underhook]]` or `[[Crossface]]`.
 - Mention these concepts as normal text when they are relevant to the technique.
 - Do not invent wiki entities merely to create additional links.
