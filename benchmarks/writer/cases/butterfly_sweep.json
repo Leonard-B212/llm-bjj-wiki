@@ -1,0 +1,16 @@
+{
+  "must_contain": [
+    "[[Butterfly-Guard]]",
+    "[[Open-Guard]]",
+    "[[Closed-Guard]]",
+    "[[Half-Guard]]",
+    "[[Mount]]",
+    "[[Three-Quarter-Mount]]"
+  ],
+  "must_not_contain": [
+    "[[Overhook]]",
+    "[[Collar-Tie]]",
+    "[[Butterfly-Hook]]",
+    "[[Shoulder-Crunch-Sweep]]"
+  ]
+}

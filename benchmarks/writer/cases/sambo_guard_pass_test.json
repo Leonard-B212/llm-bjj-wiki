@@ -1,0 +1,18 @@
+{
+  "must_contain": [
+    "[[Closed-Guard]]",
+    "[[Knee-Slice]]",
+    "[[Side-Control]]",
+    "[[Kesa-Gatame]]",
+    "[[North-South]]",
+    "[[Butterfly-Guard]]"
+  ],
+  "must_not_contain": [
+    "[[Underhook]]",
+    "[[Crossface]]",
+    "[[Shoulder-Pin]]",
+    "[[Upper-Body-Pressure]]",
+    "[[Butterfly-Hook]]",
+    "[[Sweep]]"
+  ]
+}

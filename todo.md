@@ -2,10 +2,13 @@
 
 ## Planned
 
+- [ ] Architecture cleanup: introduce clear application/infrastructure boundaries by moving Markdown vault access into a `repositories` layer and LLM provider access into an `llm` layer; keep CLI as presentation and services focused on use-case logic
 - [x] RAG retrieval improvements
 - [x] Configurable note content language
 - [x] Add a setup/launcher script that handles first-time configuration, settings, dependency installation, and starting the application
 - [ ] BJJ terminology glossary: define canonical meanings for ambiguous or relative terms (e.g. Rear-Side-Arm, Far-Side-Arm, Underhook, Crossface) and provide relevant glossary context to the writer
+- [ ] Benchmarking tests for diffrent models (GPT first)
+- [ ] Switching Models if answer is not given correctly
 - [ ] Smart Router: detect whether free-text input should trigger write, update, or question
 - [ ] Fuzzy matching for note names (case differences, typos)
 - [ ] Duplicate check for `/write`

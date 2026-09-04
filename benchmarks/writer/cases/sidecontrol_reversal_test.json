@@ -1,0 +1,9 @@
+{
+  "must_contain": [
+    "[[Side-Control]]"
+  ],
+  "must_not_contain": [
+    "[[Top-Side-Control]]",
+    "[[Bottom-Side-Control]]"
+  ]
+}

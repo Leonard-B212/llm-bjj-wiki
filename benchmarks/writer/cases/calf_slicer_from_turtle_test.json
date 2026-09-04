@@ -1,0 +1,13 @@
+{
+  "must_contain": [
+    "[[Turtle]]",
+    "[[Calf-Slicer]]",
+    "[[Armbar]]"
+  ],
+  "must_not_contain": [
+    "[[Right-Turtle]]",
+    "[[Left-Turtle]]",
+    "[[Triangle-Lock]]",
+    "[[Wedge]]"
+  ]
+}
