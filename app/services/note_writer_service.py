@@ -2,8 +2,12 @@ import os
 
 from openai import OpenAI
 
-from app.ingestion.loader import get_existing_note_titles
-from app.config import OPENAI_API_KEY, VAULT_PATH, TYPE_TO_FOLDER, LANGUAGE, WRITER_MODEL
+from app.repositories.note_repository import (
+    get_existing_note_titles,
+    build_note_path as build_repository_note_path,
+    write_note,
+)
+from app.config import OPENAI_API_KEY, TYPE_TO_FOLDER, LANGUAGE, WRITER_MODEL
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
@@ -143,18 +147,10 @@ OUTPUT REQUIREMENTS
     }
 
 def build_note_path(draft):
-    note_type = draft["note_type"]
-    filename = draft["filename"]
-
-    folder = TYPE_TO_FOLDER.get(note_type)
-
-    if not folder:
-        raise ValueError(f"No folder mapping for type: {note_type}")
-
-    folder_path = os.path.join(VAULT_PATH, folder)
-    os.makedirs(folder_path, exist_ok=True)
-
-    return os.path.join(folder_path, filename)
+    return build_repository_note_path(
+        draft["note_type"],
+        draft["filename"]
+    )
 
 
 def save_note_draft(draft, overwrite=False):
@@ -167,8 +163,7 @@ def save_note_draft(draft, overwrite=False):
             "path": file_path
         }
 
-    with open(file_path, "w", encoding="utf-8") as file:
-        file.write(draft["content"])
+    write_note(file_path, draft["content"])
 
     return {
         "saved": True,

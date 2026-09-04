@@ -1,30 +1,20 @@
-import os
-
 from openai import OpenAI
 
-from app.config import OPENAI_API_KEY, VAULT_PATH, TYPE_TO_FOLDER
+from app.config import OPENAI_API_KEY
+from app.repositories.note_repository import (
+    find_note_path,
+    read_note,
+    write_note,
+)
 from app.services.note_writer_service import load_global_rules
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 
-def find_note_path(note_name):
-    filename = f"{note_name}.md"
-
-    for folder in TYPE_TO_FOLDER.values():
-        path = os.path.join(VAULT_PATH, folder, filename)
-
-        if os.path.exists(path):
-            return path
-
-    raise FileNotFoundError(f"Note not found: {filename}")
-
-
 def generate_note_update(note_name, user_input):
     file_path = find_note_path(note_name)
 
-    with open(file_path, "r", encoding="utf-8") as file:
-        existing_content = file.read()
+    existing_content = read_note(file_path)
 
     global_rules = load_global_rules()
 
@@ -75,7 +65,7 @@ Rules:
 
 
 def save_note_update(update_result):
-    with open(update_result["path"], "w", encoding="utf-8") as file:
-        file.write(update_result["new_content"])
-
-    return update_result["path"]
+    return write_note(
+    update_result["path"],
+    update_result["new_content"]
+)
