@@ -4,7 +4,10 @@
 
 - Do NOT include the title as a heading.
 - Do not include unnecessary explanations outside the note content itself.
-- Always include every heading and subheading defined in the schema, even if no information was provided for it. In that case, write a single placeholder bullet: `* TBD`.
+- Use the user's input as the source of truth. Do NOT invent, infer, assume, or add technical details that were not provided by the user.
+- You may reorganize, clarify, and concisely rephrase information provided by the user, but do NOT introduce new setups, execution details, reactions, defenses, counters, problems, finishes, combinations, or other technical information from general BJJ knowledge. 
+- Do NOT derive missing content by reversing, negating, or logically extrapolating information from another section. For example, an attacking detail must not be turned into a defense, reaction, or problem unless the user explicitly provided that information.
+- Always include every heading and subheading defined in the schema, even if no information was provided for it. If the user's input does not provide information for a section, write a single placeholder bullet: `* TBD`.
 - Do not skip, merge, or omit schema sections for any reason.
 
 ## Language and Terminology
