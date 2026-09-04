@@ -75,27 +75,48 @@ def generate_note_draft(filename, user_input, model=None):
     prompt = f"""
 You create Obsidian markdown notes for a Brazilian Jiu-Jitsu wiki.
 
-Global rules:
-{global_rules}
+Follow the instruction hierarchy below.
 
-Existing canonical note titles:
-{existing_notes_text}
+PRIORITY 1 — USER INPUT
+The user input is the only source of technical BJJ knowledge for this note.
+Only information explicitly stated by the user may be used; do not derive content for one section from another (e.g. an Attack detail must not be reversed into a Defense or Problem).
 
-User input:
+<user_input>
 {user_input}
+</user_input>
+
+PRIORITY 2 — GLOBAL RULES
+These rules define how the note must be written and linked.
+
+<global_rules>
+{global_rules}
+</global_rules>
+
+PRIORITY 3 — NOTE SCHEMA
+The schema defines the required structure and headings.
+It does not authorize you to invent missing content.
+If a schema section is unsupported by the user input, use `* TBD`.
+
+<schema>
+{schema}
+</schema>
+
+REFERENCE — EXISTING CANONICAL NOTE TITLES
+Use these titles when a matching wiki entity is referenced.
+
+<existing_note_titles>
+{existing_notes_text}
+</existing_note_titles>
 
 Detected note type:
 {note_type}
 
-Use this schema:
-{schema}
-
-Rules:
-- content must follow the provided schema
-- Return ONLY the raw markdown content.
-- Do NOT return JSON.
-- Do NOT return a Python dictionary.
-- Do NOT use markdown code fences.
+OUTPUT REQUIREMENTS
+- Follow the provided schema exactly.
+- Return only the raw markdown content.
+- Do not return JSON.
+- Do not return a Python dictionary.
+- Do not use markdown code fences.
 """
 
     response = client.chat.completions.create(

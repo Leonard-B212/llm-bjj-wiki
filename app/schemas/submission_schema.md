@@ -4,8 +4,14 @@ Use this structure for submission techniques.
 
 IMPORTANT:
 
-* Always include the tag: #submission
-* The section below marked "EXAMPLE — REFERENCE ONLY" is illustrative only. Do NOT copy its content, wording, or technique names into your output. Use it only to understand the expected heading structure and level of detail.
+- Always include the tag: #submission
+- The section below marked "EXAMPLE — REFERENCE ONLY" is illustrative only.
+- Do NOT copy its content, wording, technique names, or technical details into your output.
+- The example only demonstrates the expected structure, formatting, and possible level of detail.
+- The example does NOT imply that every section must contain content.
+- User input is the source of truth. Do NOT fill missing sections by inferring, reversing, or generating information from general BJJ knowledge.
+- If the user did not provide information for a required section, keep the section and write only `* TBD`.
+- Avoid inventing content even if the example contains information for that section.
 
 ---
 
