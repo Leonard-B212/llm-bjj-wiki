@@ -7,14 +7,16 @@
 - [x] RAG retrieval improvements
 - [x] Configurable note content language
 - [x] Add a setup/launcher script that handles first-time configuration, settings, dependency installation, and starting the application
+- [ ] Automatic validation repair: after `/write` or `/update`, validate generated notes and perform one targeted LLM repair pass for detected formatting or Wiki-Link violations before showing the final preview; revalidate afterward and keep warnings if issues remain
+- [ ] Duplicate check for `/write`
+- [ ] Customizable CLI belt rank: allow users to configure their BJJ rank in the launcher settings and display a colored ASCII belt in the CLI banner
 - [ ] BJJ terminology glossary: define canonical meanings for ambiguous or relative terms (e.g. Rear-Side-Arm, Far-Side-Arm, Underhook, Crossface) and provide relevant glossary context to the writer
 - [x] Deterministic note validation: detect forbidden generic wiki links and invalid perspective-specific aliases during `/write` and `/update`
 - [x] Benchmarking tests for diffrent models (GPT first)
 - [x] Add a CLI loading spinner for long-running LLM operations such as note generation and updates.
 - [ ] Switching Models if answer is not given correctly
 - [ ] Smart Router: detect whether free-text input should trigger write, update, or question
-- [ ] Fuzzy matching for note names (case differences, typos)
-- [ ] Duplicate check for `/write`
+- [x] Fuzzy matching for note names (case differences, typos)
 - [x] Canonical note linking: provide existing note titles to the writer so it can prefer existing canonical concepts (e.g. [[Side-Control]]) while still allowing links to not-yet-created techniques
 - [ ] Undo functionality for `/update`
 - [ ] Support multiple LLM providers (e.g. OpenAI, Anthropic Claude)
