@@ -8,8 +8,9 @@
 - [x] Configurable note content language
 - [x] Add a setup/launcher script that handles first-time configuration, settings, dependency installation, and starting the application
 - [ ] BJJ terminology glossary: define canonical meanings for ambiguous or relative terms (e.g. Rear-Side-Arm, Far-Side-Arm, Underhook, Crossface) and provide relevant glossary context to the writer
+- [x] Deterministic note validation: detect forbidden generic wiki links and invalid perspective-specific aliases during `/write` and `/update`
 - [x] Benchmarking tests for diffrent models (GPT first)
-- [ ] Add a CLI loading spinner for long-running LLM operations such as note generation and updates.
+- [x] Add a CLI loading spinner for long-running LLM operations such as note generation and updates.
 - [ ] Switching Models if answer is not given correctly
 - [ ] Smart Router: detect whether free-text input should trigger write, update, or question
 - [ ] Fuzzy matching for note names (case differences, typos)

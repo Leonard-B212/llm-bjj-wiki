@@ -30,6 +30,8 @@ BJJ LLM Wiki is designed to turn personal BJJ knowledge into a structured and se
 - Hybrid RAG retrieval using semantic and title matching
 - Markdown/Obsidian as a portable source of truth
 - Preview and confirmation before notes are saved
+- Deterministic validation for generated and updated notes
+- CLI loading feedback during long-running LLM operations
 - Writer benchmark suite with deterministic regression checks
 - Provider-neutral LLM application layer
 
@@ -157,7 +159,8 @@ The application:
 2. Loads the corresponding schema and global writing rules
 3. Provides existing note titles as canonical wiki entities
 4. Structures the supplied knowledge
-5. Shows the generated note before saving it
+5. Validates the generated note against deterministic wiki rules
+6. Shows the generated note and validation warnings before saving it
 
 The writer currently supports:
 
