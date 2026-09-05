@@ -44,7 +44,7 @@
 
 Examples:
 - `Position` → `[[Side-Control]]`, `[[Mount]]`, `[[Turtle]]`
-- `Guard` → `[[Closed-Guard]]`, `[[Open-Guard]]`, `[[Butterfly-Guard]]`, `[[Half-Guard]]`
+- `Guard` is a broad positional concept and should not be used as a wiki link target. Link to the specific guard position instead, such as `[[Closed-Guard]]`, `[[Open-Guard]]`, `[[Butterfly-Guard]]`, or `[[Half-Guard]]`.
 - `Submission` → `[[Armbar]]`, `[[Calf-Slicer]]`, `[[Triangle-Choke]]`
 - `Sweep` → `[[Butterfly-Sweep]]`
 - `Pass` → `[[Knee-Slice]]`

@@ -89,6 +89,11 @@ def main():
             print("\nContent:")
             print(draft["content"])
 
+            if draft["validation_warnings"]:
+                print("\nValidation warnings:")
+                for warning in draft["validation_warnings"]:
+                    print(f"- Generic BJJ concept should not be a Wiki-Link: [[{warning}]]")
+
             folder = TYPE_TO_FOLDER.get(draft["note_type"], "Unknown")
 
             print(f"\n→ Will be saved in: {folder}")
@@ -139,6 +144,11 @@ def main():
                     update_result["old_content"],
                     update_result["new_content"]
                 )
+
+                if update_result["validation_warnings"]:
+                    print("\nValidation warnings:")
+                    for warning in update_result["validation_warnings"]:
+                        print(f"- Generic BJJ concept should not be a Wiki-Link: [[{warning}]]")
 
                 confirm = input("\nSave update? (y/n): ")
 
