@@ -10,7 +10,7 @@ from app.repositories.note_repository import (
     get_existing_note_titles,
 )
 from app.schemas.schema_loader import load_schema, load_global_rules
-from app.validation.note_validator import find_forbidden_wiki_links
+from app.validation.note_validator import validate_note
 
 
 # Generates a complete updated note while preserving supported existing technical content.
@@ -97,13 +97,13 @@ OUTPUT REQUIREMENTS
     )
 
     updated_content = response.choices[0].message.content.strip()
-    validation_warnings = find_forbidden_wiki_links(updated_content)
+    validation_result = validate_note(updated_content)
 
     return {
         "path": file_path,
         "old_content": existing_content,
         "new_content": updated_content,
-        "validation_warnings": validation_warnings,
+        "validation_result": validation_result,
         "note_type": note_type,
         "usage": {
             "input_tokens": response.usage.prompt_tokens,

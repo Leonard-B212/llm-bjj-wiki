@@ -12,7 +12,7 @@ from app.repositories.note_repository import (
 )
 from app.config import TYPE_TO_FOLDER, WRITER_MODEL, CLASSIFIER_MODEL
 from app.schemas.schema_loader import load_schema, load_global_rules
-from app.validation.note_validator import find_forbidden_wiki_links
+from app.validation.note_validator import validate_note
 
 
 # Classifies user-provided BJJ knowledge into one of the supported note types.
@@ -117,7 +117,7 @@ OUTPUT REQUIREMENTS
     )
 
     content = response.choices[0].message.content.strip()
-    validation_warnings = find_forbidden_wiki_links(content)
+    validation_result = validate_note(content)
 
     if not filename.endswith(".md"):
         filename += ".md"
@@ -126,7 +126,7 @@ OUTPUT REQUIREMENTS
         "filename": filename,
         "content": content,
         "note_type": note_type,
-        "validation_warnings": validation_warnings,
+        "validation_result": validation_result,
         "usage": {
             "input_tokens": response.usage.prompt_tokens,
             "output_tokens": response.usage.completion_tokens,

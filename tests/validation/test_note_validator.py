@@ -1,6 +1,8 @@
 from app.validation.note_validator import (
     extract_wiki_links,
     find_forbidden_wiki_links,
+    find_perspective_aliases,
+    validate_note,
 )
 
 
@@ -48,3 +50,32 @@ def test_duplicate_forbidden_links_are_reported_once():
     assert find_forbidden_wiki_links(content) == [
         "Scramble",
     ]
+
+def test_find_perspective_aliases():
+    content = "Maintain pressure from [[Top-Side-Control]] before moving to [[North-South]]."
+
+    assert find_perspective_aliases(content) == {
+        "Top-Side-Control": "Side-Control",
+    }
+
+
+def test_allows_canonical_position_links():
+    content = "Move from [[Side-Control]] to [[North-South]]."
+
+    assert find_perspective_aliases(content) == {}
+
+def test_validate_note_combines_all_validation_results():
+    content = """
+Use an [[Underhook]] from [[Top-Side-Control]]
+during a [[Scramble]].
+"""
+
+    assert validate_note(content) == {
+        "forbidden_wiki_links": [
+            "Underhook",
+            "Scramble",
+        ],
+        "perspective_aliases": {
+            "Top-Side-Control": "Side-Control",
+        },
+    }
