@@ -11,6 +11,7 @@ from app.services.note_writer_service import generate_note_draft, save_note_draf
 from app.config import LANGUAGE, TYPE_TO_FOLDER, VAULT_PATH
 from app.services.note_update_service import generate_note_update, save_note_update
 from app.cli.diff_printer import print_diff
+from app.cli.spinner import Spinner
 
 
 # Rebuilds the vector index from the current Markdown notes in the configured vault.
@@ -94,7 +95,8 @@ def main():
             filename = parts[0]
             user_input = parts[1]
 
-            draft = generate_note_draft(filename, user_input)
+            with Spinner("Generating note..."):
+                draft = generate_note_draft(filename, user_input)
 
             print("\nFilename:")
             print(draft["filename"])
@@ -148,7 +150,8 @@ def main():
                 note_name = parts[0]
                 new_info = parts[1]
 
-                update_result = generate_note_update(note_name, new_info)
+                with Spinner("Updating note..."):
+                    update_result = generate_note_update(note_name, new_info)
 
                 print_diff(
                     update_result["old_content"],
