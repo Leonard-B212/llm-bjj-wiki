@@ -2,6 +2,7 @@
 # Coordinates input validation, generation, preview, validation output, and save confirmation.
 
 import os
+from time import time
 
 from app.cli.spinner import Spinner
 from app.cli.output.validation_printer import print_validation_result
@@ -23,6 +24,10 @@ def handle_write(content):
 
     with Spinner("Generating note..."):
         draft = generate_note_draft(filename, user_input)
+
+    if draft["repairs_applied"]:
+        print("\n✓ Formatting fixed.")
+        time.sleep(0.5)
 
     print("\nFilename:")
     print(draft["filename"])

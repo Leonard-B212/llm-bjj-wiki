@@ -1,6 +1,8 @@
 # Handles the interactive CLI workflow for updating existing BJJ wiki notes.
 # Coordinates note resolution, fuzzy matching, generation, diff output, validation, and save confirmation.
 
+import time
+
 from app.cli.output.diff_printer import print_diff
 from app.cli.output.validation_printer import print_validation_result
 from app.cli.spinner import Spinner
@@ -67,6 +69,10 @@ def handle_update(content):
 
                 with Spinner("Updating note..."):
                     update_result = generate_note_update(note_name, new_info)
+
+        if update_result["repairs_applied"]:
+            print("\n✓ Formatting fixed.")
+            time.sleep(0.5)
 
         print_diff(
             update_result["old_content"],

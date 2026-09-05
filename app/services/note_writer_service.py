@@ -12,7 +12,7 @@ from app.repositories.note_repository import (
 )
 from app.config import TYPE_TO_FOLDER, WRITER_MODEL, CLASSIFIER_MODEL
 from app.schemas.schema_loader import load_schema, load_global_rules
-from app.validation.note_validator import validate_note
+from app.repair.note_processing import process_note
 
 
 # Classifies user-provided BJJ knowledge into one of the supported note types.
@@ -117,16 +117,17 @@ OUTPUT REQUIREMENTS
     )
 
     content = response.choices[0].message.content.strip()
-    validation_result = validate_note(content)
+    processing_result = process_note(content)
 
     if not filename.endswith(".md"):
         filename += ".md"
 
     return {
         "filename": filename,
-        "content": content,
+        "content": processing_result["content"],
         "note_type": note_type,
-        "validation_result": validation_result,
+        "validation_result": processing_result["validation_result"],
+        "repairs_applied": processing_result["repairs_applied"],
         "usage": {
             "input_tokens": response.usage.prompt_tokens,
             "output_tokens": response.usage.completion_tokens,
