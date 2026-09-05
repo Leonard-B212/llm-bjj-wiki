@@ -7,7 +7,7 @@
 - [x] RAG retrieval improvements
 - [x] Configurable note content language
 - [x] Add a setup/launcher script that handles first-time configuration, settings, dependency installation, and starting the application
-- [ ] Automatic validation repair: after `/write` or `/update`, validate generated notes and perform one targeted LLM repair pass for detected formatting or Wiki-Link violations before showing the final preview; revalidate afterward and keep warnings if issues remain
+- [x] Automatic validation repair: deterministically repair known Wiki-Link violations during `/write` and `/update`, revalidate afterward, and keep warnings for unresolved issues
 - [ ] Duplicate check for `/write`
 - [ ] Customizable CLI belt rank: allow users to configure their BJJ rank in the launcher settings and display a colored ASCII belt in the CLI banner
 - [ ] BJJ terminology glossary: define canonical meanings for ambiguous or relative terms (e.g. Rear-Side-Arm, Far-Side-Arm, Underhook, Crossface) and provide relevant glossary context to the writer
@@ -31,3 +31,4 @@
 - [ ] Router: detect and split multiple intents within a single message (more complex, long-term)
 - [ ] Build a standalone frontend without requiring Obsidian, providing a simple UI for users without CLI or Obsidian experience
 - [x] Make repository public-ready: remove secrets/personal data, add example configuration, documentation, and setup instructions
+- [x] LLM Repair function if an error presents itself, that cant be handled deterministically 

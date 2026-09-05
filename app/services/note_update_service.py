@@ -10,7 +10,7 @@ from app.repositories.note_repository import (
     get_existing_note_titles,
 )
 from app.schemas.schema_loader import load_schema, load_global_rules
-from app.validation.note_validator import validate_note
+from app.repair.note_processing import process_note
 
 
 # Generates a complete updated note while preserving supported existing technical content.
@@ -21,6 +21,8 @@ def generate_note_update(note_name, user_input):
     note_type = note["note_type"]
 
     existing_content = read_note(file_path)
+    existing_processing_result = process_note(existing_content)
+    cleaned_existing_content = existing_processing_result["content"]
 
     schema = load_schema(note_type)
     global_rules = load_global_rules()
@@ -43,7 +45,7 @@ Only information supported by the existing note or the new information may be us
 Do not derive content for one section from another (e.g. an Attack detail must not be reversed into a Defense or Problem).
 
 <existing_note>
-{existing_content}
+{cleaned_existing_content}
 </existing_note>
 
 <new_information>
@@ -97,13 +99,15 @@ OUTPUT REQUIREMENTS
     )
 
     updated_content = response.choices[0].message.content.strip()
-    validation_result = validate_note(updated_content)
+    processing_result = process_note(updated_content)
 
     return {
         "path": file_path,
-        "old_content": existing_content,
-        "new_content": updated_content,
-        "validation_result": validation_result,
+        "old_content": cleaned_existing_content,
+        "new_content": processing_result["content"],
+        "validation_result": processing_result["validation_result"],
+        "repairs_applied": processing_result["repairs_applied"],
+        "existing_repairs_applied": existing_processing_result["repairs_applied"],
         "note_type": note_type,
         "usage": {
             "input_tokens": response.usage.prompt_tokens,
