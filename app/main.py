@@ -4,7 +4,10 @@
 import os
 
 from app.repositories.note_repository import load_notes, get_existing_note_titles
-from app.matching.note_name_matcher import find_similar_note_names
+from app.matching.note_name_matcher import (
+    find_exact_normalized_match,
+    find_similar_note_names,
+)
 from app.vectorstore.chroma_store import add_notes, reset_collection
 from app.services.rag_service import ask
 from app.cli.command_handler import handle_command
@@ -156,30 +159,44 @@ def main():
                         update_result = generate_note_update(note_name, new_info)
 
                 except FileNotFoundError:
-                    matches = find_similar_note_names(
+                    existing_titles = get_existing_note_titles()
+
+                    exact_match = find_exact_normalized_match(
                         note_name,
-                        get_existing_note_titles(),
+                        existing_titles,
                     )
 
-                    if not matches:
+                    if exact_match:
+                        note_name = exact_match
+
+                        with Spinner("Updating note..."):
+                            update_result = generate_note_update(note_name, new_info)
+
+                    else:
+                        matches = find_similar_note_names(
+                            note_name,
+                            existing_titles,
+                        )
+
+                        if not matches:
+                            print(f'\nNote not found: "{note_name}"')
+                            continue
+
+                        suggested_name = matches[0]
+
                         print(f'\nNote not found: "{note_name}"')
-                        continue
+                        confirm_match = input(
+                            f'Did you mean "{suggested_name}"? (y/n): '
+                        )
 
-                    suggested_name = matches[0]
+                        if confirm_match.lower() != "y":
+                            print("\nUpdate cancelled.")
+                            continue
 
-                    print(f'\nNote not found: "{note_name}"')
-                    confirm_match = input(
-                        f'Did you mean "{suggested_name}"? (y/n): '
-                    )
+                        note_name = suggested_name
 
-                    if confirm_match.lower() != "y":
-                        print("\nUpdate cancelled.")
-                        continue
-
-                    note_name = suggested_name
-
-                    with Spinner("Updating note..."):
-                        update_result = generate_note_update(note_name, new_info)
+                        with Spinner("Updating note..."):
+                            update_result = generate_note_update(note_name, new_info)
 
                 print_diff(
                     update_result["old_content"],
