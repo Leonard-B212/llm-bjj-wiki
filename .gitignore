@@ -19,3 +19,6 @@ Thumbs.db
 
 #Test Results
 benchmarks/writer/results/
+
+#Code Counter
+.VSCodeCounter/

@@ -2,13 +2,86 @@
 # Coordinates input validation, generation, preview, validation output, and save confirmation.
 
 import os
-from time import time
+import time
 
 from app.cli.spinner import Spinner
 from app.cli.output.validation_printer import print_validation_result
+from app.cli.handlers.update_handler import handle_update
 from app.config import TYPE_TO_FOLDER
+from app.matching.note_name_matcher import (
+    find_exact_normalized_match,
+    find_similar_note_names,
+)
+from app.repositories.note_repository import get_existing_note_titles
 from app.services.note_writer_service import generate_note_draft, save_note_draft
 
+def ask_for_new_filename():
+    while True:
+        new_filename = input("New filename: ").strip()
+
+        if new_filename:
+            return new_filename
+
+        print("Filename cannot be empty.")
+
+def resolve_duplicate(filename, user_input):
+    existing_titles = get_existing_note_titles()
+
+    exact_match = find_exact_normalized_match(
+        filename,
+        existing_titles,
+    )
+
+    if exact_match:
+        print(f'\nA note with this name already exists: "{exact_match}"')
+        print("\n[u] Update existing note")
+        print("[r] Rename new note")
+        print("[c] Cancel")
+
+        choice = input("\nChoice: ").lower()
+
+        if choice == "u":
+            handle_update(f"{exact_match} {user_input}")
+            return None
+
+        if choice == "r":
+            new_filename = ask_for_new_filename()
+            return resolve_duplicate(new_filename, user_input)
+
+        print("\nWrite cancelled.")
+        return None
+
+    matches = find_similar_note_names(
+        filename,
+        existing_titles,
+    )
+
+    if not matches:
+        return filename
+
+    suggested_name = matches[0]
+
+    print(f'\nPossible duplicate found: "{suggested_name}"')
+    print("\n[u] Update existing note")
+    print("[r] Rename new note")
+    print("[w] Write anyway")
+    print("[c] Cancel")
+
+    choice = input("\nChoice: ").lower()
+
+    if choice == "u":
+        handle_update(f"{suggested_name} {user_input}")
+        return None
+
+    if choice == "r":
+        new_filename = ask_for_new_filename()
+        return resolve_duplicate(new_filename, user_input)
+
+    if choice == "w":
+        return filename
+
+    print("\nWrite cancelled.")
+    return None
 
 def handle_write(content):
     parts = content.split(" ", 1)
@@ -21,6 +94,11 @@ def handle_write(content):
 
     filename = parts[0]
     user_input = parts[1]
+
+    filename = resolve_duplicate(filename, user_input)
+
+    if filename is None:
+        return
 
     with Spinner("Generating note..."):
         draft = generate_note_draft(filename, user_input)

@@ -8,7 +8,8 @@
 - [x] Configurable note content language
 - [x] Add a setup/launcher script that handles first-time configuration, settings, dependency installation, and starting the application
 - [x] Automatic validation repair: deterministically repair known Wiki-Link violations during `/write` and `/update`, revalidate afterward, and keep warnings for unresolved issues
-- [ ] Duplicate check for `/write`
+- [x] Duplicate check for `/write`
+- [ ] Note activity tracking: use file metadata and/or a lightweight activity history to identify recently created and updated notes, enabling questions such as "What did I learn or document recently?"
 - [ ] Customizable CLI belt rank: allow users to configure their BJJ rank in the launcher settings and display a colored ASCII belt in the CLI banner
 - [ ] BJJ terminology glossary: define canonical meanings for ambiguous or relative terms (e.g. Rear-Side-Arm, Far-Side-Arm, Underhook, Crossface) and provide relevant glossary context to the writer
 - [x] Deterministic note validation: detect forbidden generic wiki links and invalid perspective-specific aliases during `/write` and `/update`
