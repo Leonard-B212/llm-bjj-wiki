@@ -1,0 +1,30 @@
+# Defines BJJ terms that may appear as normal text but must not be used as wiki link targets.
+# Includes broad classification terms and generic mechanics, controls, movements, and situations.
+
+FORBIDDEN_WIKI_LINKS = {
+    "Position",
+    "Guard",
+    "Submission",
+    "Sweep",
+    "Pass",
+    "Escape",
+    "Takedown",
+    "Throw",
+    "S-Grip",
+    "Underhook",
+    "Overhook",
+    "Crossface",
+    "Frame",
+    "Base",
+    "Shrimp",
+    "Bridge",
+    "Grip",
+    "Hook",
+    "Post",
+    "Butterfly-Hook",
+    "Collar-Tie",
+    "Shoulder-Pin",
+    "Upper-Body-Pressure",
+    "Wedge",
+    "Scramble",
+}

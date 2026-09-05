@@ -19,6 +19,22 @@ def reindex_notes():
     reset_collection()
     add_notes(notes)
 
+# Prints validation warnings returned by the deterministic note validator.
+def print_validation_result(validation_result):
+    forbidden_links = validation_result["forbidden_wiki_links"]
+    perspective_aliases = validation_result["perspective_aliases"]
+
+    if not forbidden_links and not perspective_aliases:
+        return
+
+    print("\nValidation warnings:")
+
+    for link in forbidden_links:
+        print(f"- Generic BJJ concept should not be a Wiki-Link: [[{link}]]")
+
+    for alias, canonical in perspective_aliases.items():
+        print(f"- Perspective-specific Wiki-Link: [[{alias}]] → [[{canonical}]]")
+
 
 def print_banner():
     print(r"""
@@ -51,11 +67,8 @@ def main():
     
     reindex_notes()
     print_banner()
-    
     print(f"Vault: {VAULT_PATH}")
     print(f"Content language: {LANGUAGE}\n")
-
-    print("Type '/exit' to quit.")
     print("Commands: /exit, /reindex, /write <filename> <description>, /update <filename> <new information>\n")
 
     while True:
@@ -88,6 +101,8 @@ def main():
 
             print("\nContent:")
             print(draft["content"])
+
+            print_validation_result(draft["validation_result"])
 
             folder = TYPE_TO_FOLDER.get(draft["note_type"], "Unknown")
 
@@ -139,6 +154,8 @@ def main():
                     update_result["old_content"],
                     update_result["new_content"]
                 )
+
+                print_validation_result(update_result["validation_result"])
 
                 confirm = input("\nSave update? (y/n): ")
 
