@@ -24,6 +24,18 @@
 ### Canonical Entities
 
 - Existing note titles are canonical wiki entities. If a referenced concept matches an existing note, ALWAYS use its exact title as the link target.
+- When an established concrete BJJ technique, position, submission, sweep, pass, escape, takedown, or throw is referenced anywhere in the content, link that concrete entity.
+- Classification words must not be added to an established entity merely to describe its category.
+- For positions and submissions, generic classification words such as `Position` or `Submission` are not part of the entity name unless they are genuinely part of an established BJJ term.
+  - Example: use `[[Side-Control]]`, not `[[Side-Control-Position]]`.
+  - Example: use `[[Armbar]]`, not `[[Armbar-Submission]]`.
+- For sweeps, passes, escapes, takedowns, and throws, the classification word may legitimately be part of the established technique name.
+  - Example: `[[Butterfly-Sweep]]` is a valid concrete entity.
+  - Do not remove or add such a classification word solely to normalize the name; use the established BJJ term or an existing canonical note title when available.
+- Recognize concrete BJJ entities even when they appear inside a longer contextual phrase. Context words must not hide or replace the underlying concrete entity.
+- Contextual words such as `Transition`, `Entry`, `Setup`, `Attempt`, or `Control` should remain normal descriptive text unless the complete phrase genuinely refers to a distinct BJJ entity.
+- Do not create a new wiki entity by appending contextual words to an established concrete entity.
+  - Example: if `Single-Leg-Takedown` is the concrete entity, write `transition into a [[Single-Leg-Takedown]]`, not `[[Single-Leg-Takedown-Transition]]`.
 - Links to non-existing notes are allowed when they represent a genuine BJJ entity that could reasonably have its own note.
 - Do not avoid a meaningful wiki link merely because the target note does not exist yet. The link should remain valid if that note is created in the future.
 - Top/bottom and offensive/defensive describe perspective, not separate position entities.

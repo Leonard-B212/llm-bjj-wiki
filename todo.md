@@ -10,6 +10,8 @@
 - [x] Automatic validation repair: deterministically repair known Wiki-Link violations during `/write` and `/update`, revalidate afterward, and keep warnings for unresolved issues
 - [x] Duplicate check for `/write`
 - [ ] Note activity tracking: use file metadata and/or a lightweight activity history to identify recently created and updated notes, enabling questions such as "What did I learn or document recently?"
+- [ ] Empty note detection on startup: scan the vault for empty Markdown files created through Wiki-Links, flag them as incomplete, and list them so they can be updated
+- [ ] Safe long-form CLI input: prevent accidental loss of unsent `/write` and `/update` text through command-history navigation, with draft recovery or multiline input support
 - [ ] Customizable CLI belt rank: allow users to configure their BJJ rank in the launcher settings and display a colored ASCII belt in the CLI banner
 - [ ] BJJ terminology glossary: define canonical meanings for ambiguous or relative terms (e.g. Rear-Side-Arm, Far-Side-Arm, Underhook, Crossface) and provide relevant glossary context to the writer
 - [x] Deterministic note validation: detect forbidden generic wiki links and invalid perspective-specific aliases during `/write` and `/update`
