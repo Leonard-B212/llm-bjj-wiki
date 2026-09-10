@@ -179,7 +179,7 @@ def validate_configuration():
 
 def show_menu():
     while True:
-        print("\n🥋 BJJ LLM Wiki")
+        print("\n BJJ LLM Wiki")
         print("----------------")
         print("1. Start BJJ-LLM-Wiki")
         print("2. Settings")

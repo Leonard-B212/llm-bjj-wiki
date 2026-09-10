@@ -44,28 +44,65 @@ def fetch_by_ids(ids):
 
 
 # Merges semantic results with direct title matches and removes duplicate notes.
-def hybrid_query(question, n_results=5):
+def hybrid_query(question, n_results=5, distance_margin=0.2):
     semantic_results = query_notes(question, n_results=n_results)
+
+    semantic_documents = (
+        list(semantic_results["documents"][0])
+        if semantic_results["documents"]
+        else []
+    )
+    semantic_ids = (
+        list(semantic_results["ids"][0])
+        if semantic_results["ids"]
+        else []
+    )
+    semantic_distances = (
+        list(semantic_results["distances"][0])
+        if semantic_results["distances"]
+        else []
+    )
+
+    # Filter semantic results relative to the strongest semantic match.
+    if semantic_distances:
+        best_semantic_distance = semantic_distances[0]
+
+        filtered = [
+            (dist, id_, doc)
+            for doc, id_, dist in zip(
+                semantic_documents,
+                semantic_ids,
+                semantic_distances,
+            )
+            if dist <= best_semantic_distance + distance_margin
+        ]
+    else:
+        filtered = []
 
     notes_meta = get_all_notes_meta()
     title_match_ids = find_title_matches(question, notes_meta)
     title_results = fetch_by_ids(title_match_ids)
 
-    documents = list(semantic_results["documents"][0]) if semantic_results["documents"] else []
-    ids = list(semantic_results["ids"][0]) if semantic_results["ids"] else []
-    distances = list(semantic_results["distances"][0]) if semantic_results["distances"] else []
+    combined = list(filtered)
+    existing_ids = {id_ for _, id_, _ in combined}
 
-    for doc, id_, dist in zip(title_results["documents"], title_results["ids"], title_results["distances"]):
-        if id_ not in ids:
-            documents.append(doc)
-            ids.append(id_)
-            distances.append(dist)
+    # Exact title matches are always included, but do not affect semantic filtering.
+    for doc, id_ in zip(
+        title_results["documents"],
+        title_results["ids"],
+    ):
+        if id_ not in existing_ids:
+            combined.append((0.0, id_, doc))
+            existing_ids.add(id_)
 
-    combined = sorted(zip(distances, ids, documents), key=lambda x: x[0])
-    distances, ids, documents = zip(*combined) if combined else ([], [], [])
+    combined.sort(key=lambda item: item[0])
+
+    distances = [item[0] for item in combined]
+    ids = [item[1] for item in combined]
+    documents = [item[2] for item in combined]
 
     return {
-        "documents": [list(documents)],
-        "ids": [list(ids)],
-        "distances": [list(distances)]
+        "documents": [documents],
+        "ids": [ids],
+        "distances": [distances],
     }

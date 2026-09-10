@@ -5,10 +5,11 @@ import os
 
 from app.repositories.note_repository import load_notes
 from app.vectorstore.chroma_store import add_notes, reset_collection
-from app.services.rag_service import ask
 from app.cli.handlers.command_handler import handle_command
 from app.cli.handlers.write_handler import handle_write
 from app.cli.handlers.update_handler import handle_update
+from app.cli.handlers.question_handler import handle_question
+from app.cli.output.status_printer import format_success
 from app.config import LANGUAGE, VAULT_PATH
 
 
@@ -22,26 +23,23 @@ def print_banner():
     print(r"""
     ╔══════════════════════════════════════════════╗
     ║                                              ║
-    ║          🥋  B J J   L L M   W I K I  🥋     ║
+    ║            B J J   L L M   W I K I           ║
     ║                                              ║
     ╠══════════════════════════════════════════════╣
-    ║  ✓ Notes indexed                             ║
-    ║  ✓ Embeddings loaded                         ║
-    ║  ✓ ChromaDB ready                            ║
-    ║  ✓ OpenAI configured                         ║
-    ╠══════════════════════════════════════════════╣
+""", end="")
+
+    print(f"    ║  {format_success('Notes indexed')}                          ║")
+    print(f"    ║  {format_success('Embeddings loaded')}                      ║")
+    print(f"    ║  {format_success('ChromaDB ready')}                         ║")
+    print(f"    ║  {format_success('OpenAI configured')}                      ║")
+
+    print(r"""    ╠══════════════════════════════════════════════╣
     ║                                              ║
     ║                 OSS. 🤙                      ║
     ║              Ready to Roll                   ║
     ║                                              ║
     ╚══════════════════════════════════════════════╝
 """)
-
-
-def print_sources(sources):
-    print("\nSources:")
-    for source in sources:
-        print(f"- {os.path.basename(source)}")
 
 
 # Initializes the index and runs the interactive command loop.
@@ -77,14 +75,8 @@ def main():
             continue
 
         elif cmd["type"] == "question":
-            answer, sources = ask(cmd["content"])
-
-            print("\nAnswer:")
-            print(answer)
-
-            print_sources(sources)
-
-            print("\n---\n")
+            handle_question(cmd["content"])
+            continue
 
 
 if __name__ == "__main__":
