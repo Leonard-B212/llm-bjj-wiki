@@ -36,6 +36,14 @@ class Spinner:
         sys.stdout.write("\r" + " " * (len(self.message) + 4) + "\r")
         sys.stdout.flush()
 
+    # Updates the message shown by the running spinner.
+    def update(self, message):
+        old_length = len(self.message)
+        self.message = message
+
+        sys.stdout.write("\r" + " " * (old_length + 4) + "\r")
+        sys.stdout.flush()
+
     # Continuously renders spinner frames until the stop event is set.
     def _spin(self):
         frames = ["|", "/", "-", "\\"]

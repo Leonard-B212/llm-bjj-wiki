@@ -4,30 +4,33 @@
 from app.config import CLASSIFIER_MODEL
 from app.llm.client import create_chat_completion
 from app.vectorstore.retrieval import hybrid_query
+from app.vectorstore.link_expansion import expand_linked_notes
 
 
-def ask(question):
+def ask(question, status_callback=None):
+    if status_callback:
+        status_callback("Finding relevant notes...")
+
     results = hybrid_query(question)
-
-    documents_raw = results["documents"][0]
-    ids_raw = results["ids"][0]
-    distances = results["distances"][0]
 
     # Return early when retrieval found no relevant notes.
     if not results["documents"] or not results["documents"][0]:
         return "No relevant notes found.", []
 
-    documents = []
-    ids = []
+    documents = results["documents"][0]
+    ids = results["ids"][0]
 
-    # Use the best semantic distance as the reference for filtering weaker matches.
-    best_distance = distances[0]
+    if status_callback:
+        status_callback("Following wiki links...")
 
-    for doc, id_, dist in zip(documents_raw, ids_raw, distances):
-        # Keep only results that are not significantly worse than the best match.
-        if dist <= best_distance + 0.2:
-            documents.append(doc)
-            ids.append(id_)
+    linked_results = expand_linked_notes(
+        primary_documents=documents,
+        primary_ids=ids,
+        limit=5,
+    )
+
+    documents.extend(linked_results["documents"])
+    ids.extend(linked_results["ids"])
 
     context_parts = []
 
@@ -48,6 +51,9 @@ Notes:
 Question:
 {question}
 """
+
+    if status_callback:
+        status_callback("Writing answer...")
 
     response = create_chat_completion(
         model=CLASSIFIER_MODEL,
