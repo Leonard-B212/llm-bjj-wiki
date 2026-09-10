@@ -10,6 +10,11 @@ from app.cli.handlers.write_handler import handle_write
 from app.cli.handlers.update_handler import handle_update
 from app.cli.handlers.question_handler import handle_question
 from app.cli.output.status_printer import format_success
+from app.cli.output.check_printer import (
+    print_check_summary,
+    print_check_details,
+)
+from app.checks.runners.wiki_check_runner import run_wiki_checks
 from app.config import LANGUAGE, VAULT_PATH
 
 
@@ -18,6 +23,10 @@ def reindex_notes():
     notes = load_notes()
     reset_collection()
     add_notes(notes)
+
+def run_checks():
+    notes = load_notes()
+    return run_wiki_checks(notes)
 
 def print_banner():
     print(r"""
@@ -47,9 +56,11 @@ def main():
     
     reindex_notes()
     print_banner()
+    check_results = run_checks()
+    print_check_summary(check_results)
     print(f"Vault: {VAULT_PATH}")
     print(f"Content language: {LANGUAGE}\n")
-    print("Commands: /exit, /reindex, /write <filename> <description>, /update <filename> <new information>\n")
+    print("Commands: /exit, /reindex, /check, /write <filename> [description], /update <filename> [new information]\n")
 
     while True:
         user_input = input(">> ")
@@ -60,6 +71,12 @@ def main():
 
         elif cmd["type"] == "reindex":
             reindex_notes()
+            continue
+
+        elif cmd["type"] == "check":
+            check_results = run_checks()
+            print_check_details(check_results)
+            print("\n---\n")
             continue
 
         elif cmd["type"] == "write":
