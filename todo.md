@@ -9,7 +9,7 @@
 - [x] Add a setup/launcher script that handles first-time configuration, settings, dependency installation, and starting the application
 - [x] Automatic validation repair: deterministically repair known Wiki-Link violations during `/write` and `/update`, revalidate afterward, and keep warnings for unresolved issues
 - [x] Duplicate check for `/write`
-- [ ] Safe long-form CLI input: prevent accidental loss of unsent `/write` and `/update` text through command-history navigation, with draft recovery or multiline input support
+- [x] Safe long-form CLI input: prevent accidental loss of unsent `/write` and `/update` text through command-history navigation, with draft recovery or multiline input support
 - [ ] Empty note detection on startup: scan the vault for empty Markdown files created through Wiki-Links, flag them as incomplete, and list them so they can be updated
 - [ ] Note activity tracking: use file metadata and/or a lightweight activity history to identify recently created and updated notes, enabling questions such as "What did I learn or document recently?"
 - [ ] Self linking fixing through linter

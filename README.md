@@ -25,15 +25,21 @@ BJJ LLM Wiki is designed to turn personal BJJ knowledge into a structured and se
 - Schema-based note updates and legacy note migration
 - Global terminology and Wiki-Linking rules
 - Canonical entity awareness using existing note titles
+- Duplicate detection before creating new notes
+- Normalized and fuzzy note-name matching
+- Deterministic validation of generated and updated notes
+- Automatic repair of known validation issues
+- LLM-assisted repair support for issues that cannot be handled deterministically
+- Safe multiline input for longer `/write` and `/update` descriptions
+- Preview and confirmation before notes are saved
 - Configurable descriptive content language
 - Configurable writer and classifier models
 - Hybrid RAG retrieval using semantic and title matching
-- Markdown/Obsidian as a portable source of truth
-- Preview and confirmation before notes are saved
-- Deterministic validation for generated and updated notes
-- CLI loading feedback during long-running LLM operations
+- Wiki-Link-aware RAG context expansion
+- Multi-stage CLI feedback during retrieval and LLM operations
 - Writer benchmark suite with deterministic regression checks
 - Provider-neutral LLM application layer
+- Markdown/Obsidian as a portable source of truth
 
 ---
 
@@ -92,8 +98,9 @@ Dependencies can also be repaired or reinstalled later through the launcher menu
 After setup, the launcher displays:
 
 ```text
-🥋 BJJ LLM Wiki
-----------------
+BJJ LLM Wiki
+------------
+
 1. Start BJJ-LLM-Wiki
 2. Settings
 3. Install / Repair Dependencies
@@ -111,36 +118,75 @@ When you exit the Wiki with `/exit`, you return to the launcher.
 | Command | Description |
 |---|---|
 | `<free text>` | Ask a question about your notes using RAG |
-| `/write <filename> <description>` | Create a structured note from user-provided BJJ knowledge |
-| `/update <filename> <new information>` | Merge new information into an existing note |
+| `/write <filename> [description]` | Create a structured note from user-provided BJJ knowledge |
+| `/update <filename> [new information]` | Merge new information into an existing note |
 | `/reindex` | Rebuild the vector index after manual vault changes |
 | `/exit` | Exit the Wiki and return to the launcher |
 
-Example:
+Short descriptions can still be supplied directly:
 
 ```text
 >> /write Rear-Naked-Choke Classic choke from back control. Wrap the arm around the neck, secure the grip and bring the elbows together.
 ```
 
-The generated note is shown as a preview before saving and must be confirmed by the user.
+For longer descriptions, omit the description from the command:
+
+```text
+>> /write Rear-Naked-Choke
+
+Describe the technique:
+Enter /done to finish or /cancel to cancel.
+
+> Start from Back-Mount with a Seatbelt.
+> The choking arm goes around the opponent's neck.
+> Secure the grip and finish by bringing the elbows together.
+> /done
+```
+
+The same multiline input is available for `/update`.
+
+Previously submitted lines are retained while entering multiline content, reducing the risk of losing an entire long description through accidental command-history navigation.
+
+Use:
+
+```text
+/done
+```
+
+to submit the multiline input, or:
+
+```text
+/cancel
+```
+
+to abort it.
+
+The generated note or update is shown as a preview before saving and must be confirmed by the user.
 
 ---
 
 ## How It Works
 
 ```text
-                         User Input
-                             │
-              ┌──────────────┴──────────────┐
-              │                             │
-         /write /update                  Question
-              │                             │
-              ▼                             ▼
-       Schema + Rules               Hybrid Retrieval
-       + Canonical Notes            Chroma + Titles
-              │                             │
-              ▼                             ▼
-          LLM Writer                  Grounded LLM
+                           User Input
+                               │
+              ┌────────────────┴────────────────┐
+              │                                 │
+        /write /update                       Question
+              │                                 │
+              ▼                                 ▼
+       Note Resolution                  Hybrid Retrieval
+    + Duplicate Matching              Semantic + Titles
+              │                                 │
+              ▼                                 ▼
+       Schema + Rules                    Wiki-Link
+     + Canonical Notes                    Expansion
+              │                                 │
+              ▼                                 ▼
+          LLM Writer                      Grounded LLM
+              │
+              ▼
+      Validation + Repair
               │
               ▼
         Markdown Vault
@@ -153,14 +199,19 @@ The generated note is shown as a preview before saving and must be confirmed by 
 
 `/write` turns user-provided BJJ knowledge into a structured Markdown note.
 
-The application:
+Before generation, existing note names are checked using normalized and fuzzy matching to reduce accidental duplicates.
 
-1. Classifies the input into a supported note type
-2. Loads the corresponding schema and global writing rules
-3. Provides existing note titles as canonical wiki entities
-4. Structures the supplied knowledge
-5. Validates the generated note against deterministic wiki rules
-6. Shows the generated note and validation warnings before saving it
+The application then:
+
+1. Checks the requested note name against existing notes
+2. Classifies the input into a supported note type
+3. Loads the corresponding schema and global writing rules
+4. Provides existing note titles as canonical wiki entities
+5. Structures the supplied knowledge
+6. Validates the generated note against deterministic wiki rules
+7. Repairs known validation issues where possible
+8. Revalidates the repaired note
+9. Shows the generated note and remaining validation warnings before saving it
 
 The writer currently supports:
 
@@ -188,9 +239,23 @@ Unsupported schema sections remain present as:
 
 `/update` works against an existing Markdown note.
 
+Note names are resolved before requesting long-form input. Normalized matching handles differences such as capitalization or hyphenation, while fuzzy matching can suggest an existing note when the supplied name contains a typo.
+
 Both the existing note and the new user input are treated as technical source material. Existing knowledge is preserved while new information is integrated into the appropriate sections.
 
 Updates use the current schema for the note type. This also allows older notes using legacy structures or headings to be migrated to the current schema while preserving their technical content.
+
+Generated updates pass through the same validation and repair pipeline before being presented to the user as a diff.
+
+### Validation and Repair
+
+Generated and updated notes are checked against deterministic wiki rules before being saved.
+
+Validation can detect known structural and Wiki-Linking problems, including forbidden generic links and invalid perspective-specific aliases.
+
+Known violations can be repaired deterministically and are then revalidated. The repair layer is separated from validation so additional repair strategies can be added without changing the writer or update workflows.
+
+The project also contains support for LLM-assisted repair for issues that cannot be resolved by deterministic rules.
 
 ### Wiki Links
 
@@ -198,20 +263,25 @@ Concrete BJJ entities are connected through Obsidian Wiki-Links:
 
 ```markdown
 [[Side-Control]]
+
 [[Mount]]
+
 [[Butterfly-Guard]]
+
 [[Armbar]]
 ```
 
 Existing note titles are supplied to the writer as canonical entities. Links to meaningful BJJ entities may also be created before the corresponding note exists, allowing the wiki to develop naturally over time.
 
+Generic classification or contextual words are not automatically treated as part of an entity name. At the same time, established technique names such as `[[Butterfly-Sweep]]` or `[[Single-Leg-Takedown]]` may legitimately contain their classification.
+
 Detailed linking and terminology behavior is defined in `app/schemas/global_rules.md`.
 
 ### Retrieval
 
-Questions are answered using hybrid retrieval.
+Questions are answered using hybrid retrieval with additional Wiki-Link-aware context expansion.
 
-**Semantic search** uses ChromaDB embeddings to find notes related to the question.
+**Semantic search** uses ChromaDB embeddings to find notes related to the meaning of the question.
 
 **Title matching** directly matches normalized note titles against the query. Matching is case- and hyphen-insensitive, so:
 
@@ -225,7 +295,13 @@ can be found from:
 side control
 ```
 
-Combining both approaches helps retrieve conceptually related notes while preventing short or sparsely written notes from being missed due to weak embeddings.
+Semantic relevance is evaluated independently from exact title matches so a direct title match does not suppress other semantically relevant notes.
+
+After the primary retrieval step, the application follows Wiki-Links from the retrieved notes and can include directly connected existing notes as additional context.
+
+For example, a question about attacks from `Side-Control` can retrieve the position itself while also providing linked submissions and related techniques to the answering LLM.
+
+The resulting context is passed to the LLM, which is instructed to answer only from the retrieved notes and state clearly when the knowledge base does not contain enough information.
 
 ---
 
@@ -240,39 +316,54 @@ CLI
 Services
  ├────► Repository ────► Markdown / Obsidian Vault
  ├────► LLM Layer ─────► LLM Provider
+ ├────► Validation / Repair
  └────► Vector Store ──► ChromaDB
 ```
 
-The main application structure is:
+The main project structure is:
 
 ```text
 LLM-BJJ-Wiki/
 │
 ├── app/
-│   ├── cli/            # Terminal interface
-│   ├── services/       # Application use cases
-│   ├── repositories/   # Markdown vault access
-│   ├── llm/            # Provider-neutral LLM access
-│   │   ├── openai/     # OpenAI implementation
-│   │   └── anthropic/  # Reserved for future provider support
-│   ├── vectorstore/    # ChromaDB and retrieval
-│   ├── schemas/        # Note schemas and global writing rules
-│   ├── config.py
-│   └── main.py
+│   ├── cli/                    # Terminal presentation layer
+│   │   ├── handlers/           # Command-specific CLI workflows
+│   │   ├── input/              # Safe multiline and interactive input
+│   │   └── output/             # Diff, validation, and status output
+│   │
+│   ├── llm/                    # Provider-neutral LLM access
+│   │   ├── openai/             # OpenAI implementation
+│   │   └── anthropic/          # Reserved for Anthropic support
+│   │
+│   ├── matching/               # Note-name normalization and fuzzy matching
+│   ├── repair/                 # Deterministic and LLM-assisted note repair
+│   ├── repositories/           # Markdown vault access
+│   ├── schemas/                # Note schemas and global writing rules
+│   ├── services/               # Application use cases
+│   ├── validation/             # Deterministic note validation
+│   │   └── lists/              # Validation rules and canonical mappings
+│   │
+│   └── vectorstore/            # ChromaDB, hybrid retrieval, and link expansion
 │
-├── example-vault/      # Empty example vault structure
-├── benchmarks/         # Writer regression benchmarks
-├── assets/
-├── .env.example
+├── assets/                     # README and project assets
+├── benchmarks/
+│   └── writer/                 # Writer regression and model benchmarks
+│
+├── example-vault/              # Example Obsidian vault structure
+├── tests/                      # Automated tests
+├── start.py                    # Setup and application launcher
 ├── requirements.txt
-├── start.py
-├── todo.md
+├── todo.md                     # Development roadmap
 └── README.md
 ```
 
 Services contain the application use cases while infrastructure-specific access is kept behind dedicated repository, LLM, and vector-store layers.
 
-The LLM layer is provider-neutral from the perspective of the application services. OpenAI is currently the implemented provider, while the structure allows additional providers to be added later.
+CLI responsibilities are separated into command handlers, input handling, and output formatting. This keeps terminal-specific behavior such as multiline input, spinners, diffs, and status messages outside the application services.
+
+Validation determines whether generated note content follows the application's rules, while the repair layer is responsible for correcting known violations and reprocessing the result.
+
+The LLM layer is provider-neutral from the perspective of the application services. OpenAI is currently the implemented provider, while the structure allows additional providers such as Anthropic to be added later.
 
 ---
 
@@ -280,7 +371,7 @@ The LLM layer is provider-neutral from the perspective of the application servic
 
 Obsidian acts as the visual frontend for the knowledge base.
 
-The application handles LLM-assisted writing, updating, retrieval, and question answering, while Obsidian provides:
+The application handles LLM-assisted writing, updating, retrieval, validation, repair, and question answering, while Obsidian provides:
 
 - browsing and manually editing notes
 - following `[[Wiki-Links]]`
@@ -342,8 +433,7 @@ The repository contains a benchmark suite for testing note generation against re
 benchmarks/
 └── writer/
     ├── cases/
-    ├── model_pricing.py
-    └── run_writer_benchmark.py
+    └── results/
 ```
 
 Benchmarks can compare writer models using identical inputs and deterministic expectations such as required or forbidden Wiki-Links.
@@ -368,7 +458,7 @@ The benchmark is intended to catch repeatable structural and Wiki-Linking errors
 
 ## Roadmap
 
-Planned improvements include smarter command routing, fuzzy note matching, duplicate detection, undo support, additional LLM providers, wiki linting, a BJJ terminology glossary, and deriving a knowledge graph from Markdown relationships.
+Planned improvements include note activity tracking, empty-note detection, smarter command routing, improved link-aware RAG ranking, undo support, additional LLM providers, wiki linting, a BJJ terminology glossary, automatic linking of existing BJJ terms, and deriving a knowledge graph from Markdown relationships.
 
 See [`todo.md`](todo.md) for the full roadmap.
 
