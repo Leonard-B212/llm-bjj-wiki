@@ -10,7 +10,8 @@
 - [x] Automatic validation repair: deterministically repair known Wiki-Link violations during `/write` and `/update`, revalidate afterward, and keep warnings for unresolved issues
 - [x] Duplicate check for `/write`
 - [x] Safe long-form CLI input: prevent accidental loss of unsent `/write` and `/update` text through command-history navigation, with draft recovery or multiline input support
-- [ ] Empty note detection on startup: scan the vault for empty Markdown files created through Wiki-Links, flag them as incomplete, and list them so they can be updated
+- [x] Empty note detection on startup: scan the vault for empty Markdown files created through Wiki-Links, flag them as incomplete, and list them so they can be updated
+- [ ] Broken Links check implementation
 - [ ] Note activity tracking: use file metadata and/or a lightweight activity history to identify recently created and updated notes, enabling questions such as "What did I learn or document recently?"
 - [ ] Self linking fixing through linter
 - [ ] Customizable CLI belt rank: allow users to configure their BJJ rank in the launcher settings and display a colored ASCII belt in the CLI banner
