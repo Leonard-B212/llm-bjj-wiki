@@ -5,6 +5,7 @@ import os
 import time
 
 from app.cli.spinner import Spinner
+from app.cli.input.multiline_input import read_multiline
 from app.cli.output.validation_printer import print_validation_result
 from app.cli.handlers.update_handler import handle_update
 from app.config import TYPE_TO_FOLDER
@@ -41,7 +42,11 @@ def resolve_duplicate(filename, user_input):
         choice = input("\nChoice: ").lower()
 
         if choice == "u":
-            handle_update(f"{exact_match} {user_input}")
+            if user_input:
+                handle_update(f"{exact_match} {user_input}")
+            else:
+                handle_update(exact_match)
+
             return None
 
         if choice == "r":
@@ -70,7 +75,11 @@ def resolve_duplicate(filename, user_input):
     choice = input("\nChoice: ").lower()
 
     if choice == "u":
-        handle_update(f"{suggested_name} {user_input}")
+        if user_input:
+            handle_update(f"{suggested_name} {user_input}")
+        else:
+            handle_update(suggested_name)
+
         return None
 
     if choice == "r":
@@ -86,19 +95,39 @@ def resolve_duplicate(filename, user_input):
 def handle_write(content):
     parts = content.split(" ", 1)
 
-    if len(parts) < 2:
-        print("\nUsage: /write <Note-Name> <description>")
-        print("Example: /write Knee-Elbow-Escape Escape aus der Side Control gegen Druck von oben.")
+    if not parts[0].strip():
+        print("\nUsage: /write <Note-Name> [description]")
+        print("Example: /write Knee-Elbow-Escape")
         print("\n---\n")
         return
 
-    filename = parts[0]
-    user_input = parts[1]
+    filename = parts[0].strip()
 
-    filename = resolve_duplicate(filename, user_input)
+    inline_user_input = (
+        parts[1].strip()
+        if len(parts) == 2 and parts[1].strip()
+        else None
+    )
+
+    filename = resolve_duplicate(filename, inline_user_input)
 
     if filename is None:
         return
+
+    if inline_user_input:
+        user_input = inline_user_input
+    else:
+        user_input = read_multiline(
+            prompt="Describe the technique:"
+        )
+
+        if user_input is None:
+            print("\nWrite cancelled.")
+            return
+
+        if not user_input:
+            print("\nWrite cancelled: description cannot be empty.")
+            return
 
     with Spinner("Generating note..."):
         draft = generate_note_draft(filename, user_input)

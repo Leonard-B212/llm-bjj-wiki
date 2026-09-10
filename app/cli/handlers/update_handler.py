@@ -3,6 +3,7 @@
 
 import time
 
+from app.cli.input.multiline_input import read_multiline
 from app.cli.output.diff_printer import print_diff
 from app.cli.output.validation_printer import print_validation_result
 from app.cli.spinner import Spinner
@@ -18,57 +19,68 @@ def handle_update(content):
     try:
         parts = content.split(" ", 1)
 
-        if len(parts) < 2:
-            print("\nUsage: /update <Note-Name> <new information>")
-            print("Example: /update Knee-Elbow-Escape Neue Side-Control Variante gelernt.")
+        if not parts[0].strip():
+            print("\nUsage: /update <Note-Name> [new information]")
+            print("Example: /update Knee-Elbow-Escape")
             return
 
-        note_name = parts[0]
-        new_info = parts[1]
+        note_name = parts[0].strip()
+        inline_new_info = (
+            parts[1].strip()
+            if len(parts) == 2 and parts[1].strip()
+            else None
+        )
 
-        try:
-            with Spinner("Updating note..."):
-                update_result = generate_note_update(note_name, new_info)
+        existing_titles = get_existing_note_titles()
 
-        except FileNotFoundError:
-            existing_titles = get_existing_note_titles()
+        exact_match = find_exact_normalized_match(
+            note_name,
+            existing_titles,
+        )
 
-            exact_match = find_exact_normalized_match(
+        if exact_match:
+            note_name = exact_match
+
+        else:
+            matches = find_similar_note_names(
                 note_name,
                 existing_titles,
             )
 
-            if exact_match:
-                note_name = exact_match
-
-                with Spinner("Updating note..."):
-                    update_result = generate_note_update(note_name, new_info)
-
-            else:
-                matches = find_similar_note_names(
-                    note_name,
-                    existing_titles,
-                )
-
-                if not matches:
-                    print(f'\nNote not found: "{note_name}"')
-                    return
-
-                suggested_name = matches[0]
-
+            if not matches:
                 print(f'\nNote not found: "{note_name}"')
-                confirm_match = input(
-                    f'Did you mean "{suggested_name}"? (y/n): '
-                )
+                return
 
-                if confirm_match.lower() != "y":
-                    print("\nUpdate cancelled.")
-                    return
+            suggested_name = matches[0]
 
-                note_name = suggested_name
+            print(f'\nNote not found: "{note_name}"')
+            confirm_match = input(
+                f'Did you mean "{suggested_name}"? (y/n): '
+            )
 
-                with Spinner("Updating note..."):
-                    update_result = generate_note_update(note_name, new_info)
+            if confirm_match.lower() != "y":
+                print("\nUpdate cancelled.")
+                return
+
+            note_name = suggested_name
+
+        if inline_new_info:
+            new_info = inline_new_info
+        else:
+            new_info = read_multiline(
+                prompt="Describe the new information:"
+            )
+
+            if new_info is None:
+                print("\nUpdate cancelled.")
+                return
+
+            if not new_info:
+                print("\nUpdate cancelled: new information cannot be empty.")
+                return
+
+        with Spinner("Updating note..."):
+            update_result = generate_note_update(note_name, new_info)
 
         if update_result["repairs_applied"]:
             print("\n✓ Formatting fixed.")
