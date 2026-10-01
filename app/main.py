@@ -10,6 +10,7 @@ from app.cli.handlers.write_handler import handle_write
 from app.cli.handlers.update_handler import handle_update
 from app.cli.handlers.question_handler import handle_question
 from app.cli.output.status_printer import format_success
+from app.cli.output.help_printer import print_help
 from app.cli.output.check_printer import (
     print_check_summary,
     print_check_details,
@@ -60,7 +61,7 @@ def main():
     print_check_summary(check_results)
     print(f"Vault: {VAULT_PATH}")
     print(f"Content language: {LANGUAGE}\n")
-    print("Commands: /exit, /reindex, /check, /write <filename> [description], /update <filename> [new information]\n")
+    print("Type /help to see available commands.\n")
 
     while True:
         user_input = input(">> ")
@@ -77,6 +78,11 @@ def main():
             check_results = run_checks()
             print_check_details(check_results)
             print("\n---\n")
+            continue
+
+        elif cmd["type"] == "help":
+            print_help()
+            print("---\n")
             continue
 
         elif cmd["type"] == "write":

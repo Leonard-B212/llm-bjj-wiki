@@ -1,5 +1,12 @@
 # Global Note Writing Rules
 
+## Metadata
+
+- Follow the YAML frontmatter structure defined by the selected note schema.
+- Metadata follows the same source-of-truth, canonical entity, and Wiki-Link rules as the note content.
+- Do NOT infer or invent metadata that was not provided by the user.
+- Metadata Wiki-Links must use canonical existing note titles when available.
+
 ## Output Structure
 
 - Do NOT include the title as a heading.
@@ -25,7 +32,9 @@
 
 - Existing note titles are canonical wiki entities. If a referenced concept matches an existing note, ALWAYS use its exact title as the link target.
 - When an established concrete BJJ technique, position, submission, sweep, pass, escape, takedown, or throw is referenced anywhere in the content, link that concrete entity.
-- Classification words must not be added to an established entity merely to describe its category.
+- Classification words must not be added to or removed from an established entity merely to describe or normalize its category.
+- Use the commonly established BJJ name as the canonical entity name.
+- For submissions, words such as `Choke` should only be part of the entity name when they are part of the commonly established name. Do not append `Choke` merely because the technique is a choke.
 - For positions and submissions, generic classification words such as `Position` or `Submission` are not part of the entity name unless they are genuinely part of an established BJJ term.
   - Example: use `[[Side-Control]]`, not `[[Side-Control-Position]]`.
   - Example: use `[[Armbar]]`, not `[[Armbar-Submission]]`.

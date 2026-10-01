@@ -11,9 +11,11 @@
 - [x] Duplicate check for `/write`
 - [x] Safe long-form CLI input: prevent accidental loss of unsent `/write` and `/update` text through command-history navigation, with draft recovery or multiline input support
 - [x] Empty note detection on startup: scan the vault for empty Markdown files created through Wiki-Links, flag them as incomplete, and list them so they can be updated
+- [ ] Typed technique relationships and game-gap analysis: add structured YAML frontmatter to technique notes (e.g. `from`, `to`, `perspective`, `gi`) so relationships between positions and techniques are machine-readable instead of relying only on Wiki-Links. Use canonical note names for position references and extend validation to keep metadata consistent. This should enable deterministic queries such as "What techniques do I have from Half-Guard bottom?", support Obsidian/Dataview and the planned Knowledge Graph, and allow automatic analysis of gaps in the user's BJJ game, such as positions with no documented escapes, sweeps, submissions, or transitions.
 - [ ] Broken Links check implementation
 - [ ] Note activity tracking: use file metadata and/or a lightweight activity history to identify recently created and updated notes, enabling questions such as "What did I learn or document recently?"
 - [ ] Self linking fixing through linter
+- [ ] Add /help command for a short introduction and explanation of the commands
 - [ ] Customizable CLI belt rank: allow users to configure their BJJ rank in the launcher settings and display a colored ASCII belt in the CLI banner
 - [ ] BJJ terminology glossary: define canonical meanings for ambiguous or relative terms (e.g. Rear-Side-Arm, Far-Side-Arm, Underhook, Crossface) and provide relevant glossary context to the writer
 - [x] RAG Fix. In a uscase where client asks for attacks from position x. Not just give the position note but also the linked notes.

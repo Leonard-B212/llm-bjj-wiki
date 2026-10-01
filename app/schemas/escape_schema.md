@@ -2,6 +2,27 @@
 
 Use this structure for escape techniques.
 
+## Metadata
+
+Start every escape note with YAML frontmatter using this structure:
+
+---
+type: escape
+gi: nogi
+from:
+  - "[[...]]"
+to:
+  - "[[...]]"
+---
+
+- `type` must always be `escape`.
+- `gi` must be `gi`, `nogi`, or `both`. Only use information provided by the user. If the user does not specify the context, use `nogi` as the default.
+- `from` contains the concrete positions from which the escape starts.
+- `to` contains the concrete positions reached by successfully performing the escape.
+- `from` and `to` must be YAML lists of Wiki-Links. If the corresponding information was not provided, use `[]`.
+- Add `variant_of: "[[...]]"` only when the note describes a specific variation or application of a broader escape.
+- Do not add `variant_of` to a general escape note.
+
 IMPORTANT:
 
 - Always include the tag: #escape
@@ -88,6 +109,15 @@ IMPORTANT:
 
 **(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)**
 
+---
+type: escape
+gi: nogi
+from:
+  - "[[Mount]]"
+  - "[[Side-Control]]"
+to:
+  - "[[Half-Guard]]"
+  - "[[Guard]]"
 ---
 
 # Goal

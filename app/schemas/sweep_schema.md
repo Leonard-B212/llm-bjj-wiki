@@ -2,6 +2,27 @@
 
 Use this structure for sweep techniques.
 
+## Metadata
+
+Start every sweep note with YAML frontmatter using this structure:
+
+---
+type: sweep
+gi: nogi
+from:
+  - "[[...]]"
+to:
+  - "[[...]]"
+---
+
+- `type` must always be `sweep`.
+- `gi` must be `gi`, `nogi`, or `both`. Only use information provided by the user. If the user does not specify the context, use `nogi` as the default.
+- `from` contains the concrete positions from which the sweep starts.
+- `to` contains the concrete positions reached by successfully performing the sweep.
+- `from` and `to` must be YAML lists of Wiki-Links. If the corresponding information was not provided, use `[]`.
+- Add `variant_of: "[[...]]"` only when the note describes a specific variation or application of a broader sweep.
+- Do not add `variant_of` to a general sweep note.
+
 IMPORTANT:
 
 - Always include the tag: #sweep
@@ -76,6 +97,12 @@ IMPORTANT:
 
 **(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)**
 
+---
+type: sweep
+gi: nogi
+from: []
+to:
+  - "[[Mount]]"
 ---
 
 # Attack
