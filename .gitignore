@@ -16,6 +16,7 @@ Thumbs.db
 .vscode/
 .idea/
 .aider*
+CONVENTIONS.md
 
 #Test Results
 benchmarks/writer/results/

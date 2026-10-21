@@ -1,4 +1,5 @@
 chromadb
 openai
+anthropic
 python-dotenv
 pytest
