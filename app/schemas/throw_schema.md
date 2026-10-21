@@ -2,6 +2,27 @@
 
 Use this structure for throwing techniques (Judo-style takedowns).
 
+## Metadata
+
+Start every throw note with YAML frontmatter using this structure:
+
+---
+type: throw
+gi: nogi
+to:
+  - "[[...]]"
+---
+
+- `type` must always be `throw`.
+- `gi` must be `gi`, `nogi`, or `both`. Only use information provided by the user. If the user does not specify the context, use `nogi` as the default.
+- `to` contains the concrete positions that can be reached as a result of successfully performing the throw.
+- `to` must be a YAML list of Wiki-Links. If no resulting position was provided, use `to: []`.
+- Add `from` only when the user provides a concrete starting position. Do not invent generic positions such as `[[Standing]]` merely because the technique is a throw.
+- If present, `from` must be a YAML list of Wiki-Links.
+- Only positions belong in `from` and `to`. Follow-up submissions or other techniques must not be added to `to`.
+- Add `variant_of: "[[...]]"` only when the note describes a specific variation or application of a broader throw.
+- Do not add `variant_of` to a general throw note.
+
 IMPORTANT:
 
 - Always include the tag: #throw
@@ -80,6 +101,12 @@ IMPORTANT:
 
 **(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)**
 
+---
+type: throw
+gi: nogi
+to:
+  - "[[Knee-On-Belly]]"
+  - "[[Side-Control]]"
 ---
 
 # Attack

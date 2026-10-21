@@ -2,6 +2,28 @@
 
 Use this structure for guard passing techniques.
 
+## Metadata
+
+Start every pass note with YAML frontmatter using this structure:
+
+---
+type: pass
+gi: nogi
+from:
+  - "[[...]]"
+to:
+  - "[[...]]"
+---
+
+- `type` must always be `pass`.
+- `gi` must be `gi`, `nogi`, or `both`. Only use information provided by the user. If the user does not specify the context, use `nogi` as the default.
+- `from` contains the concrete positions from which the pass starts.
+- `to` contains the concrete positions that can be reached as a result of successfully performing the pass.
+- `from` and `to` must be YAML lists of Wiki-Links. If the corresponding information was not provided, use `[]`.
+- Only positions belong in `from` and `to`. Follow-up submissions or other techniques remain in the appropriate note sections and must not be added to `to`.
+- Add `variant_of: "[[...]]"` only when the note describes a specific variation or application of a broader pass.
+- Do not add `variant_of` to a general pass note.
+
 IMPORTANT:
 
 - Always include the tag: #pass
@@ -74,6 +96,13 @@ IMPORTANT:
 
 **(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)**
 
+---
+type: pass
+gi: nogi
+from:
+  - "[[Knee-On-Belly]]"
+to:
+  - "[[Mount]]"
 ---
 
 # Attack (Top)

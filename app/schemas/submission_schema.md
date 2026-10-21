@@ -2,6 +2,25 @@
 
 Use this structure for submission techniques.
 
+## Metadata
+
+Start every submission note with YAML frontmatter using this structure:
+
+---
+type: submission
+gi: nogi
+from:
+  - "[[...]]"
+---
+
+- `type` must always be `submission`.
+- `gi` must be `gi`, `nogi`, or `both`. Only use information provided by the user. If the user does not specify the context, use `nogi` as the default.
+- `from` contains the concrete positions from which the submission works.
+- `from` must be a YAML list of Wiki-Links. If no starting position was provided, use `from: []`.
+- Add `variant_of: "[[...]]"` only when the note describes a specific variation, entry, or application of a broader submission.
+- Do not add `variant_of` to a general submission note.
+- Do not include `to` for submission notes.
+
 IMPORTANT:
 
 - Always include the tag: #submission
@@ -75,6 +94,12 @@ IMPORTANT:
 
 **(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)**
 
+---
+type: submission
+gi: nogi
+from:
+  - "[[Turtle]]"
+  - "[[Front-Headlock]]"
 ---
 
 # Attack

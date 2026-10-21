@@ -15,6 +15,9 @@ def handle_command(user_input):
         if command == "/check":
             return {"type": "check"}
 
+        if command == "/help":
+            return {"type": "help"}
+
         if command == "/write":
             content = parts[1] if len(parts) > 1 else ""
             return {"type": "write", "content": content}

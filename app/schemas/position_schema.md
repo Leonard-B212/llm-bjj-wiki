@@ -2,6 +2,21 @@
 
 Use this structure for positional control in BJJ.
 
+## Metadata
+
+Start every position note with YAML frontmatter using this structure:
+
+---
+type: position
+gi: nogi
+---
+
+- `type` must always be `position`.
+- `gi` must be `gi`, `nogi`, or `both`. Only use information provided by the user. If the user does not specify the context, use `nogi` as the default.
+- Position notes do not use `from` or `to`. They represent positional nodes rather than transitions between positions.
+- Add `variant_of: "[[...]]"` only when the note describes a specific variation of a broader position.
+- Do not add `variant_of` to a general position note.
+
 IMPORTANT:
 
 - Always include the tag: #position
@@ -63,6 +78,9 @@ IMPORTANT:
 
 **(Do not include this section or its content in your generated output. It exists only to show the expected structure and depth.)**
 
+---
+type: position
+gi: nogi
 ---
 
 # Attack (Top)

@@ -11,9 +11,14 @@
 - [x] Duplicate check for `/write`
 - [x] Safe long-form CLI input: prevent accidental loss of unsent `/write` and `/update` text through command-history navigation, with draft recovery or multiline input support
 - [x] Empty note detection on startup: scan the vault for empty Markdown files created through Wiki-Links, flag them as incomplete, and list them so they can be updated
+- [x] Add typed technique relationships through YAML frontmatter (`type`, `gi`, `from`, `to`, `variant_of`)
+- [ ] Parse structured technique metadata from Markdown notes
+- [ ] Validate technique metadata as part of wiki health checks
+- [ ] Add game analysis based on typed technique relationships to identify documented options and gaps from positions
 - [ ] Broken Links check implementation
 - [ ] Note activity tracking: use file metadata and/or a lightweight activity history to identify recently created and updated notes, enabling questions such as "What did I learn or document recently?"
 - [ ] Self linking fixing through linter
+- [ ] Add /help command for a short introduction and explanation of the commands
 - [ ] Customizable CLI belt rank: allow users to configure their BJJ rank in the launcher settings and display a colored ASCII belt in the CLI banner
 - [ ] BJJ terminology glossary: define canonical meanings for ambiguous or relative terms (e.g. Rear-Side-Arm, Far-Side-Arm, Underhook, Crossface) and provide relevant glossary context to the writer
 - [x] RAG Fix. In a uscase where client asks for attacks from position x. Not just give the position note but also the linked notes.
@@ -37,5 +42,6 @@
 - [ ] Router: ask a clarification question when input is ambiguous or incomplete (single-turn clarification first, no persistent memory)
 - [ ] Router: detect and split multiple intents within a single message (more complex, long-term)
 - [ ] Build a standalone frontend without requiring Obsidian, providing a simple UI for users without CLI or Obsidian experience
+- [ ] Evaluate Jev as a dedicated note classifier: benchmark Jev against the current LLM classifier for the seven BJJ note types (`submission`, `escape`, `sweep`, `pass`, `position`, `takedown`, `throw`) and compare classification accuracy, confidence, latency, and cost before considering integration.
 - [x] Make repository public-ready: remove secrets/personal data, add example configuration, documentation, and setup instructions
 - [x] LLM Repair function if an error presents itself, that cant be handled deterministically 
